@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+// 1. Import Mantine core styles
+import "@mantine/core/styles.css";
+
+// 2. Import Mantine components
+import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -10,6 +16,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+// 3. Create a theme (you can customize this later)
+const theme = createTheme({
+  fontFamily: geistSans.style.fontFamily,
+  fontFamilyMonospace: geistMono.style.fontFamily,
 });
 
 export const metadata: Metadata = {
@@ -24,7 +36,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>{children}</body>
+      <head>
+        {/* 4. Add ColorSchemeScript before the <body> */}
+        <ColorSchemeScript />
+      </head>
+      <body>
+        {/* 5. Wrap children in MantineProvider */}
+        <MantineProvider theme={theme}>
+          {children}
+        </MantineProvider>
+      </body>
     </html>
   );
 }
