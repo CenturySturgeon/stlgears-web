@@ -1,10 +1,11 @@
 'use client';
 
+import classes from './Header.module.css';
+import Link from 'next/link';
+import { SITE_CONFIG } from '@/config';
 import { Group, Button, UnstyledButton, Menu, Container, Burger, Text, Box } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import Link from 'next/link';
 import { IconChevronDown } from '@tabler/icons-react';
-import classes from './Header.module.css';
 
 export function Header() {
   const [opened, { toggle }] = useDisclosure(false);
@@ -15,8 +16,8 @@ export function Header() {
         {/* Left: Logo */}
         <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
           <Group gap="xs">
-             <Box bg="logoBlue.6" w={30} h={30} style={{ borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold' }}>G</Box>
-             <Text fw={700} size="lg">BrandName</Text>
+            <Box bg="logoBlue.6" w={30} h={30} style={{ borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold' }}>G</Box>
+            <Text fw={700} size="lg">{SITE_CONFIG.name}</Text>
           </Group>
         </Link>
 
@@ -59,10 +60,10 @@ export function Header() {
 
         {/* Right: External Blog Button */}
         <Group>
-          <Button 
-            component="a" 
-            href="https://yourblog.com" 
-            target="_blank" 
+          <Button
+            component="a"
+            href="https://yourblog.com"
+            target="_blank"
             variant="outline"
             visibleFrom="sm"
           >

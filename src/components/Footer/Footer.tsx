@@ -1,9 +1,8 @@
 'use client';
 
+import classes from './Footer.module.css';
 import { Container, Group, Text, Anchor, Stack, Divider } from '@mantine/core';
 import { SITE_CONFIG } from '@/config';
-import Link from 'next/link';
-import classes from './Footer.module.css';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -23,20 +22,19 @@ export function Footer() {
           </Stack>
 
           <Group gap="lg">
-            {/* The modern way: component={Link} handles the ref automatically */}
-            <Anchor 
+            <Anchor
               href={SITE_CONFIG.links.privacy}
               target="_blank"
-              size="sm" 
+              size="sm"
               className={classes.link}
             >
               Privacy Policy
             </Anchor>
-            
-            <Anchor 
-              href={SITE_CONFIG.links.cookies} 
+
+            <Anchor
+              href={SITE_CONFIG.links.cookies}
               target="_blank"
-              size="sm" 
+              size="sm"
               className={classes.link}
             >
               Cookies Policy
