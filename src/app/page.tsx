@@ -8,6 +8,86 @@ export default function HomePage() {
         <Button variant="filled">Filled Button</Button>
         <Button variant="outline">Outline Button</Button>
       </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
+      <Group mt="md">
+        <Button variant="filled">Filled Button</Button>
+        <Button variant="outline">Outline Button</Button>
+      </Group>
     </div>
   );
 }
