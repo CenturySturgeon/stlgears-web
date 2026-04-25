@@ -23,7 +23,7 @@ export function Footer() {
 
           <Group gap="lg">
             <Anchor
-              href={SITE_CONFIG.links.privacy}
+              href={SITE_CONFIG.documents.privacy}
               target="_blank"
               size="sm"
               className={classes.link}
@@ -32,7 +32,7 @@ export function Footer() {
             </Anchor>
 
             <Anchor
-              href={SITE_CONFIG.links.cookies}
+              href={SITE_CONFIG.documents.cookies}
               target="_blank"
               size="sm"
               className={classes.link}
