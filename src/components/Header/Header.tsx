@@ -16,7 +16,7 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
   const [opened, { toggle }] = useDisclosure(false);
 
   return (
-    <Container size="md" h="100%">
+    <Container size="lg" h="100%">
       <Group justify="space-between" h="100%">
         {/* Left: Logo */}
         <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
