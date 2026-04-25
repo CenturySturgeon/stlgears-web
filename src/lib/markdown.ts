@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { EQUATIONS, EquationId } from '@/content/equations';
 
 const contentDirectory = path.join(process.cwd(), 'src/content');
 
@@ -8,12 +9,26 @@ export async function getMarkdownData(slug: string) {
   const fullPath = path.join(contentDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
-  // Use gray-matter to parse the post metadata section (frontmatter)
   const matterResult = matter(fileContents);
+  let processedContent = matterResult.content;
+
+  // Regex to find all instances of {{eq:some_id}}
+  processedContent = processedContent.replace(/\{\{eq:([^}]+)\}\}/g, (match, id) => {
+    const eqId = id as EquationId;
+    const eq = EQUATIONS[eqId];
+
+    if (eq) {
+      // Return a JSON payload inside an "equation" code block
+      return `\n\n\`\`\`equation\n${JSON.stringify(eq)}\n\`\`\`\n\n`;
+    }
+
+    // If the ID is wrong, leave the tag so you notice the typo
+    return match;
+  });
 
   return {
     slug,
-    content: matterResult.content, // Pass the raw markdown string, not HTML
+    content: processedContent,
     ...(matterResult.data as { title?: string; date?: string }),
   };
 }
@@ -25,10 +40,9 @@ export function getAllTheorySlugs() {
   }));
 }
 
-// Add this to src/lib/markdown.ts
 export function getTheoryNavigation() {
-  const fileNames = fs.readdirSync(contentDirectory);
-  
+  const fileNames = fs.readdirSync(contentDirectory).filter((fileName) => fileName.endsWith('.md'));
+
   const navItems = fileNames.map((fileName) => {
     const slug = fileName.replace(/\.md$/, '');
     const fullPath = path.join(contentDirectory, fileName);
