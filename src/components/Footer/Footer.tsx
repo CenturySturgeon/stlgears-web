@@ -25,8 +25,8 @@ export function Footer() {
           <Group gap="lg">
             {/* The modern way: component={Link} handles the ref automatically */}
             <Anchor 
-              component={Link} 
-              href={SITE_CONFIG.links.privacy} 
+              href={SITE_CONFIG.links.privacy}
+              target="_blank"
               size="sm" 
               className={classes.link}
             >
@@ -34,8 +34,8 @@ export function Footer() {
             </Anchor>
             
             <Anchor 
-              component={Link} 
               href={SITE_CONFIG.links.cookies} 
+              target="_blank"
               size="sm" 
               className={classes.link}
             >
