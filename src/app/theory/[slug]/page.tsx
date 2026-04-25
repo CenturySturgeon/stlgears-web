@@ -25,7 +25,7 @@ export default async function TheoryPage({
             {theoryData.title}
           </Title>
         )}
-        
+
         <Typography>
           {/* Safe, native React rendering without dangerous HTML injection */}
           <ReactMarkdown>{theoryData.content}</ReactMarkdown>

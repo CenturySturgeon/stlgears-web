@@ -72,10 +72,10 @@ export default function RootLayout({
               <Header />
             </AppShellHeader>
 
-            <AppShellMain style={{ 
-              display: 'flex', 
-              flexDirection: 'column', 
-              minHeight: '100vh' 
+            <AppShellMain style={{
+              display: 'flex',
+              flexDirection: 'column',
+              minHeight: '100vh'
             }}>
               <div style={{ flex: 1 }}>
                 {children}
