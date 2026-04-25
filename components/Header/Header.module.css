@@ -1,0 +1,16 @@
+.link {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 8px 12px;
+  border-radius: var(--mantine-radius-sm);
+  text-decoration: none;
+  color: var(--mantine-color-slate-7);
+  font-weight: 500;
+  font-size: var(--mantine-font-size-sm);
+}
+
+.link:hover {
+  background-color: var(--mantine-color-logoBlue-0);
+  color: var(--mantine-color-logoBlue-7);
+}

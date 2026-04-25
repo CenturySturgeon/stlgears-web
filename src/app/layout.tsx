@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google"; // Swapping fonts
 import "./globals.css";
 import "@mantine/core/styles.css";
-import { ColorSchemeScript, createTheme, MantineColorsTuple, MantineProvider } from "@mantine/core";
+import { AppShell, AppShellHeader, AppShellMain, ColorSchemeScript, createTheme, MantineColorsTuple, MantineProvider } from "@mantine/core";
+import { Header } from "../../components/Header/Header";
 
-// 1. Initialize the new fonts
+// Font families
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-jakarta",
@@ -16,16 +17,15 @@ const mono = JetBrains_Mono({
 });
 
 const logoBlue: MantineColorsTuple = [
-  '#e9f3fb', '#d1e4f5', '#a1c7eb', '#6fa8e1', '#488fd9', 
+  '#e9f3fb', '#d1e4f5', '#a1c7eb', '#6fa8e1', '#488fd9',
   '#2a77cc', '#075395', '#054681', '#04396a', '#03264a',
 ];
 
 export const theme = createTheme({
   primaryColor: 'logoBlue',
-  // 2. Link the fonts to Mantine
   fontFamily: jakarta.style.fontFamily,
   fontFamilyMonospace: mono.style.fontFamily,
-  
+
   colors: {
     logoBlue,
     slate: [
@@ -57,14 +57,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // 3. Apply the font variables to the html tag
-    <html lang="en" className={`${jakarta.variable} ${mono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${jakarta.variable} ${mono.variable}`}>
       <head>
         <ColorSchemeScript />
       </head>
       <body>
         <MantineProvider theme={theme}>
-          {children}
+          <AppShell header={{ height: 60 }}>
+            <AppShellHeader>
+              <Header />
+            </AppShellHeader>
+
+            <AppShellMain>{children}</AppShellMain>
+          </AppShell>
         </MantineProvider>
       </body>
     </html>
