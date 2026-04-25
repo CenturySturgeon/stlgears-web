@@ -1,9 +1,11 @@
-import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google"; // Swapping fonts
 import "./globals.css";
 import "@mantine/core/styles.css";
-import { AppShell, AppShellHeader, AppShellMain, ColorSchemeScript, createTheme, MantineColorsTuple, MantineProvider } from "@mantine/core";
+
+import type { Metadata } from "next";
+import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { AppShell, AppShellFooter, AppShellHeader, AppShellMain, ColorSchemeScript, createTheme, MantineColorsTuple, MantineProvider } from "@mantine/core";
 import { Header } from "../../components/Header/Header";
+import { Footer } from "../../components/Footer/Footer";
 
 // Font families
 const jakarta = Plus_Jakarta_Sans({
@@ -57,18 +59,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${jakarta.variable} ${mono.variable}`}>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <ColorSchemeScript />
       </head>
       <body>
         <MantineProvider theme={theme}>
-          <AppShell header={{ height: 60 }}>
+          <AppShell
+            header={{ height: 60 }}
+            footer={{ height: 'auto' }} // Added offset to prevent overlap
+          >
             <AppShellHeader>
               <Header />
             </AppShellHeader>
 
             <AppShellMain>{children}</AppShellMain>
+
+            <AppShellFooter>
+              <Footer />
+            </AppShellFooter>
           </AppShell>
         </MantineProvider>
       </body>
