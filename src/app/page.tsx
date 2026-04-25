@@ -1,8 +1,8 @@
-import { Button, Group, Title } from '@mantine/core';
+import { Button, Container, Group, Title } from '@mantine/core';
 
 export default function HomePage() {
   return (
-    <div style={{ padding: '40px' }}>
+    <Container size="md">
       <Title order={1}>Mantine is G ready!</Title>
       <Group mt="md">
         <Button variant="filled">Filled Button</Button>
@@ -88,6 +88,6 @@ export default function HomePage() {
         <Button variant="filled">Filled Button</Button>
         <Button variant="outline">Outline Button</Button>
       </Group>
-    </div>
+    </Container>
   );
 }
