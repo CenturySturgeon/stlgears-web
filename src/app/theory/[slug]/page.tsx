@@ -1,20 +1,12 @@
-
-import 'katex/dist/katex.min.css';
-
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
-
-import { getMarkdownData, getAllTheorySlugs } from '@/lib/markdown';
-import { Container, Title, Text, Anchor, Code, Box } from '@mantine/core';
+import { getMarkdownData } from '@/lib/markdown';
+import { Container, Title, Text, Anchor, Code, Box, Image } from '@mantine/core';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import 'katex/dist/katex.min.css';
 
 import EquationBlock from '@/components/EquationBlock/EquationBlock';
-
-export async function generateStaticParams() {
-  const slugs = getAllTheorySlugs();
-  return slugs;
-}
 
 export default async function TheoryPage({
   params,
@@ -41,7 +33,20 @@ export default async function TheoryPage({
             h1: ({ node, ...props }) => <Title order={1} mt="xl" mb="sm" c="slate.9" {...props} />,
             h2: ({ node, ...props }) => <Title order={2} mt="xl" mb="sm" c="slate.8" {...props} />,
             h3: ({ node, ...props }) => <Title order={3} mt="lg" mb="sm" c="slate.7" {...props} />,
-            p: ({ node, ...props }) => <Text mb="md" lh="1.6" c="slate.8" {...props} />,
+
+            /** * FIX 1: The Paragraph component
+             * By changing 'component' to 'div', we allow nested block elements 
+             * like Images and EquationBlocks without triggering hydration errors.
+             */
+            p: ({ node, ...props }) => (
+              <Text
+                component="div"
+                mb="md"
+                lh="1.6"
+                c="slate.8"
+                {...props}
+              />
+            ),
 
             ul: ({ node, ...props }) => (
               <Box component="ul" style={{ paddingLeft: '2rem', marginBottom: '1rem' }} {...props} />
@@ -50,43 +55,54 @@ export default async function TheoryPage({
               <Box component="ol" style={{ paddingLeft: '2rem', marginBottom: '1rem' }} {...props} />
             ),
             li: ({ node, children, ...props }) => (
-              <Box
-                component="li"
-                mb={4}
-                style={{ lineHeight: '1.6', color: 'var(--mantine-color-slate-8)' }}
-                {...props}
-              >
+              <Box component="li" mb={4} style={{ lineHeight: '1.6', color: 'var(--mantine-color-slate-8)' }} {...props}>
                 {children}
               </Box>
             ),
 
             a: ({ node, ...props }) => <Anchor c="logoBlue.6" underline="hover" {...props} />,
 
+            img: ({ node, src, alt, ...props }) => (
+              <Box my="xl" component="span" style={{ display: 'block' }}>
+                <Image
+                  src={src}
+                  alt={alt}
+                  radius="md"
+                  style={{ border: '1px solid var(--mantine-color-slate-2)', maxWidth: '100%' }}
+                  {...props}
+                />
+                {alt && (
+                  <Text
+                    component="span" // FIX 2: Use span for caption to avoid p-inside-p
+                    c="dimmed"
+                    size="xs"
+                    ta="center"
+                    mt="xs"
+                    style={{ fontStyle: 'italic', display: 'block' }}
+                  >
+                    {alt}
+                  </Text>
+                )}
+              </Box>
+            ),
+
             blockquote: ({ node, children, ...props }) => (
               <Box
                 component="blockquote"
-                p="md"
-                my="md"
-                bg="slate.0"
-                style={{
-                  borderLeft: '4px solid var(--mantine-color-logoBlue-5)',
-                  borderRadius: 'var(--mantine-radius-sm)'
-                }}
+                p="md" my="md" bg="slate.0"
+                style={{ borderLeft: '4px solid var(--mantine-color-logoBlue-5)', borderRadius: 'var(--mantine-radius-sm)' }}
                 {...props}
               >
                 {children}
               </Box>
             ),
 
-            // 1. Remove the default <pre> styling so Mantine's <Code block> takes over
             pre: ({ node, children }) => <>{children}</>,
 
-            // 2. Updated Code component logic
             code({ node, className, children, ...props }) {
               const match = /language-(\w+)/.exec(className || '');
-              const isInline = !className; // Inline code usually has no class
+              const isInline = !className;
 
-              // Handle our custom Equation system
               if (match && match[1] === 'equation') {
                 try {
                   const eqData = JSON.parse(String(children));
@@ -98,16 +114,14 @@ export default async function TheoryPage({
 
               return (
                 <Code
-                  // If it's not inline (i.e., it's a fenced block), use 'block'
                   block={!isInline}
                   className={className}
                   c="logoBlue.8"
                   bg="slate.1"
                   p={isInline ? '0.2rem 0.4rem' : 'md'}
-                  my={isInline ? 0 : 'md'}
                   style={{
                     fontSize: '0.9rem',
-                    overflowX: 'auto', // Ensure code doesn't break layout
+                    overflowX: 'auto',
                     borderRadius: 'var(--mantine-radius-sm)',
                     border: isInline ? 'none' : '1px solid var(--mantine-color-slate-2)'
                   }}

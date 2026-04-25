@@ -13,33 +13,33 @@ export async function getMarkdownData(slug: string) {
   let processedContent = matterResult.content;
 
   /**
-   * regex breakdown:
-   * \{\{eq:     -> Match the prefix
-   * ([^}.]+)    -> Group 1: The Equation ID (e.g., 'pythagoras')
-   * (?:\.       -> Start of an optional non-capturing group for the dot
-   * ([^}]+)   -> Group 2: The Property name (e.g., 'number')
-   * )?          -> End of optional group
-   * \}\}        -> Match the closing suffix
+   * 1. Image Path Normalization
+   * Converts ![] (../../public/images/img.png) -> ![](/images/img.png)
+   * This makes images work in both VS Code and the browser.
+   */
+  processedContent = processedContent.replace(
+    /!\[(.*?)\]\(\.\.\/\.\.\/public(.*?)\)/g,
+    '![$1]($2)'
+  );
+
+  /**
+   * 2. Equation System
+   * regex: {{eq:id.property}}
    */
   processedContent = processedContent.replace(/\{\{eq:([^}.]+)(?:\.([^}]+))?\}\}/g, (match, id, property) => {
     const eqId = id as EquationId;
     const eq = EQUATIONS[eqId];
 
-    if (!eq) return match; // Typo protection
+    if (!eq) return match;
 
-    // Case 1: Specific property requested (e.g., {{eq:pythagoras.number}})
+    // Inline properties (e.g., number or description)
     if (property) {
-      // Access the property dynamically
       const val = (eq as any)[property];
-      
-      if (val !== undefined) {
-        return String(val); // Return '1', 'The formula for...', etc.
-      }
-      
-      return match; // Property doesn't exist? Keep the tag.
+      if (val !== undefined) return String(val);
+      return match;
     }
 
-    // Case 2: Full block requested (e.g., {{eq:pythagoras}})
+    // Full Block (renders the EquationBlock component)
     return `\n\n\`\`\`equation\n${JSON.stringify(eq)}\n\`\`\`\n\n`;
   });
 
@@ -69,11 +69,10 @@ export function getTheoryNavigation() {
     return {
       label: (matterResult.data.title as string) || slug,
       href: `/theory/${slug}`,
-      order: (matterResult.data.order as number) || 99, // Push files without order to the bottom
+      order: (matterResult.data.order as number) || 99,
     };
   });
 
-  // Sort by order and remove the order field so we only pass clean data to the client
   return navItems
     .sort((a, b) => a.order - b.order)
     .map(({ label, href }) => ({ label, href }));

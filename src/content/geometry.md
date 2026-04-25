@@ -8,3 +8,7 @@ To understand triangles, we look at equation {{eq:pythagoras.number}} ({{eq:pyth
 {{eq:pythagoras}}
 
 As you can see, the hypotenuse is derived from the other two sides.
+
+Check this picture out:
+
+![picture](../../public/images/image.png)
