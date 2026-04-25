@@ -12,18 +12,35 @@ export async function getMarkdownData(slug: string) {
   const matterResult = matter(fileContents);
   let processedContent = matterResult.content;
 
-  // Regex to find all instances of {{eq:some_id}}
-  processedContent = processedContent.replace(/\{\{eq:([^}]+)\}\}/g, (match, id) => {
+  /**
+   * regex breakdown:
+   * \{\{eq:     -> Match the prefix
+   * ([^}.]+)    -> Group 1: The Equation ID (e.g., 'pythagoras')
+   * (?:\.       -> Start of an optional non-capturing group for the dot
+   * ([^}]+)   -> Group 2: The Property name (e.g., 'number')
+   * )?          -> End of optional group
+   * \}\}        -> Match the closing suffix
+   */
+  processedContent = processedContent.replace(/\{\{eq:([^}.]+)(?:\.([^}]+))?\}\}/g, (match, id, property) => {
     const eqId = id as EquationId;
     const eq = EQUATIONS[eqId];
 
-    if (eq) {
-      // Return a JSON payload inside an "equation" code block
-      return `\n\n\`\`\`equation\n${JSON.stringify(eq)}\n\`\`\`\n\n`;
+    if (!eq) return match; // Typo protection
+
+    // Case 1: Specific property requested (e.g., {{eq:pythagoras.number}})
+    if (property) {
+      // Access the property dynamically
+      const val = (eq as any)[property];
+      
+      if (val !== undefined) {
+        return String(val); // Return '1', 'The formula for...', etc.
+      }
+      
+      return match; // Property doesn't exist? Keep the tag.
     }
 
-    // If the ID is wrong, leave the tag so you notice the typo
-    return match;
+    // Case 2: Full block requested (e.g., {{eq:pythagoras}})
+    return `\n\n\`\`\`equation\n${JSON.stringify(eq)}\n\`\`\`\n\n`;
   });
 
   return {
