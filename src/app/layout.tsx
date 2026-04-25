@@ -3,7 +3,7 @@ import "@mantine/core/styles.css";
 
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
-import { AppShell, AppShellFooter, AppShellHeader, AppShellMain, ColorSchemeScript, createTheme, MantineColorsTuple, MantineProvider } from "@mantine/core";
+import { AppShell, AppShellHeader, AppShellMain, ColorSchemeScript, createTheme, MantineColorsTuple, MantineProvider } from "@mantine/core";
 import { Header } from "../components/Header/Header";
 import { Footer } from "../components/Footer/Footer";
 
@@ -67,17 +67,21 @@ export default function RootLayout({
         <MantineProvider theme={theme}>
           <AppShell
             header={{ height: 60 }}
-            footer={{ height: 'auto' }} // Added offset to prevent overlap
           >
             <AppShellHeader>
               <Header />
             </AppShellHeader>
 
-            <AppShellMain>{children}</AppShellMain>
-
-            <AppShellFooter>
+            <AppShellMain style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              minHeight: '100vh' 
+            }}>
+              <div style={{ flex: 1 }}>
+                {children}
+              </div>
               <Footer />
-            </AppShellFooter>
+            </AppShellMain>
           </AppShell>
         </MantineProvider>
       </body>
