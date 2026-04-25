@@ -4,8 +4,8 @@ import "@mantine/core/styles.css";
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import { AppShell, AppShellFooter, AppShellHeader, AppShellMain, ColorSchemeScript, createTheme, MantineColorsTuple, MantineProvider } from "@mantine/core";
-import { Header } from "../../components/Header/Header";
-import { Footer } from "../../components/Footer/Footer";
+import { Header } from "../components/Header/Header";
+import { Footer } from "../components/Footer/Footer";
 
 // Font families
 const jakarta = Plus_Jakarta_Sans({

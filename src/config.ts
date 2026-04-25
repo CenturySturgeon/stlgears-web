@@ -1,8 +1,8 @@
 export const SITE_CONFIG = {
   name: 'BrandName',
   links: {
-    privacy: '/privacy',
-    cookies: '/cookies',
+    privacy: '/documents/privacy-policy.pdf',
+    cookies: '/documents/cookies-policy.pdf',
     terms: '/terms', // Added a suggestion
   }
 };
