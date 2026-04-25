@@ -24,3 +24,26 @@ export function getAllTheorySlugs() {
     slug: fileName.replace(/\.md$/, ''),
   }));
 }
+
+// Add this to src/lib/markdown.ts
+export function getTheoryNavigation() {
+  const fileNames = fs.readdirSync(contentDirectory);
+  
+  const navItems = fileNames.map((fileName) => {
+    const slug = fileName.replace(/\.md$/, '');
+    const fullPath = path.join(contentDirectory, fileName);
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const matterResult = matter(fileContents);
+
+    return {
+      label: (matterResult.data.title as string) || slug,
+      href: `/theory/${slug}`,
+      order: (matterResult.data.order as number) || 99, // Push files without order to the bottom
+    };
+  });
+
+  // Sort by order and remove the order field so we only pass clean data to the client
+  return navItems
+    .sort((a, b) => a.order - b.order)
+    .map(({ label, href }) => ({ label, href }));
+}

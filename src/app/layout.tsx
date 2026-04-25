@@ -4,8 +4,9 @@ import "@mantine/core/styles.css";
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import { AppShell, AppShellHeader, AppShellMain, ColorSchemeScript, createTheme, MantineColorsTuple, MantineProvider } from "@mantine/core";
-import { Header } from "../components/Header/Header";
-import { Footer } from "../components/Footer/Footer";
+import { Header } from "@/components/Header/Header";
+import { Footer } from "@/components/Footer/Footer";
+import { getTheoryNavigation } from '@/lib/markdown';
 
 // Font families
 const jakarta = Plus_Jakarta_Sans({
@@ -58,6 +59,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Fetch sorted links on the server
+  const theoryLinks = getTheoryNavigation();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -69,7 +73,7 @@ export default function RootLayout({
             header={{ height: 60 }}
           >
             <AppShellHeader>
-              <Header />
+              <Header theoryLinks={theoryLinks}/>
             </AppShellHeader>
 
             <AppShellMain style={{

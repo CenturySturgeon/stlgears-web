@@ -7,7 +7,12 @@ import { Group, Button, UnstyledButton, Menu, Container, Burger, Text, Box } fro
 import { useDisclosure } from '@mantine/hooks';
 import { IconChevronDown } from '@tabler/icons-react';
 
-export function Header() {
+type TheoryLink = {
+  label: string;
+  href: string;
+};
+
+export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
   const [opened, { toggle }] = useDisclosure(false);
 
   return (
@@ -41,7 +46,7 @@ export function Header() {
             </Menu.Dropdown>
           </Menu>
 
-          {/* Theory - Desktop: Menu / Mobile: Link (Logic handled via visibility) */}
+          {/* Theory - Dynamically Mapped */}
           <Menu trigger="hover" openDelay={100} closeDelay={400}>
             <Menu.Target>
               <UnstyledButton component={Link} href="/theory" className={classes.link}>
@@ -52,8 +57,16 @@ export function Header() {
               </UnstyledButton>
             </Menu.Target>
             <Menu.Dropdown>
-              <Menu.Item component={Link} href="/theory/basics">Basics</Menu.Item>
-              <Menu.Item component={Link} href="/theory/advanced">Advanced</Menu.Item>
+              {/* 3. Map over the sorted links */}
+              {theoryLinks.length > 0 ? (
+                theoryLinks.map((link) => (
+                  <Menu.Item key={link.href} component={Link} href={link.href}>
+                    {link.label}
+                  </Menu.Item>
+                ))
+              ) : (
+                <Menu.Item disabled>No theories yet</Menu.Item>
+              )}
             </Menu.Dropdown>
           </Menu>
         </Group>

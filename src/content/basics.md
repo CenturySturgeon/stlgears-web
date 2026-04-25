@@ -1,6 +1,6 @@
 ---
-title: 'Hello World Theory'
-date: '2023-10-01'
+title: 'Basics'
+order: 1
 ---
 
 ## Welcome to my theory page
