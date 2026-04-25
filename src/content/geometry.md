@@ -3,7 +3,7 @@ title: "Advanced Geometry"
 order: 3
 ---
 
-To understand triangles, we look at Equation.
+To understand triangles, we look at the pythagoras equation:
 
 {{eq:pythagoras}}
 

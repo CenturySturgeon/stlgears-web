@@ -8,12 +8,13 @@ import rehypeKatex from 'rehype-katex';
 
 interface EquationProps {
   number: number;
+  name: string,
   formula: string;
   description: string;
   copyText: string;
 }
 
-export default function EquationBlock({ number, formula, description, copyText }: EquationProps) {
+export default function EquationBlock({ number, name, formula, description, copyText }: EquationProps) {
   return (
     <Box 
       my="xl" 
@@ -26,12 +27,11 @@ export default function EquationBlock({ number, formula, description, copyText }
       <Group align="flex-start" justify="space-between">
         <Box>
           <Text size="sm" c="dimmed" mb="xs" fw={500}>
-            Equation {number}
+            ({number}) {name}
           </Text>
           
           <Tooltip label={description} multiline w={300} withArrow position="bottom-start">
             <Box style={{ cursor: 'help' }}>
-              {/* Safe, native rendering without dangerouslySetInnerHTML */}
               <ReactMarkdown
                 remarkPlugins={[remarkMath]}
                 rehypePlugins={[rehypeKatex]}
@@ -44,7 +44,7 @@ export default function EquationBlock({ number, formula, description, copyText }
 
         <CopyButton value={copyText} timeout={2000}>
           {({ copied, copy }) => (
-            <Tooltip label={copied ? 'Copied!' : 'Copy clean math'} withArrow position="left">
+            <Tooltip label={copied ? 'Copied!' : 'Copy'} withArrow position="left">
               <ActionIcon 
                 color={copied ? 'teal' : 'logoBlue'} 
                 variant="subtle" 
