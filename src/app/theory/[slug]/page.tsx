@@ -1,8 +1,8 @@
 import { getMarkdownData, getAllTheorySlugs } from '@/lib/markdown';
 import { Typography, Container, Title } from '@mantine/core';
 import { notFound } from 'next/navigation';
+import ReactMarkdown from 'react-markdown'; // <-- Import here
 
-// generateStaticParams remains the same as it handles the promise internally
 export async function generateStaticParams() {
   const slugs = getAllTheorySlugs();
   return slugs;
@@ -11,13 +11,11 @@ export async function generateStaticParams() {
 export default async function TheoryPage({
   params,
 }: {
-  params: Promise<{ slug: string }>; // 1. Define params as a Promise
+  params: Promise<{ slug: string }>;
 }) {
-  // 2. Await the params object itself
   const { slug } = await params;
 
   try {
-    // 3. Use the unwrapped slug
     const theoryData = await getMarkdownData(slug);
 
     return (
@@ -29,12 +27,12 @@ export default async function TheoryPage({
         )}
         
         <Typography>
-          <div dangerouslySetInnerHTML={{ __html: theoryData.contentHtml }} />
+          {/* Safe, native React rendering without dangerous HTML injection */}
+          <ReactMarkdown>{theoryData.content}</ReactMarkdown>
         </Typography>
       </Container>
     );
   } catch (error) {
-    // This will trigger if the file doesn't exist in src/content
     notFound();
   }
 }
