@@ -10,13 +10,13 @@ export function Footer() {
   return (
     <footer className={classes.footer}>
       <Container size="md">
-        <Divider mb="xl" color="slate.1" />
+        <Divider mb="xl" />
         <Group justify="space-between" className={classes.inner}>
           <Stack gap={4}>
-            <Text size="sm" fw={600} style={{ color: 'var(--mantine-color-logoBlue-7)' }}>
+            <Text size="sm" fw={600} c="logoBlue.7">
               {SITE_CONFIG.name}
             </Text>
-            <Text size="xs" color="slate.5">
+            <Text size="xs" c="dimmed">
               © {currentYear} All rights reserved.
             </Text>
           </Stack>
