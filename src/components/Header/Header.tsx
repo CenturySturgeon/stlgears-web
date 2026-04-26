@@ -3,9 +3,9 @@
 import classes from './Header.module.css';
 import Link from 'next/link';
 import { SITE_CONFIG } from '@/config';
-import { Accordion, Box, Button, Burger, Container, Drawer, Group, Image, Menu, NavLink, Stack, Text, UnstyledButton, rem } from '@mantine/core';
+import { Box, Button, Burger, Container, Drawer, Group, Image, Menu, NavLink, Text, UnstyledButton, rem, ActionIcon, useComputedColorScheme, useMantineColorScheme } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconChevronDown, IconHome, IconTools, IconBook, IconInfoCircle, IconNews } from '@tabler/icons-react';
+import { IconChevronDown, IconHome, IconTools, IconBook, IconInfoCircle, IconNews, IconMoon, IconSun } from '@tabler/icons-react';
 
 type TheoryLink = {
   label: string;
@@ -14,6 +14,12 @@ type TheoryLink = {
 
 export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
   const [opened, { toggle }] = useDisclosure(false);
+  const { setColorScheme } = useMantineColorScheme();
+  const computedColorScheme = useComputedColorScheme('light', { getInitialValueInEffect: true });
+
+  const toggleTheme = () => {
+    setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light');
+  };
 
   return (
     <>
@@ -91,6 +97,15 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
 
           {/* Right: External Blog Button */}
           <Group>
+            <ActionIcon
+              onClick={toggleTheme}
+              variant="outline"
+              color="logoBlue"
+              aria-label="Toggle theme"
+              visibleFrom="sm"
+            >
+              {computedColorScheme === 'dark' ? <IconSun size={18} /> : <IconMoon size={18} />}
+            </ActionIcon>
             <Button
               component="a"
               leftSection={<IconNews style={{ width: rem(20), height: rem(20) }} />}
