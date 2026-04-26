@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { SITE_CONFIG } from '@/config';
 import { Accordion, Box, Button, Burger, Container, Drawer, Group, Image, Menu, NavLink, Stack, Text, UnstyledButton, rem } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconChevronDown, IconHome, IconTools, IconBook, IconInfoCircle } from '@tabler/icons-react';
+import { IconChevronDown, IconHome, IconTools, IconBook, IconInfoCircle, IconNews } from '@tabler/icons-react';
 
 type TheoryLink = {
   label: string;
@@ -203,6 +203,21 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
             onClick={toggle}
             className={classes.mobileNavLink}
           />
+
+          {/* kofi */}
+          <Button
+            component="a"
+            href={SITE_CONFIG.socials.kofi}
+            target="_blank"
+            justify='left'
+            variant="outline"
+            fullWidth
+            leftSection={<IconNews style={{ width: rem(20), height: rem(20) }} />}
+            onClick={toggle}
+            mt="md"
+          >
+            Blog
+          </Button>
         </Stack>
       </Drawer>
     </>
