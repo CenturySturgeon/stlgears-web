@@ -138,6 +138,7 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
           href="/"
           label="Home"
           component={Link}
+          onClick={toggle}
           leftSection={<IconHome size={20} />}
         />
 
@@ -146,8 +147,8 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
           leftSection={<IconTools size={20} />}
           childrenOffset={28}
         >
-          <NavLink component={Link} href="/generators/one" label="One" />
-          <NavLink component={Link} href="/generators/two" label="Two" />
+          <NavLink component={Link} href="/generators/one" label="One" onClick={toggle} />
+          <NavLink component={Link} href="/generators/two" label="Two" onClick={toggle} />
         </NavLink>
 
         <NavLink
@@ -170,6 +171,7 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
           href="/about"
           label="About"
           component={Link}
+          onClick={toggle}
           leftSection={<IconInfoCircle size={20} />}
         />
         <NavLink
