@@ -27,3 +27,30 @@
 .mobileAccordionItem {
   border-bottom: 1px solid var(--mantine-color-gray-light) !important;
 }
+
+.blogNavLink {
+  margin-top: var(--mantine-spacing-md);
+  border: 1px solid var(--mantine-color-logoBlue-outline); /* Or your primary color */
+  color: var(--mantine-color-logoBlue-outline);
+  border-radius: var(--mantine-radius-md);
+  font-weight: 600;
+  transition: background-color 150ms ease;
+  
+  /* Resetting NavLink default background */
+  background-color: transparent;
+}
+
+.blogNavLink:hover {
+  background-color: var(--mantine-color-logoBlue-light);
+}
+
+/* Ensure the label and icons are centered like a button */
+.blogNavLink :global(.mantine-NavLink-body) {
+  flex: none;
+}
+
+.blogNavLink :global(.mantine-NavLink-content) {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

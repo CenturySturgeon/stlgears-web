@@ -146,6 +146,7 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
           label="Generators"
           leftSection={<IconTools size={20} />}
           childrenOffset={28}
+          defaultOpened
         >
           <NavLink component={Link} href="/generators/one" label="One" onClick={toggle} />
           <NavLink component={Link} href="/generators/two" label="Two" onClick={toggle} />
@@ -179,6 +180,9 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
           target="_blank"
           label="Blog"
           leftSection={<IconNews size={20} />}
+          className={classes.blogNavLink}
+          description="See what's new!"
+        /* No variant="filled" so it doesn't clash with custom CSS */
         />
       </Drawer>
     </>
