@@ -8,7 +8,6 @@ import { notFound } from 'next/navigation';
 import { getMarkdownData } from '@/lib/markdown';
 import { Container, Title, Text, Anchor, Code, Box, Image } from '@mantine/core';
 
-
 import EquationBlock from '@/components/EquationBlock/EquationBlock';
 
 export async function generateMetadata({
@@ -45,7 +44,7 @@ export default async function TheoryPage({
     return (
       <Container size="md" py="xl">
         {theoryData.title && (
-          <Title order={1} mb="xl" c="slate.9">
+          <Title order={1} mb="xl" c="text">
             {theoryData.title}
           </Title>
         )}
@@ -54,20 +53,16 @@ export default async function TheoryPage({
           remarkPlugins={[remarkMath]}
           rehypePlugins={[rehypeKatex]}
           components={{
-            h1: ({ node, ...props }) => <Title order={1} mt="xl" mb="sm" c="slate.9" {...props} />,
-            h2: ({ node, ...props }) => <Title order={2} mt="xl" mb="sm" c="slate.8" {...props} />,
-            h3: ({ node, ...props }) => <Title order={3} mt="lg" mb="sm" c="slate.7" {...props} />,
+            h1: ({ node, ...props }) => <Title order={1} mt="xl" mb="sm" c="text" {...props} />,
+            h2: ({ node, ...props }) => <Title order={2} mt="xl" mb="sm" c="text" {...props} />,
+            h3: ({ node, ...props }) => <Title order={3} mt="lg" mb="sm" c="text" {...props} />,
 
-            /** * FIX 1: The Paragraph component
-             * By changing 'component' to 'div', we allow nested block elements 
-             * like Images and EquationBlocks without triggering hydration errors.
-             */
             p: ({ node, ...props }) => (
               <Text
                 component="div"
                 mb="md"
                 lh="1.6"
-                c="slate.8"
+                c="text"
                 {...props}
               />
             ),
@@ -79,7 +74,7 @@ export default async function TheoryPage({
               <Box component="ol" style={{ paddingLeft: '2rem', marginBottom: '1rem' }} {...props} />
             ),
             li: ({ node, children, ...props }) => (
-              <Box component="li" mb={4} style={{ lineHeight: '1.6', color: 'var(--mantine-color-slate-8)' }} {...props}>
+              <Box component="li" mb={4} style={{ lineHeight: '1.6', color: 'var(--mantine-color-text)' }} {...props}>
                 {children}
               </Box>
             ),
@@ -93,12 +88,17 @@ export default async function TheoryPage({
                   alt={alt}
                   radius="md"
                   fit="contain"
-                  style={{ border: '1px solid var(--mantine-color-slate-2)', maxWidth: '100%', maxHeight: '40vh' }}
+                  style={{
+                    border: '1px solid var(--mantine-color-gray-3)',
+                    maxWidth: '100%',
+                    maxHeight: '40vh',
+                    backgroundColor: 'var(--mantine-color-body)'
+                  }}
                   {...props}
                 />
                 {alt && (
                   <Text
-                    component="span" // FIX 2: Use span for caption to avoid p-inside-p
+                    component="span"
                     c="dimmed"
                     size="xs"
                     ta="center"
@@ -114,8 +114,12 @@ export default async function TheoryPage({
             blockquote: ({ node, children, ...props }) => (
               <Box
                 component="blockquote"
-                p="md" my="md" bg="slate.0"
-                style={{ borderLeft: '4px solid var(--mantine-color-logoBlue-5)', borderRadius: 'var(--mantine-radius-sm)' }}
+                p="md" my="md"
+                style={{
+                  borderLeft: '4px solid var(--mantine-color-logoBlue-5)',
+                  borderRadius: 'var(--mantine-radius-sm)',
+                  backgroundColor: 'var(--mantine-color-gray-0)'
+                }}
                 {...props}
               >
                 {children}
@@ -142,13 +146,13 @@ export default async function TheoryPage({
                   block={!isInline}
                   className={className}
                   c="logoBlue.8"
-                  bg="slate.1"
+                  bg="gray.1"
                   p={isInline ? '0.2rem 0.4rem' : 'md'}
                   style={{
                     fontSize: '0.9rem',
                     overflowX: 'auto',
                     borderRadius: 'var(--mantine-radius-sm)',
-                    border: isInline ? 'none' : '1px solid var(--mantine-color-slate-2)'
+                    border: isInline ? 'none' : '1px solid var(--mantine-color-gray-3)'
                   }}
                   {...props}
                 >
