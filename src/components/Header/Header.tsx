@@ -38,7 +38,7 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
                   height={50}
                 />
               </Box>
-              <Text fw={700} size="lg">{SITE_CONFIG.name}</Text>
+              <Text fw={700} size="xl">{SITE_CONFIG.name}</Text>
             </Group>
           </Link>
 
@@ -213,7 +213,7 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
             justify='left'
             variant="outline"
             fullWidth
-            leftSection={<IconNews style={{ width: rem(20), height: rem(20) }} />}
+            leftSection={<IconNews style={{ width: rem(20), height: rem(20), marginLeft: 5}} />}
             onClick={toggle}
             mt="md"
           >
