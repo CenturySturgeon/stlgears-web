@@ -145,7 +145,7 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
           />
 
           {/* Generators */}
-          <Accordion variant="filled" chevronPosition="right" className={classes.mobileAccordion}>
+          <Accordion variant="unstyled" chevronPosition="right" className={classes.mobileAccordion}>
             <Accordion.Item value="generators" className={classes.mobileAccordionItem}>
               <Accordion.Control icon={<IconTools style={{ width: rem(20), height: rem(20) }} />}>
                 <Text className={classes.mobileAccordionLabel}>Generators</Text>
@@ -172,7 +172,7 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
           </Accordion>
 
           {/* Theory */}
-          <Accordion variant="filled" chevronPosition="right" className={classes.mobileAccordion}>
+          <Accordion variant="unstyled" chevronPosition="right" className={classes.mobileAccordion}>
             <Accordion.Item value="theory" className={classes.mobileAccordionItem}>
               <Accordion.Control icon={<IconBook style={{ width: rem(20), height: rem(20) }} />}>
                 <Text className={classes.mobileAccordionLabel}>Theory</Text>
