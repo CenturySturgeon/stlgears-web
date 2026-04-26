@@ -85,8 +85,8 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
               </Menu.Dropdown>
             </Menu>
 
-            {/* About Us */}
-            <UnstyledButton component={Link} href="/about" className={classes.link}>About Us</UnstyledButton>
+            {/* About */}
+            <UnstyledButton component={Link} href="/about" className={classes.link}>About</UnstyledButton>
           </Group>
 
           {/* Right: External Blog Button */}
@@ -194,11 +194,11 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
             </Accordion.Item>
           </Accordion>
 
-          {/* About Us */}
+          {/* About */}
           <NavLink
             component={Link}
             href="/about"
-            label="About Us"
+            label="About"
             leftSection={<IconInfoCircle style={{ width: rem(20), height: rem(20) }} />}
             onClick={toggle}
             className={classes.mobileNavLink}
