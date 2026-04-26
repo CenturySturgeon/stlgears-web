@@ -116,6 +116,15 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
             >
               Blog
             </Button>
+            <ActionIcon
+              onClick={toggleTheme}
+              variant="outline"
+              color="logoBlue"
+              aria-label="Toggle theme"
+              hiddenFrom="sm"
+            >
+              {computedColorScheme === 'dark' ? <IconSun size={18} /> : <IconMoon size={18} />}
+            </ActionIcon>
             <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           </Group>
         </Group>
