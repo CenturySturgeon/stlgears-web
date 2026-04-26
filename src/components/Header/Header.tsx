@@ -93,6 +93,7 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
           <Group>
             <Button
               component="a"
+              leftSection={<IconNews style={{ width: rem(20), height: rem(20) }} />}
               href={SITE_CONFIG.socials.kofi}
               target="_blank"
               variant="outline"
