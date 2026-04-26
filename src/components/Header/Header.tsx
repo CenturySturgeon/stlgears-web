@@ -3,7 +3,7 @@
 import classes from './Header.module.css';
 import Link from 'next/link';
 import { SITE_CONFIG } from '@/config';
-import { Group, Button, UnstyledButton, Menu, Container, Burger, Text, Box } from '@mantine/core';
+import { Image, Group, Button, UnstyledButton, Menu, Container, Burger, Text, Box } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconChevronDown } from '@tabler/icons-react';
 
@@ -21,7 +21,22 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
         {/* Left: Logo */}
         <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
           <Group gap="xs">
-            <Box bg="logoBlue.6" w={30} h={30} style={{ borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold' }}>G</Box>
+            <Box
+              w={50}
+              h={50}
+              style={{
+                borderRadius: '4px',
+                overflow: 'hidden',
+                backgroundColor: 'white',
+              }}
+            >
+              <Image
+                src="/logo.svg"
+                alt="Logo"
+                width={50}
+                height={50}
+              />
+            </Box>
             <Text fw={700} size="lg">{SITE_CONFIG.name}</Text>
           </Group>
         </Link>
