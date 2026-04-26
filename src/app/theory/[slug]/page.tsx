@@ -1,12 +1,36 @@
-import { getMarkdownData } from '@/lib/markdown';
-import { Container, Title, Text, Anchor, Code, Box, Image } from '@mantine/core';
-import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
 
+import type { Metadata } from "next";
+import { notFound } from 'next/navigation';
+import { getMarkdownData } from '@/lib/markdown';
+import { Container, Title, Text, Anchor, Code, Box, Image } from '@mantine/core';
+
+
 import EquationBlock from '@/components/EquationBlock/EquationBlock';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+
+  try {
+    const theoryData = await getMarkdownData(slug);
+
+    return {
+      title: theoryData.title,
+      description: theoryData.description ?? undefined,
+    };
+  } catch (e) {
+    return {
+      title: "Not Found",
+    };
+  }
+}
 
 export default async function TheoryPage({
   params,

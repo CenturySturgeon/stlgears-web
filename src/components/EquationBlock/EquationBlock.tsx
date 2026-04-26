@@ -27,7 +27,7 @@ export default function EquationBlock({ number, name, formula, description, copy
       <Group align="flex-start" justify="space-between">
         <Box>
           <Text size="sm" c="dimmed" mb="xs" fw={500}>
-            ({number}) {name}
+            [ {number} ] {name}
           </Text>
           
           <Tooltip label={description} multiline w={300} withArrow position="bottom-start">

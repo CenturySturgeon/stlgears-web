@@ -1,5 +1,6 @@
 ---
-title: "Advanced Geometry"
+title: 'Advanced Geometry'
+description: 'Advanced geometry description'
 order: 3
 ---
 

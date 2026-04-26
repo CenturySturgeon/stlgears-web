@@ -46,7 +46,7 @@ export async function getMarkdownData(slug: string) {
   return {
     slug,
     content: processedContent,
-    ...(matterResult.data as { title?: string; date?: string }),
+    ...(matterResult.data as { title?: string; description?: string }),
   };
 }
 

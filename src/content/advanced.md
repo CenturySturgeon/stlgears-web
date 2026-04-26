@@ -1,5 +1,6 @@
 ---
 title: 'Advanced'
+description: 'Advanced description'
 order: 2
 ---
 
