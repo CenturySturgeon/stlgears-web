@@ -2,6 +2,7 @@ import "./globals.css";
 import "@mantine/core/styles.css";
 
 import type { Metadata } from "next";
+import { SITE_CONFIG } from '@/config';
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import { AppShell, AppShellHeader, AppShellMain, ColorSchemeScript, createTheme, MantineColorsTuple, MantineProvider } from "@mantine/core";
 import { Header } from "@/components/Header/Header";
@@ -50,8 +51,8 @@ export const theme = createTheme({
 });
 
 export const metadata: Metadata = {
-  title: "My New Site",
-  description: "Modernized with Mantine",
+  title: SITE_CONFIG.name,
+  description: SITE_CONFIG.description,
 };
 
 export default function RootLayout({

@@ -90,7 +90,7 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
         <Group>
           <Button
             component="a"
-            href="https://yourblog.com"
+            href={SITE_CONFIG.socials.kofi}
             target="_blank"
             variant="outline"
             visibleFrom="sm"
