@@ -68,7 +68,8 @@ export default async function TheoryPage({
                   src={src}
                   alt={alt}
                   radius="md"
-                  style={{ border: '1px solid var(--mantine-color-slate-2)', maxWidth: '100%' }}
+                  fit="contain"
+                  style={{ border: '1px solid var(--mantine-color-slate-2)', maxWidth: '100%', maxHeight: '40vh' }}
                   {...props}
                 />
                 {alt && (
