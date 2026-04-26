@@ -134,92 +134,50 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
           </Link>
         }
       >
-        <Stack gap="xs">
-          {/* Home */}
-          <NavLink
-            component={Link}
-            href="/"
-            label="Home"
-            leftSection={<IconHome style={{ width: rem(20), height: rem(20) }} />}
-            onClick={toggle}
-            className={classes.mobileNavLink}
-          />
+        <NavLink
+          href="/"
+          label="Home"
+          component={Link}
+          leftSection={<IconHome size={20} />}
+        />
 
-          {/* Generators */}
-          <Accordion variant="unstyled" chevronPosition="right" className={classes.mobileAccordion}>
-            <Accordion.Item value="generators" className={classes.mobileAccordionItem}>
-              <Accordion.Control icon={<IconTools style={{ width: rem(20), height: rem(20) }} />}>
-                <Text className={classes.mobileAccordionLabel}>Generators</Text>
-              </Accordion.Control>
-              <Accordion.Panel>
-                <Stack gap={2}>
-                  <NavLink
-                    component={Link}
-                    href="/generators/one"
-                    label="Generator One"
-                    onClick={toggle}
-                    className={classes.mobileNavLink}
-                  />
-                  <NavLink
-                    component={Link}
-                    href="/generators/two"
-                    label="Generator Two"
-                    onClick={toggle}
-                    className={classes.mobileNavLink}
-                  />
-                </Stack>
-              </Accordion.Panel>
-            </Accordion.Item>
-          </Accordion>
+        <NavLink
+          label="Generators"
+          leftSection={<IconTools size={20} />}
+          childrenOffset={28}
+        >
+          <NavLink component={Link} href="/generators/one" label="One" />
+          <NavLink component={Link} href="/generators/two" label="Two" />
+        </NavLink>
 
-          {/* Theory */}
-          <Accordion variant="unstyled" chevronPosition="right" className={classes.mobileAccordion}>
-            <Accordion.Item value="theory" className={classes.mobileAccordionItem}>
-              <Accordion.Control icon={<IconBook style={{ width: rem(20), height: rem(20) }} />}>
-                <Text className={classes.mobileAccordionLabel}>Theory</Text>
-              </Accordion.Control>
-              <Accordion.Panel>
-                <Stack gap={2}>
-                  {theoryLinks.map((link) => (
-                    <NavLink
-                      key={link.href}
-                      component={Link}
-                      href={link.href}
-                      label={link.label}
-                      onClick={toggle}
-                      className={classes.mobileNavLink}
-                    />
-                  ))}
-                </Stack>
-              </Accordion.Panel>
-            </Accordion.Item>
-          </Accordion>
+        <NavLink
+          label="Theory"
+          leftSection={<IconBook size={20} />}
+          childrenOffset={28}
+        >
+          {theoryLinks.map((link) => (
+            <NavLink
+              key={link.href}
+              component={Link}
+              href={link.href}
+              label={link.label}
+              onClick={toggle}
+            />
+          ))}
+        </NavLink>
 
-          {/* About */}
-          <NavLink
-            component={Link}
-            href="/about"
-            label="About"
-            leftSection={<IconInfoCircle style={{ width: rem(20), height: rem(20) }} />}
-            onClick={toggle}
-            className={classes.mobileNavLink}
-          />
-
-          {/* kofi */}
-          <Button
-            component="a"
-            href={SITE_CONFIG.socials.kofi}
-            target="_blank"
-            justify='left'
-            variant="outline"
-            fullWidth
-            leftSection={<IconNews style={{ width: rem(20), height: rem(20), marginLeft: 5}} />}
-            onClick={toggle}
-            mt="md"
-          >
-            Blog
-          </Button>
-        </Stack>
+        <NavLink
+          href="/about"
+          label="About"
+          component={Link}
+          leftSection={<IconInfoCircle size={20} />}
+        />
+        <NavLink
+          href={SITE_CONFIG.socials.kofi}
+          target="_blank"
+          label="Blog"
+          leftSection={<IconNews size={20} />}
+        />
       </Drawer>
     </>
   );
