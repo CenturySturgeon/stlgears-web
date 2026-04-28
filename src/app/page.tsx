@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import {
   Container,
@@ -8,6 +6,7 @@ import {
   Button,
   Group,
   Grid,
+  GridCol,
   Card,
   Box,
   SimpleGrid,
@@ -46,7 +45,7 @@ export default function HomePage() {
         <Card withBorder shadow="sm" radius="md" p={0} mb={80}>
           <Grid align="stretch">
             {/* Image Side (Left) */}
-            <Grid.Col span={{ base: 12, md: 6 }}>
+            <GridCol span={{ base: 12, md: 6 }}>
               <Box
                 h="100%"
                 style={{
@@ -63,10 +62,10 @@ export default function HomePage() {
                   </Text>
                 </Box>
               </Box>
-            </Grid.Col>
+            </GridCol>
 
             {/* Text Side (Right) */}
-            <Grid.Col span={{ base: 12, md: 6 }}>
+            <GridCol span={{ base: 12, md: 6 }}>
               <Box p={{ base: "xl", md: 60 }}>
                 <Title order={2} mb="md">
                   Card title
@@ -74,23 +73,23 @@ export default function HomePage() {
                 <Text c="dimmed" size="lg" mb="xl">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
                 </Text>
-                <Button
-                  component={Link}
-                  href="/3d-generator"
-                  variant="light"
-                  rightSection={<IconArrowRight size={16} />}
-                >
-                  Button here
-                </Button>
+                <Link href="/3d-generator" style={{ textDecoration: "none" }}>
+                  <Button
+                    variant="light"
+                    rightSection={<IconArrowRight size={16} />}
+                  >
+                    Button here
+                  </Button>
+                </Link>
               </Box>
-            </Grid.Col>
+            </GridCol>
           </Grid>
         </Card>
 
         <Card withBorder shadow="sm" radius="md" p={0} mb={80}>
           <Grid align="stretch">
             {/* Text Side (Left) */}
-            <Grid.Col span={{ base: 12, md: 6 }} order={{ base: 2, md: 1 }}>
+            <GridCol span={{ base: 12, md: 6 }} order={{ base: 2, md: 1 }}>
               <Box p={{ base: "xl", md: 60 }}>
                 <Title order={2} mb="md">
                   Card title
@@ -98,19 +97,19 @@ export default function HomePage() {
                 <Text c="dimmed" size="lg" mb="xl">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
                 </Text>
-                <Button
-                  component={Link}
-                  href="/2d-generator"
-                  variant="light"
-                  rightSection={<IconArrowRight size={16} />}
-                >
-                  Card button
-                </Button>
+                <Link href="/2d-generator" style={{ textDecoration: "none" }}>
+                  <Button
+                    variant="light"
+                    rightSection={<IconArrowRight size={16} />}
+                  >
+                    Card button
+                  </Button>
+                </Link>
               </Box>
-            </Grid.Col>
+            </GridCol>
 
             {/* Image Side (Right) */}
-            <Grid.Col span={{ base: 12, md: 6 }} order={{ base: 1, md: 2 }}>
+            <GridCol span={{ base: 12, md: 6 }} order={{ base: 1, md: 2 }}>
               <Box
                 h="100%"
                 style={{
@@ -127,7 +126,7 @@ export default function HomePage() {
                   </Text>
                 </Box>
               </Box>
-            </Grid.Col>
+            </GridCol>
           </Grid>
         </Card>
       </Container>
@@ -147,9 +146,14 @@ export default function HomePage() {
             <Text c="dimmed" mb="lg">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </Text>
-            <Button component={Link} href="/theory" variant="subtle" px={0} rightSection={<IconArrowRight size={16} />}>
-              Read the documentation
-            </Button>
+            <Link href="/theory" style={{ textDecoration: "none" }}>
+              <Button
+                variant="subtle" px="--button-padding-x"
+                rightSection={<IconArrowRight size={16} />}
+              >
+                Read the docs
+              </Button>
+            </Link>
           </Card>
 
           <Card withBorder shadow="sm" radius="md" >
@@ -162,9 +166,16 @@ export default function HomePage() {
             <Text c="dimmed" mb="lg">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </Text>
-            <Button component={Link} href="/about" variant="subtle" color="sand" px={0} rightSection={<IconArrowRight size={16} />}>
-              Learn about the site
-            </Button>
+            <Link href="/about" style={{ textDecoration: "none" }}>
+              <Button
+                variant="subtle"
+                color="sand"
+                px="--button-padding-x"
+                rightSection={<IconArrowRight size={16} />}
+              >
+                Read about the site
+              </Button>
+            </Link>
           </Card>
         </SimpleGrid>
       </Container>
