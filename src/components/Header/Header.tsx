@@ -2,6 +2,7 @@
 
 import classes from './Header.module.css';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import { SITE_CONFIG } from '@/config';
 import { Box, Button, Burger, Container, Drawer, Group, Image, Menu, NavLink, Text, UnstyledButton, rem, ActionIcon, useComputedColorScheme, useMantineColorScheme } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
@@ -17,8 +18,22 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
   const { setColorScheme } = useMantineColorScheme();
   const computedColorScheme = useComputedColorScheme('light', { getInitialValueInEffect: true });
 
+  // State to avoid hydration error due to dark theme reload
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const toggleTheme = () => {
     setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light');
+  };
+
+  const renderThemeIcon = () => {
+    if (!mounted) {
+      // Always match the server's initial render (light mode / moon)
+      return <IconMoon size={18} />;
+    }
+    return computedColorScheme === 'dark' ? <IconSun size={18} /> : <IconMoon size={18} />;
   };
 
   return (
@@ -104,7 +119,7 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
               aria-label="Toggle theme"
               visibleFrom="sm"
             >
-              {computedColorScheme === 'dark' ? <IconSun size={18} /> : <IconMoon size={18} />}
+              {renderThemeIcon()}
             </ActionIcon>
             <Button
               component="a"
@@ -123,7 +138,7 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
               aria-label="Toggle theme"
               hiddenFrom="sm"
             >
-              {computedColorScheme === 'dark' ? <IconSun size={18} /> : <IconMoon size={18} />}
+              {renderThemeIcon()}
             </ActionIcon>
             <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           </Group>
@@ -175,7 +190,6 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
           <NavLink component={Link} href="/generators/one" label="One" onClick={toggle} />
           <NavLink component={Link} href="/generators/two" label="Two" onClick={toggle} />
         </NavLink>
-
         <NavLink
           label="Theory"
           leftSection={<IconBook size={20} />}
@@ -206,7 +220,6 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
           leftSection={<IconNews size={20} />}
           className={classes.blogNavLink}
           description="See what's new!"
-        /* No variant="filled" so it doesn't clash with custom CSS */
         />
       </Drawer>
     </>
