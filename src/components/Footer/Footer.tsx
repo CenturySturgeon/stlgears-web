@@ -13,7 +13,7 @@ export function Footer() {
         <Divider mb="xl" />
         <Group justify="space-between" className={classes.inner}>
           <Stack gap={4}>
-            <Text size="sm" fw={600} c="logoBlue.7">
+            <Text size="sm" fw={600} c="logoBlue">
               {SITE_CONFIG.name}
             </Text>
             <Text size="xs" c="dimmed">

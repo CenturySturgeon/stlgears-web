@@ -109,7 +109,7 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
             <Button
               component="a"
               leftSection={<IconNews style={{ width: rem(20), height: rem(20) }} />}
-              href={SITE_CONFIG.socials.kofi}
+              href={SITE_CONFIG.socials.blog}
               target="_blank"
               variant="outline"
               visibleFrom="sm"
@@ -200,7 +200,7 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
           leftSection={<IconInfoCircle size={20} />}
         />
         <NavLink
-          href={SITE_CONFIG.socials.kofi}
+          href={SITE_CONFIG.socials.blog}
           target="_blank"
           label="Blog"
           leftSection={<IconNews size={20} />}

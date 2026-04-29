@@ -6,6 +6,6 @@ export const SITE_CONFIG = {
     cookies: '/documents/cookies-policy.pdf',
   },
   socials:{
-    kofi: 'https://ko-fi.com/juangras'
+    blog: 'https://ko-fi.com/juangras'
   }
 };
