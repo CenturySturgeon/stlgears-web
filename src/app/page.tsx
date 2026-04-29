@@ -20,11 +20,15 @@ import {
   IconInfoCircle,
 } from "@tabler/icons-react";
 
+const large_margin = 80
+const small_margin = 40
+const margins = { base: small_margin, sm: large_margin } // Devices bigger than sm get the 80 value (only phones get the base)
+
 export default function HomePage() {
   return (
-    <Box pb={60}>
+    <Box>
       {/* HERO SECTION */}
-      <Box pt={80} pb={80}>
+      <Box pt={large_margin} pb={large_margin}>
         <Container size="lg">
           <Box ta="center" maw={800} mx="auto">
             <Title order={1} size="h1" fw={900} mb="lg">
@@ -42,7 +46,7 @@ export default function HomePage() {
 
       {/* GENERATOR CARDS SECTION (Symmetrical Zig-Zag) */}
       <Container size="lg">
-        <Card withBorder shadow="sm" radius="md" p={0} mb={80}>
+        <Card withBorder shadow="sm" radius="md" p={0} mb={margins}>
           <Grid align="stretch">
             {/* Image Side (Left) */}
             <GridCol span={{ base: 12, md: 6 }}>
@@ -86,7 +90,7 @@ export default function HomePage() {
           </Grid>
         </Card>
 
-        <Card withBorder shadow="sm" radius="md" p={0} mb={80}>
+        <Card withBorder shadow="sm" radius="md" p={0} mb={margins}>
           <Grid align="stretch">
             {/* Text Side (Left) */}
             <GridCol span={{ base: 12, md: 6 }} order={{ base: 2, md: 1 }}>
@@ -134,7 +138,7 @@ export default function HomePage() {
       {/* THEORY & ABOUT CARDS (Supplemental usefulness below) */}
 
 
-      <Container size="lg" mt={{ base: 40, md: 80 }}>
+      <Container size="lg" mb={margins}>
         <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="xl">
           <Card withBorder shadow="sm" radius="md" >
             <Group mb="md">
