@@ -27,7 +27,6 @@ export default function GearCard({
                     display: 'flex',
                     flexDirection: 'column',
                     height: '100%',
-                    maxWidth: '33%'
                 }}
             >
                 {/* Image */}
