@@ -12,4 +12,4 @@ As you can see, the hypotenuse is derived from the other two sides.
 
 Check this picture out:
 
-![A picture description](../../public/images/image.png)
+![A picture description](../../public/images/spur.png)
