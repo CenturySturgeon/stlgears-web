@@ -1,17 +1,20 @@
-
-import { Container } from "@mantine/core";
+import { Container, SimpleGrid } from "@mantine/core";
 import GearCard from "@/components/GearCard/GearCard";
+import { cardsData } from "./config";
 
-// Put the generic homepage cards here and talk about file formats
+const small_margin = 40
 
 export default function Generators() {
     return (
-        <Container size="xl">
-            <GearCard
-                image="/images/image.png"
-                title="Spur Gear"
-                description="I am a tiny description"
-            />
+        <Container my={small_margin} size="lg">
+            <SimpleGrid
+                cols={{ base: 1, sm: 2, lg: 3 }}
+                spacing="lg"
+            >
+                {cardsData.map((card, index) => (
+                    <GearCard key={index} {...card} />
+                ))}
+            </SimpleGrid>
         </Container>
-    )
+    );
 }
