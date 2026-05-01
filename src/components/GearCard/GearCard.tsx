@@ -64,7 +64,7 @@ export default function GearCard({
                     mt="md"
                     onClick={() => setOpened(true)}
                 >
-                    Open
+                    Customize
                 </Button>
             </Card>
 
