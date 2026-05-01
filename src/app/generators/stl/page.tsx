@@ -1,5 +1,6 @@
-import { Box, Container, SimpleGrid, Text, Title } from "@mantine/core";
+import { SITE_CONFIG } from '@/config';
 import { cardsData } from "./config";
+import { Box, Container, SimpleGrid, Text, Title } from "@mantine/core";
 import GearCard from "@/components/GearCard/GearCard";
 import ButtonLink from "@/components/ButtonLink/ButtonLink";
 
@@ -20,7 +21,7 @@ export default function Generators() {
                         <Text c="dimmed" size="xl" mb="sm">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </Text>
-                        <ButtonLink href="/" variant="light" color="sand">
+                        <ButtonLink href={SITE_CONFIG.routes.theory} variant="light" color="sand">
                             Learn more...
                         </ButtonLink>
                     </Box>
