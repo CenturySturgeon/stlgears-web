@@ -28,7 +28,7 @@ export default function HomePage() {
   return (
     <Box>
       {/* HERO SECTION */}
-      <Box pt={large_margin} pb={large_margin}>
+      <Box py={margins}>
         <Container size="lg">
           <Box ta="center" maw={800} mx="auto">
             <Title order={1} size="h1" fw={900} mb="lg">

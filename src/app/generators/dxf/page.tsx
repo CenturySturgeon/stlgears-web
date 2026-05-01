@@ -21,9 +21,6 @@ export default function Generators() {
                         <Text c="dimmed" size="xl" mb="sm">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </Text>
-                        <ButtonLink href={SITE_CONFIG.routes.theory} variant="light" color="sand">
-                            Learn more...
-                        </ButtonLink>
                     </Box>
                 </Container>
             </Box>
