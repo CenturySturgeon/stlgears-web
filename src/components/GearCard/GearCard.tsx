@@ -29,18 +29,44 @@ export default function GearCard({
                     height: '100%',
                 }}
             >
-                {/* Image */}
                 <Card.Section>
-                    <Image
-                        src={image}
-                        alt={title}
-                        height={180} // fixed image height across all cards
-                        fit="contain"
-                        style={{ backgroundColor: "aliceblue" }}
-                    />
+                    <div style={{
+                        position: 'relative',
+                        height: 180,
+                        overflow: 'hidden',
+                    }}>
+                        {/* Diamond pattern background */}
+                        <div style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            backgroundImage: "url('/logo.svg')",
+                            backgroundSize: "50px 50px",
+                            backgroundRepeat: "repeat",
+                            transform: "scale(1.41)",
+                            opacity: 0.8,
+
+                            // --- ADDED CHECKERED MASK ---
+                            // The mask size is 80px (exactly double your 40px background size)
+                            WebkitMaskImage: "conic-gradient(#000 25%, transparent 25% 50%, #000 50% 75%, transparent 75%)",
+                            WebkitMaskSize: "100px 100px",
+                            maskImage: "conic-gradient(#000 25%, transparent 25% 50%, #000 50% 75%, transparent 75%)",
+                            maskSize: "100px 100px",
+                        }} />
+
+                        {/* Your image */}
+                        <Image
+                            src={image}
+                            alt={title}
+                            height={180}
+                            fit="contain"
+                            style={{ position: 'relative', zIndex: 1 }}
+                        />
+                    </div>
                 </Card.Section>
 
-                {/* Content */}
                 <Stack
                     mt="md"
                     style={{
@@ -48,18 +74,15 @@ export default function GearCard({
                         alignItems: "center"
                     }}
                 >
-                    {/* Title */}
                     <Title order={4}>
                         {title}
                     </Title>
 
-                    {/* Description */}
                     <Text size="sm" c="dimmed">
                         {description}
                     </Text>
                 </Stack>
 
-                {/* Button pinned to bottom */}
                 <Button
                     mt="md"
                     onClick={() => setOpened(true)}
