@@ -78,15 +78,15 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
                 </UnstyledButton>
               </Menu.Target>
               <Menu.Dropdown>
-                <Menu.Item component={Link} href="/generators/one">Generator One</Menu.Item>
-                <Menu.Item component={Link} href="/generators/two">Generator Two</Menu.Item>
+                <Menu.Item component={Link} href={SITE_CONFIG.routes.generators.items.stl}>STL Generator</Menu.Item>
+                <Menu.Item component={Link} href={SITE_CONFIG.routes.generators.items.dxf}>DXF Generator</Menu.Item>
               </Menu.Dropdown>
             </Menu>
 
             {/* Theory - Dynamically Mapped */}
             <Menu trigger="hover" openDelay={100} closeDelay={400}>
               <Menu.Target>
-                <UnstyledButton component={Link} href="/theory" className={classes.link}>
+                <UnstyledButton component={Link} href={SITE_CONFIG.routes.theory} className={classes.link}>
                   <Group gap={5}>
                     <span>Theory</span>
                     <IconChevronDown size={14} />
@@ -107,7 +107,7 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
             </Menu>
 
             {/* About */}
-            <UnstyledButton component={Link} href="/about" className={classes.link}>About</UnstyledButton>
+            <UnstyledButton component={Link} href={SITE_CONFIG.routes.about} className={classes.link}>About</UnstyledButton>
           </Group>
 
           {/* Right: External Blog Button */}
@@ -187,8 +187,8 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
           childrenOffset={28}
           defaultOpened
         >
-          <NavLink component={Link} href="/generators/one" label="One" onClick={toggle} />
-          <NavLink component={Link} href="/generators/two" label="Two" onClick={toggle} />
+          <NavLink component={Link} href={SITE_CONFIG.routes.generators.items.stl} label="STL Generator" onClick={toggle} />
+          <NavLink component={Link} href={SITE_CONFIG.routes.generators.items.dxf} label="DXF Generator" onClick={toggle} />
         </NavLink>
         <NavLink
           label="Theory"
