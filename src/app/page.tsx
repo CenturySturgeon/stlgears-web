@@ -1,9 +1,9 @@
-import Link from "next/link";
+import ButtonLink from "@/components/ButtonLink/ButtonLink";
+import { SITE_CONFIG } from '@/config';
 import {
   Container,
   Title,
   Text,
-  Button,
   Group,
   Grid,
   GridCol,
@@ -77,14 +77,13 @@ export default function HomePage() {
                 <Text c="dimmed" size="lg" mb="xl">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
                 </Text>
-                <Link href="/3d-generator" style={{ textDecoration: "none" }}>
-                  <Button
-                    variant="light"
-                    rightSection={<IconArrowRight size={16} />}
-                  >
-                    Button here
-                  </Button>
-                </Link>
+                <ButtonLink
+                  href={SITE_CONFIG.routes.generators.items.stl}
+                  variant="light"
+                  rightSection={<IconArrowRight size={16} />}
+                >
+                  Button here
+                </ButtonLink>
               </Box>
             </GridCol>
           </Grid>
@@ -101,14 +100,13 @@ export default function HomePage() {
                 <Text c="dimmed" size="lg" mb="xl">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
                 </Text>
-                <Link href="/2d-generator" style={{ textDecoration: "none" }}>
-                  <Button
-                    variant="light"
-                    rightSection={<IconArrowRight size={16} />}
-                  >
-                    Card button
-                  </Button>
-                </Link>
+                <ButtonLink
+                  href={SITE_CONFIG.routes.generators.items.dxf}
+                  variant="light"
+                  rightSection={<IconArrowRight size={16} />}
+                >
+                  Card button
+                </ButtonLink>
               </Box>
             </GridCol>
 
@@ -150,14 +148,13 @@ export default function HomePage() {
             <Text c="dimmed" mb="lg">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </Text>
-            <Link href="/theory" style={{ textDecoration: "none" }}>
-              <Button
-                variant="subtle" px="--button-padding-x"
-                rightSection={<IconArrowRight size={16} />}
-              >
-                Read the docs
-              </Button>
-            </Link>
+            <ButtonLink
+              href={SITE_CONFIG.routes.theory}
+              variant="subtle" px="--button-padding-x"
+              rightSection={<IconArrowRight size={16} />}
+            >
+              Read the docs
+            </ButtonLink>
           </Card>
 
           <Card withBorder shadow="sm" radius="md" >
@@ -170,16 +167,15 @@ export default function HomePage() {
             <Text c="dimmed" mb="lg">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </Text>
-            <Link href="/about" style={{ textDecoration: "none" }}>
-              <Button
-                variant="subtle"
-                color="sand"
-                px="--button-padding-x"
-                rightSection={<IconArrowRight size={16} />}
-              >
-                Read about the site
-              </Button>
-            </Link>
+            <ButtonLink
+              href={SITE_CONFIG.routes.about}
+              variant="subtle"
+              color="sand"
+              px="--button-padding-x"
+              rightSection={<IconArrowRight size={16} />}
+            >
+              Read about the site
+            </ButtonLink>
           </Card>
         </SimpleGrid>
       </Container>
