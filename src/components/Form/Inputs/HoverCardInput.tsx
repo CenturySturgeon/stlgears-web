@@ -4,6 +4,19 @@ import { Box, Group, HoverCard, Image, Stack, Text } from '@mantine/core';
 import { IconHelpCircle } from '@tabler/icons-react';
 import ButtonLink from '@/components/ButtonLink/ButtonLink';
 
+// TODO: Hard type the HoverCardInput props and make them exportable
+// type HoverCardInputProps =
+//   | {
+//       InputComponent: React.ComponentType<TextInputProps>;
+//       inputProps: TextInputProps;
+//       helpText: string;
+//     }
+//   | {
+//       InputComponent: React.ComponentType<NumberInputProps>;
+//       inputProps: NumberInputProps;
+//       helpText: string;
+//     };
+
 type HoverCardInputProps<T> = {
   InputComponent: React.ComponentType<T>; // any Mantine input
   inputProps: T;

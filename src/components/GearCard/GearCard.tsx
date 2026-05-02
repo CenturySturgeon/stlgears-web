@@ -3,14 +3,31 @@
 import { useState } from 'react';
 import { Box, Button, Card, Image, Stack, Text, Title } from '@mantine/core';
 import FormModal from '@/components/Form/FormModal/FormModal';
+import HoverCardInput from '../Form/Inputs/HoverCardInput';
+
+
+// TODO: Hard type the HoverCardInput props and import them
+
+type AnyHoverCardInputProps = {
+  InputComponent: React.ComponentType<any>;
+  inputProps: Record<string, any>;
+
+  helpText?: string;
+  helpImage?: string;
+  helpLink?: {
+    href: string;
+    label: string;
+  };
+};
 
 type Props = {
     image: string;
     title: string;
     description: string;
+    inputConfigs: AnyHoverCardInputProps[];
 };
 
-export default function ({ image, title, description }: Props) {
+export default function ({ image, title, description, inputConfigs }: Props) {
     const [opened, setOpened] = useState(false);
 
     return (
@@ -79,8 +96,9 @@ export default function ({ image, title, description }: Props) {
                 onClose={() => setOpened(false)}
                 title={title}
             >
-                {/* dynamic content goes here */}
-                <Text size="sm">You can inject anything here.</Text>
+                {inputConfigs.map((inputConfig, index) => (
+                    <HoverCardInput key={index} {...inputConfig} />
+                ))}
             </FormModal>
         </>
     );
