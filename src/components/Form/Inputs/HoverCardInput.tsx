@@ -49,7 +49,7 @@ export default function HoverCardInput<T>({
             <HoverCard.Dropdown>
               <Stack gap="xs">
                 {helpImage && (
-                  <Image fit='contain' mah='200px' src={helpImage} alt="help" radius="sm" style={{ backgroundColor: 'white' }} />
+                  <Image fit='contain' mah='150px' src={helpImage} alt="help" radius="sm" style={{ backgroundColor: 'white' }} />
                 )}
 
                 <Text size="sm">{helpText}</Text>
