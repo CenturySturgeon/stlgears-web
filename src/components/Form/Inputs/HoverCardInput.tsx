@@ -1,0 +1,67 @@
+'use client';
+
+import { Box, Group, HoverCard, Image, Stack, Text } from '@mantine/core';
+import { IconHelpCircle } from '@tabler/icons-react';
+import ButtonLink from '@/components/ButtonLink/ButtonLink';
+
+type HoverCardInputProps<T> = {
+  InputComponent: React.ComponentType<T>; // any Mantine input
+  inputProps: T;
+
+  helpText: string;
+  helpImage?: string;
+  helpLink?: {
+    href: string;
+    label: string;
+  };
+};
+
+export default function HoverCardInput<T>({
+  InputComponent,
+  inputProps,
+  helpText,
+  helpImage,
+  helpLink,
+}: HoverCardInputProps<T>) {
+  return (
+    <Group align="stretch" gap="xs" wrap="nowrap">
+      {/* Input */}
+      <InputComponent {...inputProps} style={{ flex: 1 }} />
+
+      {/* Help icon + hover card */}
+      {/* Icon container centers itself vertically */}
+      <Box
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <HoverCard width={280} shadow="md" withArrow>
+          <HoverCard.Target>
+            <IconHelpCircle
+              size={18}
+              style={{ cursor: 'pointer', opacity: 0.7 }}
+            />
+          </HoverCard.Target>
+
+          <HoverCard.Dropdown>
+            <Stack gap="xs">
+              {helpImage && (
+                <Image src={helpImage} alt="help" radius="sm" />
+              )}
+
+              <Text size="sm">{helpText}</Text>
+
+              {helpLink && (
+                <ButtonLink href={helpLink.href} size="xs" variant="light">
+                  {helpLink.label}
+                </ButtonLink>
+              )}
+            </Stack>
+          </HoverCard.Dropdown>
+        </HoverCard>
+      </Box>
+
+    </Group>
+  );
+}
