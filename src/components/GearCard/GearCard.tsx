@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, Image, Text, Button, Modal, Stack, Title } from '@mantine/core';
+import { Box, Button, Card, Image, Modal, Stack, Text, Title } from '@mantine/core';
 
 type GearCardProps = {
     image: string;
@@ -30,13 +30,13 @@ export default function GearCard({
                 }}
             >
                 <Card.Section>
-                    <div style={{
+                    <Box style={{
                         position: 'relative',
                         height: 180,
                         overflow: 'hidden',
                     }}>
                         {/* Diamond pattern background */}
-                        <div style={{
+                        <Box style={{
                             position: 'absolute',
                             top: 0,
                             left: 0,
@@ -46,7 +46,7 @@ export default function GearCard({
                             backgroundSize: "50px 50px",
                             backgroundRepeat: "repeat",
                             transform: "scale(1.41)",
-                            opacity: 0.8,
+
 
                             // --- ADDED CHECKERED MASK ---
                             // The mask size is 80px (exactly double your 40px background size)
@@ -64,7 +64,7 @@ export default function GearCard({
                             fit="contain"
                             style={{ position: 'relative', zIndex: 1 }}
                         />
-                    </div>
+                    </Box>
                 </Card.Section>
 
                 <Stack
