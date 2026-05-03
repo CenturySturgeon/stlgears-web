@@ -33,7 +33,7 @@ export const pressureAngleInputConfig = {
         max: 35,
         decimalScale: 1,
     },
-    helpText: 'The angle between the line of action and the tangent to the pitch circle, typically 20 or 25 degrees.',
+    helpText: 'The angle between the line of action and the tangent to the pitch circle, typically 20° or 25°.',
     helpImage: "/images/gears/inputs/pressure_angle.svg",
     helpLink: {
         href: '/',
@@ -46,7 +46,7 @@ export const helixAngleInputConfig = {
     inputProps: {
         label: 'Helix angle',
         description: 'The angle between the helix and the axis of rotation',
-        defaultValue: 20,
+        defaultValue: 15,
         placeholder: '°',
         suffix: ' °',
         min: 5,
@@ -54,6 +54,7 @@ export const helixAngleInputConfig = {
         allowDecimal: false,
     },
     helpImage: "/images/gears/inputs/helix_angle.svg",
+    helpText: "- Typically from 15° to 30° in helical gears.\n\n- Double helical gears self cancel thrust; up to 45°.",
     helpLink: {
         href: '/',
         label: 'Learn more'
@@ -69,6 +70,30 @@ export const numberOfTeethInputConfig = {
         max: 150,
         allowDecimal: false,
     },
+};
+
+export const bevelPinpionNumberOfTeethInputConfig = {
+    InputComponent: NumberInput,
+    inputProps: {
+        label: "Pinion's number of teeth",
+        defaultValue: 17,
+        min: 1,
+        max: 150,
+        allowDecimal: false,
+    },
+    helpText: "By convention, the Pinion is the smaller gear."
+};
+
+export const bevelWheelNumberOfTeethInputConfig = {
+    InputComponent: NumberInput,
+    inputProps: {
+        label: "Wheel's number of teeth",
+        defaultValue: 17,
+        min: 1,
+        max: 150,
+        allowDecimal: false,
+    },
+    helpText: "By convention, the Wheel is the larger gear."
 };
 
 export const helicalSystemInputConfig = {
@@ -126,6 +151,7 @@ export const helixDirectionInputConfig = {
         description: "Controls direction of the helix",
         data: ['Clock wise', 'Counter clock wise']
     },
+    helpText: "For paralel shaft helical gears to mesh, their helix angle must be equal in magnitude but opposite in direction."
 };
 
 export const doubleHelicalLengthInputConfig = {
