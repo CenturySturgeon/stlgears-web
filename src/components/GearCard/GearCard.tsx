@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Button, Card, Image, Stack, Text, Title } from '@mantine/core';
+import { Box, Button, Card, Center, Container, Grid, Image, Stack, Text, Title } from '@mantine/core';
 import FormModal from '@/components/Form/FormModal/FormModal';
 import HoverCardInput from '../Form/Inputs/HoverCardInput';
 
@@ -9,15 +9,15 @@ import HoverCardInput from '../Form/Inputs/HoverCardInput';
 // TODO: Hard type the HoverCardInput props and import them
 
 type AnyHoverCardInputProps = {
-  InputComponent: React.ComponentType<any>;
-  inputProps: Record<string, any>;
+    InputComponent: React.ComponentType<any>;
+    inputProps: Record<string, any>;
 
-  helpText?: string;
-  helpImage?: string;
-  helpLink?: {
-    href: string;
-    label: string;
-  };
+    helpText?: string;
+    helpImage?: string;
+    helpLink?: {
+        href: string;
+        label: string;
+    };
 };
 
 type Props = {
@@ -91,14 +91,32 @@ export default function ({ image, title, description, inputConfigs }: Props) {
                 </Button>
             </Card>
 
+
             <FormModal
                 opened={opened}
                 onClose={() => setOpened(false)}
                 title={title}
             >
-                {inputConfigs.map((inputConfig, index) => (
-                    <HoverCardInput key={index} {...inputConfig} />
-                ))}
+                <Container size="md">
+                    <Grid gap="md">
+                        {inputConfigs.map((inputConfig, index) => (
+                            <Grid.Col
+                                span={{ base: 12, sm: 6 }}
+                                key={index}
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'flex-end',
+                                }}
+                            >
+                                <HoverCardInput {...inputConfig} />
+                            </Grid.Col>
+                        ))}
+                    </Grid>
+                    <Center mt="lg">
+                        <Button>Submit</Button>
+                    </Center>
+                </Container>
             </FormModal>
         </>
     );
