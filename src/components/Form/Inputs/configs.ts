@@ -63,7 +63,7 @@ export const helicalSystemInputConfig = {
         defaultValue: "Normal",
         rightSection: React.createElement(IconCaretDownFilled, { size: 16 }) as ReactElement,
     },
-    helpText: "The radial system preserves the profile of the spur gear on the transverse plane, but can't be manufactured through conventional methods.",
+    helpText: `Radial system \n - Preserves the profile of the spur gear on the transverse plane. \n - Can't be manufactured through conventional methods.\n\nNormal system\n - Can be manufactured from a single hob cutter. \n - Tooth profile dimensions are different from the spur gear's.`,
     helpLink: {
         href: '/theory/module',
         label: 'Learn more'

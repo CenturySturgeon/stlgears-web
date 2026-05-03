@@ -1,6 +1,7 @@
 'use client';
 
-import { Box, Group, HoverCard, Image, Stack, Text } from '@mantine/core';
+import ReactMarkdown from 'react-markdown';
+import { Anchor, Box, Group, HoverCard, Image, List, Stack, Text } from '@mantine/core';
 import { IconHelpCircle } from '@tabler/icons-react';
 import ButtonLink from '@/components/ButtonLink/ButtonLink';
 
@@ -69,7 +70,39 @@ export default function HoverCardInput<T>({
                   <Image fit='contain' mah='150px' src={helpImage} alt="help" radius="sm" style={{ backgroundColor: 'white' }} />
                 )}
 
-                <Text size="sm">{helpText}</Text>
+                {helpText && (
+                  <ReactMarkdown
+                    components={{
+                      p: ({ children }) => <Text size="sm">{children}</Text>,
+
+                      ul: ({ children }) => (
+                        <List size="sm" spacing={4}>
+                          {children}
+                        </List>
+                      ),
+
+                      ol: ({ children }) => (
+                        <List size="sm" spacing={4} type="ordered">
+                          {children}
+                        </List>
+                      ),
+
+                      li: ({ children }) => (
+                        <List.Item>
+                          {children}
+                        </List.Item>
+                      ),
+
+                      a: ({ href, children }) => (
+                        <Anchor href={href} size="sm" target="_blank">
+                          {children}
+                        </Anchor>
+                      ),
+                    }}
+                  >
+                    {helpText}
+                  </ReactMarkdown>
+                )}
 
                 {helpLink && (
                   <ButtonLink href={helpLink.href} size="xs" variant="light">
