@@ -1,7 +1,5 @@
-import React from 'react';
-import { NumberInput, Select } from "@mantine/core"
-import { IconCaretDownFilled } from "@tabler/icons-react";
-import { ReactElement } from 'react';
+import { NumberInput } from "@mantine/core"
+import LabeledSegmentedControl from "@/components/Form/Inputs/LabeledSegmentedControl/LabeledSegmentedControl"
 
 export const moduleInputConfig = {
     InputComponent: NumberInput,
@@ -43,6 +41,25 @@ export const pressureAngleInputConfig = {
     }
 };
 
+export const helixAngleInputConfig = {
+    InputComponent: NumberInput,
+    inputProps: {
+        label: 'Helix angle',
+        description: 'The angle between the helix and the axis of rotation',
+        defaultValue: 20,
+        placeholder: '°',
+        suffix: ' °',
+        min: 5,
+        max: 45,
+        allowDecimal: false,
+    },
+    helpImage: "/images/gears/inputs/helix_angle.svg",
+    helpLink: {
+        href: '/',
+        label: 'Learn more'
+    }
+};
+
 export const numberOfTeethInputConfig = {
     InputComponent: NumberInput,
     inputProps: {
@@ -55,15 +72,15 @@ export const numberOfTeethInputConfig = {
 };
 
 export const helicalSystemInputConfig = {
-    InputComponent: Select,
+    InputComponent: LabeledSegmentedControl,
     inputProps: {
+        color: "slate.6",
         label: 'Helical system',
         description: 'Determines tooth profile on the transverse plane',
         data: ['Normal', 'Radial'],
         defaultValue: "Normal",
-        rightSection: React.createElement(IconCaretDownFilled, { size: 16 }) as ReactElement,
     },
-    helpText: `Radial system \n - Preserves the profile of the spur gear on the transverse plane. \n - Can't be manufactured through conventional methods.\n\nNormal system\n - Can be manufactured from a single hob cutter. \n - Tooth profile dimensions are different from the spur gear's.`,
+    helpText: `**Radial system** \n - Preserves the profile of the spur gear on the transverse plane. \n - Can't be manufactured through conventional methods.\n\n**Normal system**\n - Can be manufactured from a single hob cutter. \n - Tooth profile dimensions are different from the spur gear's.`,
     helpLink: {
         href: '/theory/module',
         label: 'Learn more'
@@ -99,6 +116,16 @@ export const radialThicknessInputConfig = {
     },
     helpImage: "/images/gears/inputs/radial_thickness.svg",
     helpText: "Distance between the root diameter (closest to the cylindrical face) and the outer diameter.",
+};
+
+export const helixDirectionInputConfig = {
+    InputComponent: LabeledSegmentedControl,
+    inputProps: {
+        color: "slate.6",
+        label: "Helix direction",
+        description: "Controls direction of the helix",
+        data: ['Clock wise', 'Counter clock wise']
+    },
 };
 
 export const doubleHelicalLengthInputConfig = {
