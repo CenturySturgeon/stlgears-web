@@ -1,4 +1,5 @@
 import {
+  helicalSystemInputConfig,
   moduleInputConfig,
   pressureAngleInputConfig,
   numberOfTeethInputConfig,
@@ -19,7 +20,7 @@ export const cardsData = [
     image: "/images/gears/double_helical.png",
     title: "Double Helical Gear",
     description: "High cost and hard to manufacture, but holds none of its helical counterpart's drawbacks",
-    inputConfigs: [moduleInputConfig, pressureAngleInputConfig, numberOfTeethInputConfig, doubleHelicalLengthInputConfig],
+    inputConfigs: [helicalSystemInputConfig, moduleInputConfig, pressureAngleInputConfig, numberOfTeethInputConfig, doubleHelicalLengthInputConfig],
   },
   {
     image: "/images/gears/spur.png",
@@ -31,7 +32,7 @@ export const cardsData = [
     image: "/images/gears/helical.png",
     title: "Helical Gear",
     description: "Rolls with smooth contact, quieter, but generates axial force",
-    inputConfigs: [moduleInputConfig, pressureAngleInputConfig, numberOfTeethInputConfig, helicalLengthInputConfig],
+    inputConfigs: [helicalSystemInputConfig, moduleInputConfig, pressureAngleInputConfig, numberOfTeethInputConfig, helicalLengthInputConfig],
   },
   {
     image: "/images/gears/internal_double_helical.png",

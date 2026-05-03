@@ -1,4 +1,7 @@
-import { NumberInput } from "@mantine/core"
+import React from 'react';
+import { NumberInput, Select } from "@mantine/core"
+import { IconCaretDownFilled } from "@tabler/icons-react";
+import { ReactElement } from 'react';
 
 export const moduleInputConfig = {
     InputComponent: NumberInput,
@@ -49,6 +52,22 @@ export const numberOfTeethInputConfig = {
         max: 150,
         allowDecimal: false,
     },
+};
+
+export const helicalSystemInputConfig = {
+    InputComponent: Select,
+    inputProps: {
+        label: 'Helical system',
+        description: 'Determines tooth profile on the transverse plane',
+        data: ['Normal', 'Radial'],
+        defaultValue: "Normal",
+        rightSection: React.createElement(IconCaretDownFilled, { size: 16 }) as ReactElement,
+    },
+    helpText: "The radial system preserves the profile of the spur gear on the transverse plane, but can't be manufactured through conventional methods.",
+    helpLink: {
+        href: '/theory/module',
+        label: 'Learn more'
+    }
 };
 
 export const lengthInputConfig = {
