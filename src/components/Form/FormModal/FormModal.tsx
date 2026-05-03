@@ -21,6 +21,7 @@ export default function FormModal({
       onClose={onClose}
       title={title}
       centered
+      size="xl"
     >
       {children ?? (
         <Text size="sm">

@@ -35,7 +35,7 @@ export const pressureAngleInputConfig = {
         max: 35,
         decimalScale: 1,
     },
-    helpText: 'The pressure angle is the angle between the line of action and the tangent to the pitch circle, typically 20 or 25 degrees.',
+    helpText: 'The angle between the line of action and the tangent to the pitch circle, typically 20 or 25 degrees.',
     helpImage: "/images/gears/inputs/pressure_angle.svg",
     helpLink: {
         href: '/',
