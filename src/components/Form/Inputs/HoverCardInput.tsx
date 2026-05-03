@@ -29,6 +29,8 @@ type HoverCardInputProps<T> = {
   };
 };
 
+const HELP_ICON_WIDTH = 18;
+
 export default function HoverCardInput<T>({
   InputComponent,
   inputProps,
@@ -43,18 +45,20 @@ export default function HoverCardInput<T>({
 
       {/* Help icon + hover */}
       {/* Icon container centers itself vertically */}
-      {
-        (helpText || helpImage) &&
-        <Box
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
+
+      <Box
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          width: HELP_ICON_WIDTH,
+        }}
+      >
+        {
+          (helpText || helpImage) &&
           <HoverCard width={280} shadow="md" withArrow>
             <HoverCard.Target>
               <IconHelpCircle
-                size={18}
+                size={HELP_ICON_WIDTH}
                 style={{ cursor: 'pointer', opacity: 0.7 }}
               />
             </HoverCard.Target>
@@ -75,8 +79,8 @@ export default function HoverCardInput<T>({
               </Stack>
             </HoverCard.Dropdown>
           </HoverCard>
-        </Box>
-      }
+        }
+      </Box>
 
     </Group>
   );
