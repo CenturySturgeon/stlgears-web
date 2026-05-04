@@ -47,9 +47,7 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
                 w={50}
                 h={50}
                 style={{
-                  borderRadius: '4px',
                   overflow: 'hidden',
-                  backgroundColor: 'white',
                 }}
               >
                 <Image
@@ -150,6 +148,7 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
         onClose={toggle}
         padding="md"
         title={
+          // TODO: Fix mobile drawer icon not closing after click and redirect to home
           <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
             <Group gap="xs">
               <Box
