@@ -5,13 +5,10 @@ import { Box, Button, Card, Center, Container, Grid, Image, Stack, Text, Title }
 import FormModal from '@/components/Form/FormModal/FormModal';
 import HoverCardInput from '../Form/Inputs/HoverCardInput';
 
-
 // TODO: Hard type the HoverCardInput props and import them
-
 type AnyHoverCardInputProps = {
     InputComponent: React.ComponentType<any>;
     inputProps: Record<string, any>;
-
     helpText?: string;
     helpImage?: string;
     helpLink?: {
@@ -27,7 +24,7 @@ type Props = {
     inputConfigs: AnyHoverCardInputProps[];
 };
 
-export default function ({ image, title, description, inputConfigs }: Props) {
+export default function GearCard({ image, title, description, inputConfigs }: Props) {
     const [opened, setOpened] = useState(false);
 
     return (
@@ -49,22 +46,22 @@ export default function ({ image, title, description, inputConfigs }: Props) {
                             position: 'relative',
                             height: 180,
                             overflow: 'hidden',
+                            // Optional: add a subtle inner shadow to enhance the "window" look
+                            // boxShadow: 'inset 0px 0px 10px rgba(0,0,0,0.1)',
                         }}
                     >
                         <Box
                             style={{
                                 position: 'absolute',
                                 inset: 0,
-                                backgroundImage: "url('/logo.svg')",
-                                backgroundSize: "50px 50px",
-                                backgroundRepeat: "repeat",
-                                transform: "scale(1.41)",
-                                WebkitMaskImage:
-                                    "conic-gradient(#000 25%, transparent 25% 50%, #000 50% 75%, transparent 75%)",
-                                WebkitMaskSize: "100px 100px",
-                                maskImage:
-                                    "conic-gradient(#000 25%, transparent 25% 50%, #000 50% 75%, transparent 75%)",
-                                maskSize: "100px 100px",
+                                backgroundImage: `
+                                url('/patterns/pattern_logo.svg'),
+                                url('/patterns/pattern_logo.svg')
+                                `,
+                                backgroundSize: '160px 160px, 160px 160px',
+                                backgroundRepeat: 'repeat, repeat',
+                                backgroundPosition: '0 0, 80px 80px',
+                                backgroundAttachment: 'fixed',
                             }}
                         />
 
@@ -90,7 +87,6 @@ export default function ({ image, title, description, inputConfigs }: Props) {
                     Customize
                 </Button>
             </Card>
-
 
             <FormModal
                 opened={opened}
