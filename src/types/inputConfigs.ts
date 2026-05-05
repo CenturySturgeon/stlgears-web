@@ -1,0 +1,24 @@
+import { InputWrapperProps, NumberInput, type SegmentedControlProps } from '@mantine/core';
+
+// Base type for all input configs
+export type BaseHoverCardInputProps<T> = {
+    InputComponent: React.ComponentType<T>;
+    inputProps: T & {
+        name: string;
+        label: string;
+    };
+    helpText?: string;
+    helpImage?: string;
+    helpLink?: {
+        href: string;
+        label: string;
+    };
+};
+
+export type NumberInputConfig = BaseHoverCardInputProps<React.ComponentProps<typeof NumberInput>>;
+
+type LabeledSegmentedControlProps = SegmentedControlProps & InputWrapperProps;
+
+export type LabeledSegmentedControlConfig = BaseHoverCardInputProps<LabeledSegmentedControlProps>;
+
+export type InputConfig = LabeledSegmentedControlConfig | NumberInputConfig;
