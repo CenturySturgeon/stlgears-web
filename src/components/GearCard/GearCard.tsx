@@ -5,24 +5,13 @@ import { Button, Card } from '@mantine/core';
 import GearCardHeader from './GearCardHeader';
 import FormModal from '@/components/Form/FormModal/FormModal';
 import GearCardForm from './GearCardForm';
-
-// TODO: Hard type the HoverCardInput props and import them
-export type AnyHoverCardInputProps = {
-    InputComponent: React.ComponentType<any>;
-    inputProps: Record<string, any>;
-    helpText?: string;
-    helpImage?: string;
-    helpLink?: {
-        href: string;
-        label: string;
-    };
-};
+import { InputConfig } from '@/types/inputConfigs';
 
 type GearCardProps = {
     image: string;
     title: string;
     description: string;
-    inputConfigs: AnyHoverCardInputProps[];
+    inputConfigs: InputConfig[];
 };
 
 export default function ({ image, title, description, inputConfigs }: GearCardProps) {
