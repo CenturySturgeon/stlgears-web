@@ -7,8 +7,8 @@ export const GearCardsData = {
   },
   spur: {
     title: "Spur Gear",
-    image: "/images/gears/spur.png",
     type: "spur",
+    image: "/images/gears/spur.png",
     description: "A staple in machinery; simple and efficient",
   },
   helical: {
