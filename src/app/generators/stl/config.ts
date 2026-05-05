@@ -1,3 +1,5 @@
+import { GearCardsData } from "@/app/generators/config"
+
 import {
   bevelPinpionNumberOfTeethInputConfig,
   bevelWheelNumberOfTeethInputConfig,
@@ -21,9 +23,7 @@ import {
 
 export const cardsData = [
   {
-    image: "/images/gears/double_helical.png",
-    title: "Double Helical Gear",
-    description: "High cost and hard to manufacture, but holds none of its helical counterpart's drawbacks",
+    ...GearCardsData.double_helical,
     inputConfigs: [
       helixDirectionInputConfig,
       helicalSystemInputConfig,
@@ -35,9 +35,7 @@ export const cardsData = [
     ],
   },
   {
-    image: "/images/gears/spur.png",
-    title: "Spur Gear",
-    description: "A staple in machinery; simple and efficient",
+    ...GearCardsData.spur,
     inputConfigs: [
       moduleInputConfig,
       numberOfTeethInputConfig,
@@ -46,9 +44,7 @@ export const cardsData = [
     ],
   },
   {
-    image: "/images/gears/helical.png",
-    title: "Helical Gear",
-    description: "Rolls with smooth contact, quieter, but generates axial force",
+    ...GearCardsData.helical,
     inputConfigs: [
       helixDirectionInputConfig,
       helicalSystemInputConfig,
@@ -60,9 +56,7 @@ export const cardsData = [
     ],
   },
   {
-    image: "/images/gears/internal_double_helical.png",
-    title: "Internal Double Helical Gear",
-    description: "Ring variant of the double helical, it's more common two see two opposite helical rings",
+    ...GearCardsData.internal_double_helical,
     inputConfigs: [
       helixDirectionInputConfig,
       helicalSystemInputConfig,
@@ -75,9 +69,7 @@ export const cardsData = [
     ],
   },
   {
-    image: "/images/gears/internal_spur.png",
-    title: "Internal Spur Gear",
-    description: "Ring variant of the spur gear, can be used for high torque applications",
+    ...GearCardsData.internal_spur,
     inputConfigs: [
       moduleInputConfig,
       numberOfTeethInputConfig,
@@ -87,9 +79,7 @@ export const cardsData = [
     ],
   },
   {
-    image: "/images/gears/internal_helical.png",
-    title: "Internal Helical Gear",
-    description: "Ring variant of the helical gear, used to be common in automotive transmissions",
+    ...GearCardsData.internal_helical,
     inputConfigs: [
       helixDirectionInputConfig,
       helicalSystemInputConfig,
@@ -102,9 +92,7 @@ export const cardsData = [
     ],
   },
   {
-    image: "/images/gears/rack.png",
-    title: "Rack",
-    description: "Transform rotational motion into linear",
+    ...GearCardsData.rack,
     inputConfigs: [
       rackModuleInputConfig,
       rackNumberOfTeethInputConfig,
@@ -114,9 +102,7 @@ export const cardsData = [
     ],
   },
   {
-    image: "/images/gears/bevel.png",
-    title: "Straight Bevel Gears",
-    description: "Modeled in pairs, they transfer power between perpendicular axes",
+    ...GearCardsData.straight_bevel,
     inputConfigs: [
       moduleInputConfig,
       pressureAngleInputConfig,

@@ -1,3 +1,4 @@
+import { GearCardsData } from "../config";
 import {
   moduleInputConfig,
   pressureAngleInputConfig,
@@ -12,21 +13,15 @@ import {
 
 export const cardsData = [
   {
-    image: "/images/gears/internal_spur.png",
-    title: "Internal Spur Gear",
-    description: "Something else",
+    ...GearCardsData.internal_spur,
     inputConfigs: [moduleInputConfig, pressureAngleInputConfig, numberOfTeethInputConfig, radialThicknessInputConfig],
   },
   {
-    image: "/images/gears/rack.png",
-    title: "Rack",
-    description: "Transform rotational motion into linear",
+    ...GearCardsData.rack,
     inputConfigs: [rackModuleInputConfig, rackPressureAngleInputConfig, rackBaseHeightInputConfig, rackLengthInputConfig, rackNumberOfTeethInputConfig],
   },
   {
-    image: "/images/gears/spur.png",
-    title: "Spur Gear",
-    description: "A staple in machinery; simple but noisy.",
+    ...GearCardsData.spur,
     inputConfigs: [moduleInputConfig, pressureAngleInputConfig, numberOfTeethInputConfig],
   },
 ];
