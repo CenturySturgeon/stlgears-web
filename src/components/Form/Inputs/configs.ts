@@ -4,6 +4,7 @@ import LabeledSegmentedControl from "@/components/Form/Inputs/LabeledSegmentedCo
 export const moduleInputConfig = {
     InputComponent: NumberInput,
     inputProps: {
+        name: 'module',
         label: 'Module',
         description: 'Controls tooth size',
         defaultValue: 1,
@@ -24,6 +25,7 @@ export const moduleInputConfig = {
 export const pressureAngleInputConfig = {
     InputComponent: NumberInput,
     inputProps: {
+        name: 'pressure_angle',
         label: 'Pressure angle',
         description: 'Controls the line of action\'s inclination',
         defaultValue: 20,
@@ -44,6 +46,7 @@ export const pressureAngleInputConfig = {
 export const helixAngleInputConfig = {
     InputComponent: NumberInput,
     inputProps: {
+        name: 'helix_angle',
         label: 'Helix angle',
         description: 'The angle between the helix and the axis of rotation',
         defaultValue: 15,
@@ -64,6 +67,7 @@ export const helixAngleInputConfig = {
 export const numberOfTeethInputConfig = {
     InputComponent: NumberInput,
     inputProps: {
+        name: 'number_of_teeth',
         label: 'Number of teeth',
         defaultValue: 17,
         min: 1,
@@ -75,6 +79,7 @@ export const numberOfTeethInputConfig = {
 export const bevelPinpionNumberOfTeethInputConfig = {
     InputComponent: NumberInput,
     inputProps: {
+        name: 'pinion_number_of_teeth',
         label: "Pinion's number of teeth",
         defaultValue: 17,
         min: 1,
@@ -87,6 +92,7 @@ export const bevelPinpionNumberOfTeethInputConfig = {
 export const bevelWheelNumberOfTeethInputConfig = {
     InputComponent: NumberInput,
     inputProps: {
+        name: 'wheel_number_of_teeth',
         label: "Wheel's number of teeth",
         defaultValue: 17,
         min: 1,
@@ -99,6 +105,7 @@ export const bevelWheelNumberOfTeethInputConfig = {
 export const helicalSystemInputConfig = {
     InputComponent: LabeledSegmentedControl,
     inputProps: {
+        name: 'helical_system',
         color: "slate.6",
         label: 'Helical system',
         description: 'Determines tooth profile on the transverse plane',
@@ -115,6 +122,7 @@ export const helicalSystemInputConfig = {
 export const lengthInputConfig = {
     InputComponent: NumberInput,
     inputProps: {
+        name: 'length',
         label: 'Length',
         description: 'Length of the cylindrical face',
         defaultValue: 10,
@@ -131,6 +139,7 @@ export const lengthInputConfig = {
 export const radialThicknessInputConfig = {
     InputComponent: NumberInput,
     inputProps: {
+        name: 'radial_thickness',
         label: 'Radial thickness',
         defaultValue: 10,
         placeholder: 'mm',
@@ -146,6 +155,7 @@ export const radialThicknessInputConfig = {
 export const helixDirectionInputConfig = {
     InputComponent: LabeledSegmentedControl,
     inputProps: {
+        name: 'helix_direction',
         color: "slate.6",
         label: "Helix direction",
         description: "Controls direction of the helix",
