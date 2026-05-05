@@ -37,7 +37,7 @@ export const cardsData = [
   {
     image: "/images/gears/spur.png",
     title: "Spur Gear",
-    description: "A staple in machinery; simple yet elegant",
+    description: "A staple in machinery; simple and efficient",
     inputConfigs: [
       moduleInputConfig,
       numberOfTeethInputConfig,
