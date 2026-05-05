@@ -140,8 +140,8 @@ export default function HomePage() {
         <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="xl">
           <Card withBorder shadow="sm" radius="md" >
             <Group mb="md">
-              <ThemeIcon size={40} radius="md" variant="light" color="logoBlue">
-                <IconBook size={24} />
+              <ThemeIcon size={40} radius="md" variant="light" color="logoBlue.1">
+                <IconBook size={24} color="var(--mantine-color-logoBlue-6)"/>
               </ThemeIcon>
               <Title order={3} size="h4">Theory</Title>
             </Group>
@@ -159,7 +159,7 @@ export default function HomePage() {
 
           <Card withBorder shadow="sm" radius="md" >
             <Group mb="md">
-              <ThemeIcon size={40} radius="md" variant="light" color="sand">
+              <ThemeIcon size={40} radius="md" variant="light" color="sand.2">
                 <IconInfoCircle size={24} color="var(--mantine-color-sand-9)" />
               </ThemeIcon>
               <Title order={3} size="h4">About MySite.com</Title>
