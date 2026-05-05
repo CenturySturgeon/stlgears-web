@@ -159,7 +159,8 @@ export const helixDirectionInputConfig = {
         color: "slate.6",
         label: "Helix direction",
         description: "Controls direction of the helix",
-        data: ['Clock wise', 'Counter clock wise']
+        data: ['Clock wise', 'Counter clock wise'],
+        defaultValue: "Clock wise",
     },
     helpText: "For paralel shaft helical gears to mesh, their helix angle must be equal in magnitude but opposite in direction."
 };
