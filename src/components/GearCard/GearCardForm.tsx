@@ -1,7 +1,7 @@
 import { useForm } from '@mantine/form';
 import { InputConfig } from '@/types/inputConfigs';
 import { Button, Center, Container, Grid, NumberInput } from '@mantine/core';
-import HoverCardInput from '@/components/Form/Inputs/HoverCardInput';
+import HoverCardInput from '@/components/Form/Inputs/HoverCardInput/HoverCardInput';
 
 export default function GearCardForm({
     inputConfigs,
