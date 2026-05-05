@@ -1,12 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Button, Card, Center, Container, Grid, Image, Stack, Text, Title } from '@mantine/core';
+import { Button, Card } from '@mantine/core';
+import GearCardHeader from './GearCardHeader';
 import FormModal from '@/components/Form/FormModal/FormModal';
-import HoverCardInput from '../Form/Inputs/HoverCardInput';
+import GearCardForm from './GearCardForm';
 
 // TODO: Hard type the HoverCardInput props and import them
-type AnyHoverCardInputProps = {
+export type AnyHoverCardInputProps = {
     InputComponent: React.ComponentType<any>;
     inputProps: Record<string, any>;
     helpText?: string;
@@ -17,14 +18,14 @@ type AnyHoverCardInputProps = {
     };
 };
 
-type Props = {
+type GearCardProps = {
     image: string;
     title: string;
     description: string;
     inputConfigs: AnyHoverCardInputProps[];
 };
 
-export default function GearCard({ image, title, description, inputConfigs }: Props) {
+export default function ({ image, title, description, inputConfigs }: GearCardProps) {
     const [opened, setOpened] = useState(false);
 
     return (
@@ -40,48 +41,11 @@ export default function GearCard({ image, title, description, inputConfigs }: Pr
                     height: '100%',
                 }}
             >
-                <Card.Section>
-                    <Box
-                        style={{
-                            position: 'relative',
-                            height: 180,
-                            overflow: 'hidden',
-                            // Optional: add a subtle inner shadow to enhance the "window" look
-                            // boxShadow: 'inset 0px 0px 10px rgba(0,0,0,0.1)',
-                        }}
-                    >
-                        <Box
-                            style={{
-                                position: 'absolute',
-                                inset: 0,
-                                backgroundImage: `
-                                url('/patterns/pattern_logo.svg'),
-                                url('/patterns/pattern_logo.svg')
-                                `,
-                                backgroundSize: '160px 160px, 160px 160px',
-                                backgroundRepeat: 'repeat, repeat',
-                                backgroundPosition: '0 0, 80px 80px',
-                                backgroundAttachment: 'fixed',
-                            }}
-                        />
-
-                        <Image
-                            src={image}
-                            alt={title}
-                            height={180}
-                            fit="contain"
-                            style={{ position: 'relative', zIndex: 1 }}
-                        />
-                    </Box>
-                </Card.Section>
-
-                <Stack mt="md" style={{ flex: 1, alignItems: 'center' }}>
-                    <Title order={4}>{title}</Title>
-
-                    <Text size="sm" c="dimmed">
-                        {description}
-                    </Text>
-                </Stack>
+                <GearCardHeader
+                    image={image}
+                    title={title}
+                    description={description}
+                />
 
                 <Button mt="md" onClick={() => setOpened(true)}>
                     Customize
@@ -93,26 +57,7 @@ export default function GearCard({ image, title, description, inputConfigs }: Pr
                 onClose={() => setOpened(false)}
                 title={title}
             >
-                <Container size="md">
-                    <Grid gap="md">
-                        {inputConfigs.map((inputConfig, index) => (
-                            <Grid.Col
-                                span={{ base: 12, sm: 6 }}
-                                key={index}
-                                style={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    justifyContent: 'flex-end',
-                                }}
-                            >
-                                <HoverCardInput {...inputConfig} />
-                            </Grid.Col>
-                        ))}
-                    </Grid>
-                    <Center mt="lg">
-                        <Button>Submit</Button>
-                    </Center>
-                </Container>
+                <GearCardForm inputConfigs={inputConfigs} />
             </FormModal>
         </>
     );
