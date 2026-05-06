@@ -54,8 +54,8 @@ export const keywayKeyWidthInputConfig = {
     ...genericDistanceInputConfig,
     inputProps: {
         ...genericDistanceInputConfig.inputProps,
-        name: 'bore_diameter',
-        label: 'Bore diameter',
+        name: 'key_width',
+        label: 'Keyway key Width',
     },
     helpImage: "/images/gears/holes/keyway_key_width.svg",
     helpText: "The distance between the two paralel faces of the key."
