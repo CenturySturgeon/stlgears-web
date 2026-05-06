@@ -77,14 +77,11 @@ export const numberOfTeethInputConfig = {
 };
 
 export const bevelPinpionNumberOfTeethInputConfig = {
-    InputComponent: NumberInput,
+    ...numberOfTeethInputConfig,
     inputProps: {
+        ...numberOfTeethInputConfig.inputProps,
         name: 'pinion_number_of_teeth',
         label: "Pinion's number of teeth",
-        defaultValue: 17,
-        min: 1,
-        max: 150,
-        allowDecimal: false,
     },
     helpText: "By convention, the Pinion is the smaller gear."
 };
@@ -92,12 +89,9 @@ export const bevelPinpionNumberOfTeethInputConfig = {
 export const bevelWheelNumberOfTeethInputConfig = {
     InputComponent: NumberInput,
     inputProps: {
+        ...numberOfTeethInputConfig.inputProps,
         name: 'wheel_number_of_teeth',
         label: "Wheel's number of teeth",
-        defaultValue: 17,
-        min: 1,
-        max: 150,
-        allowDecimal: false,
     },
     helpText: "By convention, the Wheel is the larger gear."
 };
@@ -200,14 +194,14 @@ export const rackLengthInputConfig = {
 
 export const rackWidthInputConfig = {
     ...lengthInputConfig,
-    inputProps: { ...lengthInputConfig.inputProps, label: 'Base width' },
+    inputProps: { ...lengthInputConfig.inputProps, label: 'Base width', name: "base_width" },
     helpImage: "/images/gears/inputs/rack_width.svg",
     helpText: "Width of the rack\'s base."
 };
 
 export const rackBaseHeightInputConfig = {
     ...lengthInputConfig,
-    inputProps: { ...lengthInputConfig.inputProps, label: 'Base height' },
+    inputProps: { ...lengthInputConfig.inputProps, label: 'Base height', name: "base_height"},
     helpImage: "/images/gears/inputs/rack_base_height.svg",
     helpText: "Distance between the base and the bottom of the teeth."
 };
