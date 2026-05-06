@@ -13,6 +13,7 @@ import {
   numberOfTeethInputConfig,
   pressureAngleInputConfig,
   rackBaseHeightInputConfig,
+  rackLengthInputConfig,
   rackModuleInputConfig,
   rackNumberOfTeethInputConfig,
   rackPressureAngleInputConfig,
@@ -97,6 +98,7 @@ export const cardsData = [
       rackModuleInputConfig,
       rackNumberOfTeethInputConfig,
       rackPressureAngleInputConfig,
+      rackLengthInputConfig,
       rackWidthInputConfig,
       rackBaseHeightInputConfig
     ],
