@@ -10,14 +10,15 @@ export default function GearCardForm({
     gear_type: string,
     inputConfigs: InputConfig[];
 }) {
-    const typeValues = {type: gear_type};
+    const typeValues = { type: gear_type };
     const initialValues = {
-        ...typeValues, 
+        ...typeValues,
         ...inputConfigs.reduce((acc, config) => {
-        const isNumberInput = config.InputComponent === NumberInput;
-        acc[config.inputProps.name] = config.inputProps.defaultValue || (isNumberInput ? 0 : '');
-        return acc;
-    }, {} as Record<string, any>)};
+            const isNumberInput = config.InputComponent === NumberInput;
+            acc[config.inputProps.name] = config.inputProps.defaultValue || (isNumberInput ? 0 : '');
+            return acc;
+        }, {} as Record<string, any>)
+    };
 
     const form = useForm({
         initialValues,
@@ -29,9 +30,9 @@ export default function GearCardForm({
                 <Grid gap="md">
                     {inputConfigs.map((inputConfig, index) => (
                         <Grid.Col
-                        span={{ base: 12, sm: 6 }}
-                        key={index}
-                        style={{
+                            span={{ base: 12, sm: 6 }}
+                            key={index}
+                            style={{
                                 display: 'flex',
                                 flexDirection: 'column',
                                 justifyContent: 'flex-end',
