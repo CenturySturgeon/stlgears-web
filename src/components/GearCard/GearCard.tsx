@@ -8,13 +8,14 @@ import GearCardForm from './GearCardForm';
 import { InputConfig } from '@/types/inputConfigs';
 
 type GearCardProps = {
-    image: string;
     title: string;
+    type: string;
+    image: string;
     description: string;
     inputConfigs: InputConfig[];
 };
 
-export default function ({ image, title, description, inputConfigs }: GearCardProps) {
+export default function GearCard({ title, type: gear_type, image, description, inputConfigs }: GearCardProps) {
     const [opened, setOpened] = useState(false);
 
     return (
@@ -46,7 +47,7 @@ export default function ({ image, title, description, inputConfigs }: GearCardPr
                 onClose={() => setOpened(false)}
                 title={title}
             >
-                <GearCardForm inputConfigs={inputConfigs} />
+                <GearCardForm gear_type={gear_type} inputConfigs={inputConfigs} />
             </FormModal>
         </>
     );

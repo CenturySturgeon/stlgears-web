@@ -4,15 +4,20 @@ import { Button, Center, Container, Grid, NumberInput } from '@mantine/core';
 import HoverCardInput from '@/components/Form/Inputs/HoverCardInput/HoverCardInput';
 
 export default function GearCardForm({
+    gear_type,
     inputConfigs,
 }: {
+    gear_type: string,
     inputConfigs: InputConfig[];
 }) {
-    const initialValues = inputConfigs.reduce((acc, config) => {
+    const typeValues = {type: gear_type};
+    const initialValues = {
+        ...typeValues, 
+        ...inputConfigs.reduce((acc, config) => {
         const isNumberInput = config.InputComponent === NumberInput;
         acc[config.inputProps.name] = config.inputProps.defaultValue || (isNumberInput ? 0 : '');
         return acc;
-    }, {} as Record<string, any>);
+    }, {} as Record<string, any>)};
 
     const form = useForm({
         initialValues,
