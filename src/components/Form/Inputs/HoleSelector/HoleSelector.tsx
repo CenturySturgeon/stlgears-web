@@ -65,6 +65,7 @@ export function HoleTypeSelector({ form }: { form: UseFormReturnType<any> }) {
         <HoverCardInput
           {...segmentedControlInputConfig}
           inputProps={{
+            color: "slate.6",
             ...segmentedControlInputConfig.inputProps,
             ...form.getInputProps('holeType'),
           }}
