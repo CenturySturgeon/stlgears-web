@@ -60,9 +60,8 @@ export function HoleTypeSelector({ form }: { form: UseFormReturnType<any> }) {
   const inputs = holeToInputs[selectedHole] || [];
 
   return (
-    <>
+    <Grid gap="md">
       <Grid.Col span={{ base: 12, sm: 6 }}>
-        {/* Use input config */}
         <HoverCardInput
           {...segmentedControlInputConfig}
           inputProps={{
@@ -91,6 +90,6 @@ export function HoleTypeSelector({ form }: { form: UseFormReturnType<any> }) {
           />
         </Grid.Col>
       ))}
-    </>
+    </Grid>
   );
 }
