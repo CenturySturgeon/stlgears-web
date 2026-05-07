@@ -1,6 +1,6 @@
 import { useForm } from '@mantine/form';
 import { InputConfig } from '@/types/inputConfigs';
-import { Accordion, Button, Center, Container, Grid, NumberInput } from '@mantine/core';
+import { Accordion, Button, Center, Container, Grid, NumberInput, Text } from '@mantine/core';
 import HoverCardInput from '@/components/Form/Inputs/HoverCardInput/HoverCardInput';
 import { HoleTypeSelector } from '../Form/Inputs/HoleSelector/HoleSelector';
 import { IconAdjustmentsCog, IconSettings, IconAdjustmentsAlt, IconAdjustmentsPlus } from '@tabler/icons-react';
@@ -30,12 +30,17 @@ export default function GearCardForm({
     return (
         <Container size="md">
             <form onSubmit={form.onSubmit((values) => console.log(values))}>
-                <Accordion variant="filled" defaultValue="photos" order={3}>
+                <Accordion variant="contained" defaultValue="photos" order={3}>
                     <Accordion.Item value="photos">
                         <Accordion.Control
                             icon={<IconAdjustmentsAlt size={22} color="var(--mantine-color-dimmed)" />}
                         >
-                            Base Params
+                            <div>
+                                <div>Base</div>
+                                <Text size="sm" c="dimmed">
+                                    Required gear parameters
+                                </Text>
+                            </div>
                         </Accordion.Control>
                         <Accordion.Panel>
                             <Grid gap="md">
@@ -66,7 +71,12 @@ export default function GearCardForm({
                         <Accordion.Control
                             icon={<IconSettings size={22} color="var(--mantine-color-dimmed)" />}
                         >
-                            Hole Params
+                            <div>
+                                <div>Hole</div>
+                                <Text size="sm" c="dimmed">
+                                    Configure hole type and dimensions
+                                </Text>
+                            </div>
                         </Accordion.Control>
                         <Accordion.Panel>
                             <HoleTypeSelector form={form} />
