@@ -69,9 +69,7 @@ export default function GearCardForm({
                             Hole Params
                         </Accordion.Control>
                         <Accordion.Panel>
-                            <Grid gap="md">
-                                <HoleTypeSelector form={form} />
-                            </Grid>
+                            <HoleTypeSelector form={form} />
                         </Accordion.Panel>
                     </Accordion.Item>
 
