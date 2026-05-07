@@ -6,9 +6,9 @@ import {
     type SegmentedControlProps,
     type InputWrapperProps,
 } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 
-type LabeledSegmentedControlProps = SegmentedControlProps &
-    InputWrapperProps;
+type LabeledSegmentedControlProps = SegmentedControlProps & InputWrapperProps;
 
 export default function LabeledSegmentedControl({
     label,
@@ -17,6 +17,8 @@ export default function LabeledSegmentedControl({
     required,
     ...segmentedProps
 }: LabeledSegmentedControlProps) {
+    const isMobile = useMediaQuery('(max-width: 810px)');
+
     return (
         <Input.Wrapper
             label={label}
@@ -30,11 +32,14 @@ export default function LabeledSegmentedControl({
                     fullWidth={true}
                     styles={{
                         root: {
-                            flexWrap: 'wrap', // Enables wrapping for items
-                            gap: '0.5rem',    // Adds spacing between wrapped items
+                            flexWrap: isMobile ? 'wrap' : 'nowrap',
+                            gap: '0.5rem',
+                            width: '100%',
+                            overflow: 'visible',
                         }
                     }}
-                    {...segmentedProps} />
+                    {...segmentedProps}
+                />
             </div>
         </Input.Wrapper>
     );
