@@ -12,6 +12,7 @@ import {
   moduleInputConfig,
   numberOfTeethInputConfig,
   pressureAngleInputConfig,
+  profileShiftCoefficientInputConfig,
   rackBaseHeightInputConfig,
   rackLengthInputConfig,
   rackModuleInputConfig,
@@ -20,7 +21,7 @@ import {
   radialThicknessInputConfig,
   rackWidthInputConfig,
 } from "@/components/Form/Inputs/configs";
-import { IconAdjustmentsAlt, IconSettings } from '@tabler/icons-react';
+import { IconAdjustmentsAlt, IconAdjustmentsPlus, IconSettings } from '@tabler/icons-react';
 
 
 import { InputConfig } from "@/types/inputConfigs";
@@ -42,10 +43,20 @@ export type GearCardType = GearCardHeader & {
   formSections: AccordionSection[],
 }
 
-const geatBaseParamsFormSection: AccordionSection = {
+const gearBaseParamsFormSection: AccordionSection = {
   label: "Base",
   description: "Required gear parameters",
   icon: IconAdjustmentsAlt,
+  content: {
+    type: "input-grid",
+    inputConfigs: [],
+  }
+}
+
+const gearAdvancedParamsFormSection: AccordionSection = {
+  label: "Advanced",
+  description: "Advanced gear parameters",
+  icon: IconAdjustmentsPlus,
   content: {
     type: "input-grid",
     inputConfigs: [],
@@ -67,9 +78,9 @@ export const stlGearCards: GearCardType[] = [
     ...gearCardHeaders.double_helical,
     formSections: [
       {
-        ...geatBaseParamsFormSection,
+        ...gearBaseParamsFormSection,
         content: {
-          ...geatBaseParamsFormSection.content,
+          ...gearBaseParamsFormSection.content,
           type: "input-grid",
           inputConfigs: [
             helixDirectionInputConfig,
@@ -83,6 +94,16 @@ export const stlGearCards: GearCardType[] = [
         }
       },
       { ...holeTypeSelectorFormSection },
+      {
+        ...gearAdvancedParamsFormSection,
+        content: {
+          ...gearBaseParamsFormSection.content,
+          type: "input-grid",
+          inputConfigs: [
+            profileShiftCoefficientInputConfig,
+          ],
+        }
+      },
     ]
   },
   {
@@ -110,7 +131,17 @@ export const stlGearCards: GearCardType[] = [
           type: "custom-component",
           component: HoleTypeSelector,
         }
-      }
+      },
+      {
+        ...gearAdvancedParamsFormSection,
+        content: {
+          ...gearBaseParamsFormSection.content,
+          type: "input-grid",
+          inputConfigs: [
+            profileShiftCoefficientInputConfig,
+          ],
+        }
+      },
     ]
   },
   {
@@ -141,7 +172,17 @@ export const stlGearCards: GearCardType[] = [
           type: "custom-component",
           component: HoleTypeSelector,
         }
-      }
+      },
+      {
+        ...gearAdvancedParamsFormSection,
+        content: {
+          ...gearBaseParamsFormSection.content,
+          type: "input-grid",
+          inputConfigs: [
+            profileShiftCoefficientInputConfig,
+          ],
+        }
+      },
     ]
   },
   {
@@ -248,7 +289,7 @@ export const stlGearCards: GearCardType[] = [
           ],
         }
       },
-      { ...holeTypeSelectorFormSection }, // Mod the component so you can add two
+      { ...holeTypeSelectorFormSection }, // TODO: Mod the component so you can add two (pinion and wheel)
     ]
   },
 ];

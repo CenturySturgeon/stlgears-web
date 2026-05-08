@@ -13,6 +13,7 @@ export const moduleInputConfig = {
         min: 0.3,
         max: 75,
         decimalScale: 2,
+        allowNegative: false,
     },
     helpText: 'The module controls the size of the tooth and thus the total size of the gear.',
     helpImage: "/images/gears/inputs/module.svg",
@@ -34,6 +35,7 @@ export const pressureAngleInputConfig = {
         min: 14.5,
         max: 35,
         decimalScale: 1,
+        allowNegative: false,
     },
     helpText: 'The angle between the line of action and the tangent to the pitch circle, typically 20° or 25°.',
     helpImage: "/images/gears/inputs/pressure_angle.svg",
@@ -55,6 +57,7 @@ export const helixAngleInputConfig = {
         min: 5,
         max: 45,
         allowDecimal: false,
+        allowNegative: false,
     },
     helpImage: "/images/gears/inputs/helix_angle.svg",
     helpText: "- Typically from 15° to 30° in helical gears.\n\n- Double helical gears self cancel thrust; up to 45°.",
@@ -73,7 +76,28 @@ export const numberOfTeethInputConfig = {
         min: 1,
         max: 150,
         allowDecimal: false,
+        allowNegative: false,
     },
+};
+
+export const profileShiftCoefficientInputConfig = {
+    InputComponent: NumberInput,
+    inputProps: {
+        name: 'profile_shift_coefficient',
+        label: 'Profile shift coefficient',
+        description: 'Controls tooth size',
+        defaultValue: 0,
+        min: -1,
+        max: 1,
+        decimalScale: 2,
+        allowNegative: true,
+    },
+    helpText: "Controls the offset of the cutter when fabricating the gear, it affects core dimensions so it can be used to modify distance between centers without changing the module.",
+    helpImage: "/images/gears/inputs/profile_shifting.svg",
+    helpLink: {
+        href: '/theory/module',
+        label: 'Learn more'
+    }
 };
 
 export const bevelPinpionNumberOfTeethInputConfig = {
@@ -125,6 +149,7 @@ export const lengthInputConfig = {
         min: 0.05,
         max: 400,
         decimalScale: 2,
+        allowNegative: false,
     },
     helpImage: "/images/gears/inputs/spur_length.svg",
     helpText: "The distance between the gear's bottom and top face."
@@ -141,6 +166,7 @@ export const radialThicknessInputConfig = {
         min: 0.05,
         max: 400,
         decimalScale: 2,
+        allowNegative: false,
     },
     helpImage: "/images/gears/inputs/radial_thickness.svg",
     helpText: "Distance between the root diameter (closest to the cylindrical face) and the outer diameter.",
@@ -201,7 +227,7 @@ export const rackWidthInputConfig = {
 
 export const rackBaseHeightInputConfig = {
     ...lengthInputConfig,
-    inputProps: { ...lengthInputConfig.inputProps, label: 'Base height', name: "base_height"},
+    inputProps: { ...lengthInputConfig.inputProps, label: 'Base height', name: "base_height" },
     helpImage: "/images/gears/inputs/rack_base_height.svg",
     helpText: "Distance between the base and the bottom of the teeth."
 };

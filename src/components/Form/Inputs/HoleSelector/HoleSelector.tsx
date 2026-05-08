@@ -60,6 +60,8 @@ export function HoleTypeSelector({ form }: { form: UseFormReturnType<any> }) {
   const selectedHole = holeTypeToHole[holeType];
   const inputs = holeToInputs[selectedHole] || [];
 
+  // TODO: Make this so it can auto-declare itself dependin on a prop so it's not always 'holetype'
+  //       it should be dynamic due to the pinion and wheel usage (reusability)
   useEffect(() => {
     if (form.values.holeType === undefined) {
       form.setFieldValue('holeType', 'none');
