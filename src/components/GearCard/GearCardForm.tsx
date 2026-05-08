@@ -13,7 +13,7 @@ export default function GearCardForm({ gearType, formSections }: {
             : []
     );
 
-    // Build initial values from gear type, holeType, and all input configs
+    // Build initial values from gear type and input configs
     const initialValues = {
         type: gearType,
         ...allInputConfigs.reduce((acc, config) => {
@@ -42,25 +42,32 @@ export default function GearCardForm({ gearType, formSections }: {
                             <Accordion.Panel>
                                 {section.content.type === 'input-grid' ? (
                                     <Grid gap="md">
-                                        {section.content.inputConfigs.map((inputConfig, i) => (
-                                            <Grid.Col
-                                                span={{ base: 12, sm: 6 }}
-                                                key={i}
-                                                style={{
-                                                    display: 'flex',
-                                                    flexDirection: 'column',
-                                                    justifyContent: 'flex-end',
-                                                }}
-                                            >
-                                                <HoverCardInput
-                                                    {...inputConfig}
-                                                    inputProps={{
-                                                        ...inputConfig.inputProps,
-                                                        ...form.getInputProps(inputConfig.inputProps.name),
+                                        {section.content.inputConfigs.map((inputConfig, i) => {
+                                            // Check visibility condition
+                                            if (inputConfig.showWhen && !inputConfig.showWhen(form.values)) {
+                                                return null; // Skip rendering if condition fails
+                                            }
+
+                                            return (
+                                                <Grid.Col
+                                                    span={{ base: 12, sm: 6 }}
+                                                    key={i}
+                                                    style={{
+                                                        display: 'flex',
+                                                        flexDirection: 'column',
+                                                        justifyContent: 'flex-end',
                                                     }}
-                                                />
-                                            </Grid.Col>
-                                        ))}
+                                                >
+                                                    <HoverCardInput
+                                                        {...inputConfig}
+                                                        inputProps={{
+                                                            ...inputConfig.inputProps,
+                                                            ...form.getInputProps(inputConfig.inputProps.name),
+                                                        }}
+                                                    />
+                                                </Grid.Col>
+                                            );
+                                        })}
                                     </Grid>
                                 ) : (
                                     <section.content.component form={form} />
