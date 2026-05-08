@@ -1,4 +1,4 @@
-import { GearCardsData } from "@/app/generators/config"
+import { gearCardHeaders } from "@/app/generators/config"
 
 import {
   bevelPinpionNumberOfTeethInputConfig,
@@ -24,7 +24,7 @@ import {
 
 export const cardsData = [
   {
-    ...GearCardsData.double_helical,
+    ...gearCardHeaders.double_helical,
     inputConfigs: [
       helixDirectionInputConfig,
       helicalSystemInputConfig,
@@ -36,7 +36,7 @@ export const cardsData = [
     ],
   },
   {
-    ...GearCardsData.spur,
+    ...gearCardHeaders.spur,
     inputConfigs: [
       moduleInputConfig,
       numberOfTeethInputConfig,
@@ -45,7 +45,7 @@ export const cardsData = [
     ],
   },
   {
-    ...GearCardsData.helical,
+    ...gearCardHeaders.helical,
     inputConfigs: [
       helixDirectionInputConfig,
       helicalSystemInputConfig,
@@ -57,7 +57,7 @@ export const cardsData = [
     ],
   },
   {
-    ...GearCardsData.internal_double_helical,
+    ...gearCardHeaders.internal_double_helical,
     inputConfigs: [
       helixDirectionInputConfig,
       helicalSystemInputConfig,
@@ -70,7 +70,7 @@ export const cardsData = [
     ],
   },
   {
-    ...GearCardsData.internal_spur,
+    ...gearCardHeaders.internal_spur,
     inputConfigs: [
       moduleInputConfig,
       numberOfTeethInputConfig,
@@ -80,7 +80,7 @@ export const cardsData = [
     ],
   },
   {
-    ...GearCardsData.internal_helical,
+    ...gearCardHeaders.internal_helical,
     inputConfigs: [
       helixDirectionInputConfig,
       helicalSystemInputConfig,
@@ -93,7 +93,7 @@ export const cardsData = [
     ],
   },
   {
-    ...GearCardsData.rack,
+    ...gearCardHeaders.rack,
     inputConfigs: [
       rackModuleInputConfig,
       rackNumberOfTeethInputConfig,
@@ -104,7 +104,7 @@ export const cardsData = [
     ],
   },
   {
-    ...GearCardsData.straight_bevel,
+    ...gearCardHeaders.straight_bevel,
     inputConfigs: [
       moduleInputConfig,
       pressureAngleInputConfig,

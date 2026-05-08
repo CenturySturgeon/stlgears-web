@@ -1,4 +1,4 @@
-import { GearCardsData } from "../config";
+import { gearCardHeaders } from "../config";
 import {
   moduleInputConfig,
   pressureAngleInputConfig,
@@ -13,15 +13,15 @@ import {
 
 export const cardsData = [
   {
-    ...GearCardsData.internal_spur,
+    ...gearCardHeaders.internal_spur,
     inputConfigs: [moduleInputConfig, pressureAngleInputConfig, numberOfTeethInputConfig, radialThicknessInputConfig],
   },
   {
-    ...GearCardsData.rack,
+    ...gearCardHeaders.rack,
     inputConfigs: [rackModuleInputConfig, rackPressureAngleInputConfig, rackBaseHeightInputConfig, rackLengthInputConfig, rackNumberOfTeethInputConfig],
   },
   {
-    ...GearCardsData.spur,
+    ...gearCardHeaders.spur,
     inputConfigs: [moduleInputConfig, pressureAngleInputConfig, numberOfTeethInputConfig],
   },
 ];
