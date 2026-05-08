@@ -110,9 +110,7 @@ export const stlGearCards: GearCardType[] = [
     ...gearCardHeaders.spur,
     formSections: [
       {
-        label: "Base",
-        description: "Required gear parameters",
-        icon: IconAdjustmentsAlt,
+        ...gearBaseParamsFormSection,
         content: {
           type: "input-grid",
           inputConfigs: [
@@ -148,9 +146,7 @@ export const stlGearCards: GearCardType[] = [
     ...gearCardHeaders.helical,
     formSections: [
       {
-        label: "Base",
-        description: "Required gear parameters",
-        icon: IconAdjustmentsAlt,
+        ...gearBaseParamsFormSection,
         content: {
           type: "input-grid",
           inputConfigs: [
@@ -189,9 +185,7 @@ export const stlGearCards: GearCardType[] = [
     ...gearCardHeaders.internal_double_helical,
     formSections: [
       {
-        label: "Base",
-        description: "Required gear parameters",
-        icon: IconAdjustmentsAlt,
+        ...gearBaseParamsFormSection,
         content: {
           type: "input-grid",
           inputConfigs: [
@@ -212,9 +206,7 @@ export const stlGearCards: GearCardType[] = [
     ...gearCardHeaders.internal_spur,
     formSections: [
       {
-        label: "Base",
-        description: "Required gear parameters",
-        icon: IconAdjustmentsAlt,
+        ...gearBaseParamsFormSection,
         content: {
           type: "input-grid",
           inputConfigs: [
@@ -232,9 +224,7 @@ export const stlGearCards: GearCardType[] = [
     ...gearCardHeaders.internal_helical,
     formSections: [
       {
-        label: "Base",
-        description: "Required gear parameters",
-        icon: IconAdjustmentsAlt,
+        ...gearBaseParamsFormSection,
         content: {
           type: "input-grid",
           inputConfigs: [
@@ -255,9 +245,7 @@ export const stlGearCards: GearCardType[] = [
     ...gearCardHeaders.rack,
     formSections: [
       {
-        label: "Base",
-        description: "Required rack parameters",
-        icon: IconAdjustmentsAlt,
+        ...gearBaseParamsFormSection,
         content: {
           type: "input-grid",
           inputConfigs: [
@@ -276,9 +264,7 @@ export const stlGearCards: GearCardType[] = [
     ...gearCardHeaders.straight_bevel,
     formSections: [
       {
-        label: "Base",
-        description: "Required rack parameters",
-        icon: IconAdjustmentsAlt,
+        ...gearBaseParamsFormSection,
         content: {
           type: "input-grid",
           inputConfigs: [
