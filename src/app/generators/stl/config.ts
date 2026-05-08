@@ -4,6 +4,7 @@ import {
   bevelPinpionNumberOfTeethInputConfig,
   bevelWheelNumberOfTeethInputConfig,
   doubleHelicalLengthInputConfig,
+  getHoleInputConfigs,
   helixAngleInputConfig,
   helixDirectionInputConfig,
   helicalLengthInputConfig,
@@ -220,7 +221,12 @@ export const stlGearCards: GearCardType[] = [
         ],
 
       },
-      { ...holeTypeSelectorFormSection }, // TODO: Mod the component so you can add two (pinion and wheel)
+      { ...holeTypeSelectorFormSection,
+        inputs: [
+          ...getHoleInputConfigs('Pinion'),
+          ...getHoleInputConfigs('Wheel'),
+        ]
+       }, // TODO: Mod the component so you can add two (pinion and wheel)
     ]
   },
 ];

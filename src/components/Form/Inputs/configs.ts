@@ -310,7 +310,7 @@ const segmentedControlInputConfig: InputConfig = {
     InputComponent: LabeledSegmentedControl,
     inputProps: {
         name: "holeType",
-        label: "Hole Type",
+        label: "Hole type",
         data: [
             { label: 'None', value: 'none' },
             { label: 'Hexagonal', value: 'hexagonal' },
@@ -320,6 +320,71 @@ const segmentedControlInputConfig: InputConfig = {
         color: "slate.6",
         defaultValue: 'none',
     },
+};
+
+export const getHoleInputConfigs = (prefix: string = ''): InputConfig[] => {
+    const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
+    const upperAndLower = (str: string) =>
+        str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+
+    const label = (key: string) =>
+        prefix ? `${upperAndLower(prefix + " " + key)}` : key;
+
+    return [
+        {
+            ...segmentedControlInputConfig,
+            inputProps: {
+                ...segmentedControlInputConfig.inputProps,
+                name: name('holeType'),
+                label: label(segmentedControlInputConfig.inputProps.label)
+            },
+        },
+        {
+            ...radiusInputConfig,
+            inputProps: {
+                ...radiusInputConfig.inputProps,
+                name: name('radius'),
+                label: label(radiusInputConfig.inputProps.label)
+            },
+            showWhen: (values) => values[name('holeType')] === 'circular',
+        },
+        {
+            ...hexagonalCircumradiusInputConfig,
+            inputProps: {
+                ...hexagonalCircumradiusInputConfig.inputProps,
+                name: name('circumradius'),
+                label: label(hexagonalCircumradiusInputConfig.inputProps.label)
+            },
+            showWhen: (values) => values[name('holeType')] === 'hexagonal',
+        },
+        {
+            ...keywayBoreDiameterInputConfig,
+            inputProps: {
+                ...keywayBoreDiameterInputConfig.inputProps,
+                name: name('bore_diameter'),
+                label: label(keywayBoreDiameterInputConfig.inputProps.label)
+            },
+            showWhen: (values) => values[name('holeType')] === 'keyway',
+        },
+        {
+            ...keywayBoreDiameterPlusKeyHeightInputConfig,
+            inputProps: {
+                ...keywayBoreDiameterPlusKeyHeightInputConfig.inputProps,
+                name: name('bore_diameter_plus_key_height'),
+                label: label(keywayBoreDiameterPlusKeyHeightInputConfig.inputProps.label)
+            },
+            showWhen: (values) => values[name('holeType')] === 'keyway',
+        },
+        {
+            ...keywayKeyWidthInputConfig,
+            inputProps: {
+                ...keywayKeyWidthInputConfig.inputProps,
+                name: name('key_width'),
+                label: label(keywayKeyWidthInputConfig.inputProps.label)
+            },
+            showWhen: (values) => values[name('holeType')] === 'keyway',
+        },
+    ];
 };
 
 export const holeInputConfigs: InputConfig[] = [
