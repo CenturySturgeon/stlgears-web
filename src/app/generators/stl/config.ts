@@ -20,96 +20,234 @@ import {
   radialThicknessInputConfig,
   rackWidthInputConfig,
 } from "@/components/Form/Inputs/configs";
+import { IconAdjustmentsAlt, IconSettings } from '@tabler/icons-react';
 
 
-export const cardsData = [
+import { InputConfig } from "@/types/inputConfigs";
+import { GearCardHeader } from "@/app/generators/config";
+import { HoleTypeSelector } from "@/components/Form/Inputs/HoleSelector/HoleSelector";
+
+type AccordionItemContent =
+  | { type: 'input-grid'; inputConfigs: InputConfig[] }
+  | { type: 'custom-component'; component: React.ComponentType<{ form: any }> };
+
+export type AccordionSection = {
+  label: string;
+  description: string;
+  icon: React.ComponentType<{ size?: number; color?: string }>;
+  content: AccordionItemContent;
+};
+
+export type GearCardType = GearCardHeader & {
+  formSections: AccordionSection[],
+}
+
+const geatBaseParamsFormSection: AccordionSection = {
+  label: "Base",
+  description: "Required gear parameters",
+  icon: IconAdjustmentsAlt,
+  content: {
+    type: "input-grid",
+    inputConfigs: [],
+  }
+}
+
+const holeTypeSelectorFormSection: AccordionSection = {
+  label: "Hole",
+  description: "Configure hole type and dimensions",
+  icon: IconSettings,
+  content: {
+    type: "custom-component",
+    component: HoleTypeSelector,
+  }
+}
+
+export const stlGearCards: GearCardType[] = [
   {
     ...gearCardHeaders.double_helical,
-    inputConfigs: [
-      helixDirectionInputConfig,
-      helicalSystemInputConfig,
-      moduleInputConfig,
-      numberOfTeethInputConfig,
-      pressureAngleInputConfig,
-      helixAngleInputConfig,
-      doubleHelicalLengthInputConfig
-    ],
+    formSections: [
+      {
+        ...geatBaseParamsFormSection,
+        content: {
+          ...geatBaseParamsFormSection.content,
+          type: "input-grid",
+          inputConfigs: [
+            helixDirectionInputConfig,
+            helicalSystemInputConfig,
+            moduleInputConfig,
+            numberOfTeethInputConfig,
+            pressureAngleInputConfig,
+            helixAngleInputConfig,
+            doubleHelicalLengthInputConfig
+          ],
+        }
+      },
+      { ...holeTypeSelectorFormSection },
+    ]
   },
   {
     ...gearCardHeaders.spur,
-    inputConfigs: [
-      moduleInputConfig,
-      numberOfTeethInputConfig,
-      pressureAngleInputConfig,
-      lengthInputConfig
-    ],
+    formSections: [
+      {
+        label: "Base",
+        description: "Required gear parameters",
+        icon: IconAdjustmentsAlt,
+        content: {
+          type: "input-grid",
+          inputConfigs: [
+            moduleInputConfig,
+            numberOfTeethInputConfig,
+            pressureAngleInputConfig,
+            lengthInputConfig
+          ],
+        }
+      },
+      {
+        label: "Hole",
+        description: "Configure hole type and dimensions",
+        icon: IconSettings,
+        content: {
+          type: "custom-component",
+          component: HoleTypeSelector,
+        }
+      }
+    ]
   },
   {
     ...gearCardHeaders.helical,
-    inputConfigs: [
-      helixDirectionInputConfig,
-      helicalSystemInputConfig,
-      moduleInputConfig,
-      numberOfTeethInputConfig,
-      pressureAngleInputConfig,
-      helixAngleInputConfig,
-      helicalLengthInputConfig
-    ],
+    formSections: [
+      {
+        label: "Base",
+        description: "Required gear parameters",
+        icon: IconAdjustmentsAlt,
+        content: {
+          type: "input-grid",
+          inputConfigs: [
+            helixDirectionInputConfig,
+            helicalSystemInputConfig,
+            moduleInputConfig,
+            numberOfTeethInputConfig,
+            pressureAngleInputConfig,
+            helixAngleInputConfig,
+            helicalLengthInputConfig
+          ],
+        }
+      },
+      {
+        label: "Hole",
+        description: "Configure hole type and dimensions",
+        icon: IconSettings,
+        content: {
+          type: "custom-component",
+          component: HoleTypeSelector,
+        }
+      }
+    ]
   },
   {
     ...gearCardHeaders.internal_double_helical,
-    inputConfigs: [
-      helixDirectionInputConfig,
-      helicalSystemInputConfig,
-      moduleInputConfig,
-      numberOfTeethInputConfig,
-      pressureAngleInputConfig,
-      helixAngleInputConfig,
-      doubleHelicalLengthInputConfig,
-      radialThicknessInputConfig,
-    ],
+    formSections: [
+      {
+        label: "Base",
+        description: "Required gear parameters",
+        icon: IconAdjustmentsAlt,
+        content: {
+          type: "input-grid",
+          inputConfigs: [
+            helixDirectionInputConfig,
+            helicalSystemInputConfig,
+            moduleInputConfig,
+            numberOfTeethInputConfig,
+            pressureAngleInputConfig,
+            helixAngleInputConfig,
+            doubleHelicalLengthInputConfig,
+            radialThicknessInputConfig,
+          ],
+        }
+      },
+    ]
   },
   {
     ...gearCardHeaders.internal_spur,
-    inputConfigs: [
-      moduleInputConfig,
-      numberOfTeethInputConfig,
-      pressureAngleInputConfig,
-      lengthInputConfig,
-      radialThicknessInputConfig,
-    ],
+    formSections: [
+      {
+        label: "Base",
+        description: "Required gear parameters",
+        icon: IconAdjustmentsAlt,
+        content: {
+          type: "input-grid",
+          inputConfigs: [
+            moduleInputConfig,
+            numberOfTeethInputConfig,
+            pressureAngleInputConfig,
+            lengthInputConfig,
+            radialThicknessInputConfig,
+          ],
+        }
+      },
+    ]
   },
   {
     ...gearCardHeaders.internal_helical,
-    inputConfigs: [
-      helixDirectionInputConfig,
-      helicalSystemInputConfig,
-      moduleInputConfig,
-      numberOfTeethInputConfig,
-      pressureAngleInputConfig,
-      helixAngleInputConfig,
-      helicalLengthInputConfig,
-      radialThicknessInputConfig,
-    ],
+    formSections: [
+      {
+        label: "Base",
+        description: "Required gear parameters",
+        icon: IconAdjustmentsAlt,
+        content: {
+          type: "input-grid",
+          inputConfigs: [
+            helixDirectionInputConfig,
+            helicalSystemInputConfig,
+            moduleInputConfig,
+            numberOfTeethInputConfig,
+            pressureAngleInputConfig,
+            helixAngleInputConfig,
+            helicalLengthInputConfig,
+            radialThicknessInputConfig,
+          ],
+        }
+      },
+    ]
   },
   {
     ...gearCardHeaders.rack,
-    inputConfigs: [
-      rackModuleInputConfig,
-      rackNumberOfTeethInputConfig,
-      rackPressureAngleInputConfig,
-      rackLengthInputConfig,
-      rackWidthInputConfig,
-      rackBaseHeightInputConfig
-    ],
+    formSections: [
+      {
+        label: "Base",
+        description: "Required rack parameters",
+        icon: IconAdjustmentsAlt,
+        content: {
+          type: "input-grid",
+          inputConfigs: [
+            rackModuleInputConfig,
+            rackNumberOfTeethInputConfig,
+            rackPressureAngleInputConfig,
+            rackLengthInputConfig,
+            rackWidthInputConfig,
+            rackBaseHeightInputConfig
+          ],
+        }
+      },
+    ]
   },
   {
     ...gearCardHeaders.straight_bevel,
-    inputConfigs: [
-      moduleInputConfig,
-      pressureAngleInputConfig,
-      bevelPinpionNumberOfTeethInputConfig,
-      bevelWheelNumberOfTeethInputConfig,
-    ],
+    formSections: [
+      {
+        label: "Base",
+        description: "Required rack parameters",
+        icon: IconAdjustmentsAlt,
+        content: {
+          type: "input-grid",
+          inputConfigs: [
+            moduleInputConfig,
+            pressureAngleInputConfig,
+            bevelPinpionNumberOfTeethInputConfig,
+            bevelWheelNumberOfTeethInputConfig,
+          ],
+        }
+      },
+    ]
   },
 ];
