@@ -5,17 +5,9 @@ import { Button, Card } from '@mantine/core';
 import GearCardHeader from './GearCardHeader';
 import FormModal from '@/components/Form/FormModal/FormModal';
 import GearCardForm from './GearCardForm';
-import { InputConfig } from '@/types/inputConfigs';
+import { GearCardType } from '@/app/generators/stl/config';
 
-type GearCardProps = {
-    title: string;
-    type: string;
-    image: string;
-    description: string;
-    inputConfigs: InputConfig[];
-};
-
-export default function GearCard({ title, type: gear_type, image, description, inputConfigs }: GearCardProps) {
+export default function GearCard(gearCard: GearCardType) {
     const [opened, setOpened] = useState(false);
 
     return (
@@ -32,9 +24,9 @@ export default function GearCard({ title, type: gear_type, image, description, i
                 }}
             >
                 <GearCardHeader
-                    image={image}
-                    title={title}
-                    description={description}
+                    image={gearCard.image}
+                    title={gearCard.title}
+                    description={gearCard.description}
                 />
 
                 <Button mt="md" onClick={() => setOpened(true)}>
@@ -45,9 +37,9 @@ export default function GearCard({ title, type: gear_type, image, description, i
             <FormModal
                 opened={opened}
                 onClose={() => setOpened(false)}
-                title={title}
+                title={gearCard.title}
             >
-                <GearCardForm gear_type={gear_type} inputConfigs={inputConfigs} />
+                <GearCardForm gearType={gearCard.type} formSections={gearCard.formSections} />
             </FormModal>
         </>
     );
