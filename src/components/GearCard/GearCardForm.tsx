@@ -8,9 +8,7 @@ export default function GearCardForm({ gearType, formSections }: {
     formSections: AccordionSection[];
 }) {
     const allInputConfigs = formSections.flatMap(section =>
-        section.content.type === 'input-grid'
-            ? section.content.inputConfigs
-            : []
+        section.inputs
     );
 
     // Build initial values from gear type and input configs
@@ -40,38 +38,37 @@ export default function GearCardForm({ gearType, formSections }: {
                                 </div>
                             </Accordion.Control>
                             <Accordion.Panel>
-                                {section.content.type === 'input-grid' ? (
-                                    <Grid gap="md">
-                                        {section.content.inputConfigs.map((inputConfig, i) => {
-                                            // Check visibility condition
-                                            if (inputConfig.showWhen && !inputConfig.showWhen(form.values)) {
-                                                return null; // Skip rendering if condition fails
-                                            }
 
-                                            return (
-                                                <Grid.Col
-                                                    span={{ base: 12, sm: 6 }}
-                                                    key={i}
-                                                    style={{
-                                                        display: 'flex',
-                                                        flexDirection: 'column',
-                                                        justifyContent: 'flex-end',
+                                <Grid gap="md">
+
+                                    {section.inputs.map((inputConfig, i) => {
+                                        // Check visibility condition
+                                        if (inputConfig.showWhen && !inputConfig.showWhen(form.values)) {
+                                            return null; // Skip rendering if condition fails
+                                        }
+
+                                        return (
+                                            <Grid.Col
+                                                span={{ base: 12, sm: 6 }}
+                                                key={i}
+                                                style={{
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                    justifyContent: 'flex-end',
+                                                }}
+                                            >
+                                                <HoverCardInput
+                                                    {...inputConfig}
+                                                    inputProps={{
+                                                        ...inputConfig.inputProps,
+                                                        ...form.getInputProps(inputConfig.inputProps.name),
                                                     }}
-                                                >
-                                                    <HoverCardInput
-                                                        {...inputConfig}
-                                                        inputProps={{
-                                                            ...inputConfig.inputProps,
-                                                            ...form.getInputProps(inputConfig.inputProps.name),
-                                                        }}
-                                                    />
-                                                </Grid.Col>
-                                            );
-                                        })}
-                                    </Grid>
-                                ) : (
-                                    <section.content.component form={form} />
-                                )}
+                                                />
+                                            </Grid.Col>
+                                        );
+                                    })}
+                                </Grid>
+
                             </Accordion.Panel>
                         </Accordion.Item>
                     ))}
