@@ -248,6 +248,7 @@ export const stlGearCards: GearCardType[] = [
           ],
         }
       },
+      { ...holeTypeSelectorFormSection }, // Mod the component so you can add two
     ]
   },
 ];

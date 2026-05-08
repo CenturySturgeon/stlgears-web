@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { Grid } from '@mantine/core';
 import LabeledSegmentedControl from '../LabeledSegmentedControl/LabeledSegmentedControl';
 import HoverCardInput from '@/components/Form/Inputs/HoverCardInput/HoverCardInput';
@@ -58,6 +59,12 @@ export function HoleTypeSelector({ form }: { form: UseFormReturnType<any> }) {
   const holeType = form.values.holeType as HoleType;
   const selectedHole = holeTypeToHole[holeType];
   const inputs = holeToInputs[selectedHole] || [];
+
+  useEffect(() => {
+    if (form.values.holeType === undefined) {
+      form.setFieldValue('holeType', 'none');
+    }
+  }, [form]);
 
   return (
     <Grid gap="md">

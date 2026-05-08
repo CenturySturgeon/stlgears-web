@@ -16,7 +16,6 @@ export default function GearCardForm({ gearType, formSections }: {
     // Build initial values from gear type, holeType, and all input configs
     const initialValues = {
         type: gearType,
-        holeType: 'none',
         ...allInputConfigs.reduce((acc, config) => {
             const isNumberInput = config.InputComponent === NumberInput;
             acc[config.inputProps.name] = config.inputProps.defaultValue || (isNumberInput ? 0 : '');
