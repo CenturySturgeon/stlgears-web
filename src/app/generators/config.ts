@@ -1,4 +1,11 @@
-export const GearCardsData = {
+export type GearCardHeader = {
+  title: string,
+  type: string,
+  image: string,
+  description: string,
+}
+
+export const gearCardHeaders: Record<string, GearCardHeader> = {
   double_helical: {
     title: "Double Helical Gear",
     type: "double_helical",
