@@ -8,6 +8,7 @@ import {
   helixDirectionInputConfig,
   helicalLengthInputConfig,
   helicalSystemInputConfig,
+  holeInputConfigs,
   lengthInputConfig,
   moduleInputConfig,
   numberOfTeethInputConfig,
@@ -21,12 +22,12 @@ import {
   radialThicknessInputConfig,
   rackWidthInputConfig,
 } from "@/components/Form/Inputs/configs";
+
 import { IconAdjustmentsAlt, IconAdjustmentsPlus, IconSettings } from '@tabler/icons-react';
 
 
 import { InputConfig } from "@/types/inputConfigs";
 import { GearCardHeader } from "@/app/generators/config";
-import { HoleTypeSelector } from "@/components/Form/Inputs/HoleSelector/HoleSelector";
 
 type AccordionItemContent =
   | { type: 'input-grid'; inputConfigs: InputConfig[] }
@@ -68,8 +69,8 @@ const holeTypeSelectorFormSection: AccordionSection = {
   description: "Configure hole type and dimensions",
   icon: IconSettings,
   content: {
-    type: "custom-component",
-    component: HoleTypeSelector,
+    type: "input-grid",
+    inputConfigs: holeInputConfigs,
   }
 }
 
@@ -122,13 +123,7 @@ export const stlGearCards: GearCardType[] = [
         }
       },
       {
-        label: "Hole",
-        description: "Configure hole type and dimensions",
-        icon: IconSettings,
-        content: {
-          type: "custom-component",
-          component: HoleTypeSelector,
-        }
+        ...holeTypeSelectorFormSection
       },
       {
         ...gearAdvancedParamsFormSection,
@@ -161,13 +156,7 @@ export const stlGearCards: GearCardType[] = [
         }
       },
       {
-        label: "Hole",
-        description: "Configure hole type and dimensions",
-        icon: IconSettings,
-        content: {
-          type: "custom-component",
-          component: HoleTypeSelector,
-        }
+        ...holeTypeSelectorFormSection
       },
       {
         ...gearAdvancedParamsFormSection,
