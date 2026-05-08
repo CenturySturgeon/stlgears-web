@@ -13,6 +13,8 @@ export type BaseHoverCardInputProps<T> = {
         href: string;
         label: string;
     };
+    // Optional function to determine visibility based on form state
+    showWhen?: (values: Record<string, any>) => boolean;
 };
 
 export type NumberInputConfig = BaseHoverCardInputProps<React.ComponentProps<typeof NumberInput>>;
