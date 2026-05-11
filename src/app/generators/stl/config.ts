@@ -22,7 +22,7 @@ import {
   rackPressureAngleInputConfig,
   radialThicknessInputConfig,
   rackWidthInputConfig,
-} from "@/components/Form/Inputs/configs";
+} from "@/configs/inputs";
 
 import { IconAdjustmentsAlt, IconAdjustmentsPlus, IconSettings } from '@tabler/icons-react';
 
