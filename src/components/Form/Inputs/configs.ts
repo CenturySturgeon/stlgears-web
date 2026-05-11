@@ -21,7 +21,12 @@ export const moduleInputConfig = {
     helpLink: {
         href: '/theory/module',
         label: 'Learn more'
-    }
+    },
+    validate: (value: number) => {
+        if (value <= 0) return "This field is required.";
+        if (value < 0.3 || value > 75) return "Value must be in range [0.3mm, 75mm].";
+        return null;
+    },
 };
 
 export const pressureAngleInputConfig = {

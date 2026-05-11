@@ -15,6 +15,8 @@ export type BaseHoverCardInputProps<T> = {
     };
     // Optional function to determine visibility based on form state
     showWhen?: (values: Record<string, any>) => boolean;
+    // For Mantine's form validation
+    validate?: (value: any) => string | null;
 };
 
 export type NumberInputConfig = BaseHoverCardInputProps<React.ComponentProps<typeof NumberInput>>;

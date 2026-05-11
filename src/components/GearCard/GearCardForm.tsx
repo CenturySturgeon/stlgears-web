@@ -7,9 +7,17 @@ export default function GearCardForm({ gearType, formSections }: {
     gearType: string,
     formSections: AccordionSection[];
 }) {
+
     const allInputConfigs = formSections.flatMap(section =>
         section.inputs
     );
+
+    const validations = allInputConfigs.reduce((acc, config) => {
+        if (config.validate) {
+            acc[config.inputProps.name] = config.validate;
+        }
+        return acc;
+    }, {} as Record<string, (value: any) => string | null>);
 
     // Build initial values from gear type and input configs
     const initialValues = {
@@ -23,6 +31,7 @@ export default function GearCardForm({ gearType, formSections }: {
 
     const form = useForm({
         initialValues,
+        validate: validations,
     });
 
     return (
