@@ -1,7 +1,7 @@
 import { useForm } from '@mantine/form';
 import { Accordion, Button, Center, Container, Grid, NumberInput, Text } from '@mantine/core';
 import HoverCardInput from '@/components/Form/Inputs/HoverCardInput/HoverCardInput';
-import { AccordionSection } from '@/app/generators/stl/config';
+import { AccordionSection } from '@/types/gearCards';
 
 export default function GearCardForm({ gearType, formSections }: {
     gearType: string,
