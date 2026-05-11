@@ -1,6 +1,21 @@
 import { NumberInput } from "@mantine/core"
 import { InputConfig } from "@/types/inputConfigs";
 import LabeledSegmentedControl from "@/components/Form/Inputs/LabeledSegmentedControl/LabeledSegmentedControl"
+import {
+    HELIX_ANGLE_MAX,
+    HELIX_ANGLE_MIN,
+    LENGTH_MIN,
+    LENGTH_MAX,
+    MODULE_MAX,
+    MODULE_MIN,
+    NUMBER_OF_TEETH_MAX,
+    NUMBER_OF_TEETH_MIN,
+    PRESSURE_ANGLE_MAX,
+    PRESSURE_ANGLE_MIN,
+    UNITS
+} from "@/lib/common/constants";
+import { inRange, required, mergeValidations } from "@/lib/common/validations";
+
 
 export const moduleInputConfig = {
     InputComponent: NumberInput,
@@ -9,10 +24,10 @@ export const moduleInputConfig = {
         label: 'Module',
         description: 'Controls tooth size',
         defaultValue: 1,
-        placeholder: 'mm',
-        suffix: ' mm',
-        min: 0.3,
-        max: 75,
+        placeholder: UNITS.milimiters,
+        suffix: ' ' + UNITS.milimiters,
+        min: MODULE_MIN,
+        max: MODULE_MAX,
         decimalScale: 2,
         allowNegative: false,
     },
@@ -22,11 +37,10 @@ export const moduleInputConfig = {
         href: '/theory/module',
         label: 'Learn more'
     },
-    validate: (value: number) => {
-        if (value <= 0) return "This field is required.";
-        if (value < 0.3 || value > 75) return "Value must be in range [0.3mm, 75mm].";
-        return null;
-    },
+    validate: mergeValidations(
+        required(),
+        inRange(MODULE_MIN, MODULE_MAX, UNITS.milimiters, 'Module'),
+    )
 };
 
 export const pressureAngleInputConfig = {
@@ -36,10 +50,10 @@ export const pressureAngleInputConfig = {
         label: 'Pressure angle',
         description: 'Controls the line of action\'s inclination',
         defaultValue: 20,
-        placeholder: '°',
-        suffix: ' °',
-        min: 14.5,
-        max: 35,
+        placeholder: UNITS.degrees,
+        suffix: ' ' + UNITS.degrees,
+        min: PRESSURE_ANGLE_MIN,
+        max: PRESSURE_ANGLE_MAX,
         decimalScale: 1,
         allowNegative: false,
     },
@@ -48,7 +62,11 @@ export const pressureAngleInputConfig = {
     helpLink: {
         href: '/',
         label: 'Learn more'
-    }
+    },
+    validate: mergeValidations(
+        required(),
+        inRange(PRESSURE_ANGLE_MIN, PRESSURE_ANGLE_MAX, UNITS.degrees, 'Pressure angle'),
+    )
 };
 
 export const helixAngleInputConfig = {
@@ -58,10 +76,10 @@ export const helixAngleInputConfig = {
         label: 'Helix angle',
         description: 'The angle between the helix and the axis of rotation',
         defaultValue: 15,
-        placeholder: '°',
-        suffix: ' °',
-        min: 5,
-        max: 45,
+        placeholder: UNITS.degrees,
+        suffix: ' ' + UNITS.degrees,
+        min: HELIX_ANGLE_MIN,
+        max: HELIX_ANGLE_MAX,
         allowDecimal: false,
         allowNegative: false,
     },
@@ -70,7 +88,11 @@ export const helixAngleInputConfig = {
     helpLink: {
         href: '/',
         label: 'Learn more'
-    }
+    },
+    validate: mergeValidations(
+        required(),
+        inRange(HELIX_ANGLE_MIN, HELIX_ANGLE_MAX, UNITS.degrees, 'Helix angle'),
+    )
 };
 
 export const numberOfTeethInputConfig = {
@@ -79,11 +101,15 @@ export const numberOfTeethInputConfig = {
         name: 'number_of_teeth',
         label: 'Number of teeth',
         defaultValue: 17,
-        min: 1,
-        max: 150,
+        min: NUMBER_OF_TEETH_MIN,
+        max: NUMBER_OF_TEETH_MAX,
         allowDecimal: false,
         allowNegative: false,
     },
+    validate: mergeValidations(
+        required(),
+        inRange(NUMBER_OF_TEETH_MIN, NUMBER_OF_TEETH_MAX, "", 'Number of teeth'),
+    ),
 };
 
 export const profileShiftCoefficientInputConfig = {
@@ -150,15 +176,19 @@ export const lengthInputConfig = {
         label: 'Length',
         description: 'Length of the cylindrical face',
         defaultValue: 10,
-        placeholder: 'mm',
-        suffix: ' mm',
-        min: 0.05,
-        max: 400,
+        placeholder: UNITS.milimiters,
+        suffix: ' ' + UNITS.milimiters,
+        min: LENGTH_MIN,
+        max: LENGTH_MAX,
         decimalScale: 2,
         allowNegative: false,
     },
     helpImage: "/images/gears/inputs/spur_length.svg",
-    helpText: "The distance between the gear's bottom and top face."
+    helpText: "The distance between the gear's bottom and top face.",
+    validate: mergeValidations(
+        required(),
+        inRange(LENGTH_MIN, LENGTH_MAX, UNITS.milimiters, 'Length'),
+    ),
 };
 
 export const radialThicknessInputConfig = {
