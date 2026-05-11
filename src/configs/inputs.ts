@@ -1,4 +1,4 @@
-import { NumberInput } from "@mantine/core"
+import { Input, NumberInput } from "@mantine/core"
 import { InputConfig } from "@/types/inputConfigs";
 import LabeledSegmentedControl from "@/components/Form/Inputs/LabeledSegmentedControl/LabeledSegmentedControl"
 import {
@@ -16,20 +16,50 @@ import {
 } from "@/lib/common/constants";
 import { inRange, required, mergeValidations } from "@/lib/common/validations";
 
-
-export const moduleInputConfig = {
+const genericAngleInputConfig: InputConfig = {
     InputComponent: NumberInput,
+    inputProps: {
+        name: 'generic',
+        label: 'generic',
+        placeholder: UNITS.degrees,
+        suffix: ' ' + UNITS.degrees,
+        decimalScale: 1,
+        allowNegative: false,
+    },
+};
+
+const genericDistanceInputConfig: InputConfig = {
+    InputComponent: NumberInput,
+    inputProps: {
+        name: 'generic',
+        label: 'generic',
+        placeholder: UNITS.milimiters,
+        suffix: ' ' + UNITS.milimiters,
+        decimalScale: 2,
+        allowNegative: false,
+    },
+};
+
+const genericNumericInputConfig: InputConfig = {
+    InputComponent: NumberInput,
+    inputProps: {
+        name: 'generic',
+        label: 'generic',
+        allowDecimal: false,
+        allowNegative: true,
+    },
+};
+
+
+export const moduleInputConfig: InputConfig = {
+    ...genericDistanceInputConfig,
     inputProps: {
         name: 'module',
         label: 'Module',
         description: 'Controls tooth size',
         defaultValue: 1,
-        placeholder: UNITS.milimiters,
-        suffix: ' ' + UNITS.milimiters,
         min: MODULE_MIN,
         max: MODULE_MAX,
-        decimalScale: 2,
-        allowNegative: false,
     },
     helpText: 'The module controls the size of the tooth and thus the total size of the gear.',
     helpImage: "/images/gears/inputs/module.svg",
@@ -43,19 +73,15 @@ export const moduleInputConfig = {
     )
 };
 
-export const pressureAngleInputConfig = {
-    InputComponent: NumberInput,
+export const pressureAngleInputConfig: InputConfig = {
+    ...genericAngleInputConfig,
     inputProps: {
         name: 'pressure_angle',
         label: 'Pressure angle',
         description: 'Controls the line of action\'s inclination',
         defaultValue: 20,
-        placeholder: UNITS.degrees,
-        suffix: ' ' + UNITS.degrees,
         min: PRESSURE_ANGLE_MIN,
         max: PRESSURE_ANGLE_MAX,
-        decimalScale: 1,
-        allowNegative: false,
     },
     helpText: 'The angle between the line of action and the tangent to the pitch circle, typically 20° or 25°.',
     helpImage: "/images/gears/inputs/pressure_angle.svg",
@@ -69,19 +95,16 @@ export const pressureAngleInputConfig = {
     )
 };
 
-export const helixAngleInputConfig = {
-    InputComponent: NumberInput,
+export const helixAngleInputConfig: InputConfig = {
+    ...genericAngleInputConfig,
     inputProps: {
         name: 'helix_angle',
         label: 'Helix angle',
         description: 'The angle between the helix and the axis of rotation',
         defaultValue: 15,
-        placeholder: UNITS.degrees,
-        suffix: ' ' + UNITS.degrees,
         min: HELIX_ANGLE_MIN,
         max: HELIX_ANGLE_MAX,
         allowDecimal: false,
-        allowNegative: false,
     },
     helpImage: "/images/gears/inputs/helix_angle.svg",
     helpText: "- Typically from 15° to 30° in helical gears.\n\n- Double helical gears self cancel thrust; up to 45°.",
@@ -95,15 +118,14 @@ export const helixAngleInputConfig = {
     )
 };
 
-export const numberOfTeethInputConfig = {
-    InputComponent: NumberInput,
+export const numberOfTeethInputConfig: InputConfig = {
+    ...genericNumericInputConfig,
     inputProps: {
         name: 'number_of_teeth',
         label: 'Number of teeth',
         defaultValue: 17,
         min: NUMBER_OF_TEETH_MIN,
         max: NUMBER_OF_TEETH_MAX,
-        allowDecimal: false,
         allowNegative: false,
     },
     validate: mergeValidations(
@@ -113,7 +135,7 @@ export const numberOfTeethInputConfig = {
 };
 
 export const profileShiftCoefficientInputConfig = {
-    InputComponent: NumberInput,
+    ...genericNumericInputConfig,
     inputProps: {
         name: 'profile_shift_coefficient',
         label: 'Profile shift coefficient',
@@ -121,6 +143,7 @@ export const profileShiftCoefficientInputConfig = {
         defaultValue: 0,
         min: -1,
         max: 1,
+        allowDecimal: true,
         decimalScale: 2,
         allowNegative: true,
     },
@@ -266,19 +289,6 @@ export const rackBaseHeightInputConfig = {
     inputProps: { ...lengthInputConfig.inputProps, label: 'Base height', name: "base_height" },
     helpImage: "/images/gears/inputs/rack_base_height.svg",
     helpText: "Distance between the base and the bottom of the teeth."
-};
-
-
-const genericDistanceInputConfig = {
-    InputComponent: NumberInput,
-    inputProps: {
-        name: 'generic',
-        label: 'generic',
-        placeholder: 'mm',
-        suffix: ' mm',
-        min: 0.1,
-        decimalScale: 2,
-    },
 };
 
 export const radiusInputConfig = {
