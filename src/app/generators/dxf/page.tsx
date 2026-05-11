@@ -1,5 +1,7 @@
+'use client' // This comes from the 'icon' in the AccordionSection Type in stl/config
+
 import { SITE_CONFIG } from '@/config';
-import { cardsData } from "./config";
+import { GearCards } from "@/configs/generators/dxf/cards";
 import { Box, Container, SimpleGrid, Text, Title } from "@mantine/core";
 import GearCard from "@/components/GearCard/GearCard";
 import ButtonLink from "@/components/ButtonLink/ButtonLink";
@@ -21,6 +23,9 @@ export default function Generators() {
                         <Text c="dimmed" size="xl" mb="sm">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </Text>
+                        <ButtonLink href={SITE_CONFIG.routes.theory} variant="light" color="sand">
+                            Learn more...
+                        </ButtonLink>
                     </Box>
                 </Container>
             </Box>
@@ -28,7 +33,7 @@ export default function Generators() {
                 cols={{ base: 1, sm: 2, lg: 3 }}
                 spacing="lg"
             >
-                {cardsData.map((card, index) => (
+                {GearCards.map((card, index) => (
                     <GearCard key={index} {...card} />
                 ))}
             </SimpleGrid>

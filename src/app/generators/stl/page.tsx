@@ -1,7 +1,7 @@
 'use client' // This comes from the 'icon' in the AccordionSection Type in stl/config
 
 import { SITE_CONFIG } from '@/config';
-import { stlGearCards } from "./config";
+import { GearCards } from "@/configs/generators/stl/cards";
 import { Box, Container, SimpleGrid, Text, Title } from "@mantine/core";
 import GearCard from "@/components/GearCard/GearCard";
 import ButtonLink from "@/components/ButtonLink/ButtonLink";
@@ -33,7 +33,7 @@ export default function Generators() {
                 cols={{ base: 1, sm: 2, lg: 3 }}
                 spacing="lg"
             >
-                {stlGearCards.map((card, index) => (
+                {GearCards.map((card, index) => (
                     <GearCard key={index} {...card} />
                 ))}
             </SimpleGrid>
