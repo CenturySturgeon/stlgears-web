@@ -12,12 +12,14 @@ export default function GearCardForm({ gearType, formSections }: {
         section.inputs
     );
 
-    const validations = allInputConfigs.reduce((acc, config) => {
-        if (config.validate) {
-            acc[config.inputProps.name] = config.validate;
-        }
-        return acc;
-    }, {} as Record<string, (value: any) => string | null>);
+    const validations = Object.fromEntries(
+        allInputConfigs
+            .filter((config) => config.validate)
+            .map((config) => [
+                config.inputProps.name,
+                (value: any) => config.validate!(value, form.values),
+            ])
+    )
 
     // Build initial values from gear type and input configs
     const initialValues = {
