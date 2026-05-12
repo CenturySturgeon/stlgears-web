@@ -1,5 +1,5 @@
 import { GearCardWithForm } from "@/types/gearCards";
-import { gearCardHeaders } from "@/app/generators/config"
+import { gearCardHeaders } from "@/configs/generators/cardHeaders"
 import {
     moduleInputConfig,
     numberOfTeethInputConfig,

@@ -1,5 +1,5 @@
-import { gearCardHeaders } from "@/app/generators/config"
-
+import { GearCardWithForm } from "@/types/gearCards";
+import { gearCardHeaders } from "@/configs/generators/cardHeaders"
 import {
   bevelPinpionNumberOfTeethInputConfig,
   bevelWheelNumberOfTeethInputConfig,
@@ -22,7 +22,6 @@ import {
   rackWidthInputConfig,
 } from "@/configs/inputs/gear/inputs";
 import { getHoleInputConfigs } from "@/configs/inputs/hole/inputs";
-import { GearCardWithForm } from "@/types/gearCards";
 import { gearAdvancedParamsFormSection, gearBaseParamsFormSection, holeTypeSelectorFormSection } from "../cardHeaders";
 
 export const GearCards: GearCardWithForm[] = [
