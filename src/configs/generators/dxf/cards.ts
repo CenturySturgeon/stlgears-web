@@ -1,8 +1,6 @@
+import { GearCardWithForm } from "@/types/gearCards";
 import { gearCardHeaders } from "@/app/generators/config"
-
 import {
-    getHoleInputConfigs,
-    holeInputConfigs,
     moduleInputConfig,
     numberOfTeethInputConfig,
     pressureAngleInputConfig,
@@ -15,30 +13,8 @@ import {
     radialThicknessInputConfig,
     rackWidthInputConfig,
 } from "@/configs/inputs/gear/inputs";
+import { gearAdvancedParamsFormSection, gearBaseParamsFormSection, holeTypeSelectorFormSection } from "../cardHeaders";
 
-import { IconAdjustmentsAlt, IconAdjustmentsPlus, IconSettings } from '@tabler/icons-react';
-import { AccordionSection, GearCardWithForm } from "@/types/gearCards";
-
-const gearBaseParamsFormSection: AccordionSection = {
-    label: "Base",
-    description: "Required gear parameters",
-    icon: IconAdjustmentsAlt,
-    inputs: []
-}
-
-const gearAdvancedParamsFormSection: AccordionSection = {
-    label: "Advanced",
-    description: "Advanced gear parameters",
-    icon: IconAdjustmentsPlus,
-    inputs: []
-}
-
-const holeTypeSelectorFormSection: AccordionSection = {
-    label: "Hole",
-    description: "Configure hole type and dimensions",
-    icon: IconSettings,
-    inputs: holeInputConfigs,
-}
 
 export const GearCards: GearCardWithForm[] = [
     {
@@ -51,6 +27,9 @@ export const GearCards: GearCardWithForm[] = [
                     numberOfTeethInputConfig,
                     pressureAngleInputConfig,
                 ],
+            },
+            {
+                ...holeTypeSelectorFormSection
             },
             {
                 ...gearAdvancedParamsFormSection,

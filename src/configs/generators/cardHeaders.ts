@@ -1,4 +1,7 @@
 import { GearCardHeader } from "@/types/gearCards";
+import { IconAdjustmentsAlt, IconAdjustmentsPlus, IconSettings } from '@tabler/icons-react';
+import { AccordionSection } from "@/types/gearCards";
+import { getHoleInputConfigs } from "../inputs/hole/inputs";
 
 export const gearCardHeaders: Record<string, GearCardHeader> = {
   double_helical: {
@@ -50,3 +53,24 @@ export const gearCardHeaders: Record<string, GearCardHeader> = {
     description: "Modeled in pairs, they transfer power between perpendicular axes",
   },
 };
+
+export const gearBaseParamsFormSection: AccordionSection = {
+  label: "Base",
+  description: "Required gear parameters",
+  icon: IconAdjustmentsAlt,
+  inputs: []
+}
+
+export const gearAdvancedParamsFormSection: AccordionSection = {
+  label: "Advanced",
+  description: "Advanced gear parameters",
+  icon: IconAdjustmentsPlus,
+  inputs: []
+}
+
+export const holeTypeSelectorFormSection: AccordionSection = {
+  label: "Hole",
+  description: "Configure hole type and dimensions",
+  icon: IconSettings,
+  inputs: getHoleInputConfigs(''),
+}

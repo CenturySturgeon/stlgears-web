@@ -4,12 +4,10 @@ import {
   bevelPinpionNumberOfTeethInputConfig,
   bevelWheelNumberOfTeethInputConfig,
   doubleHelicalLengthInputConfig,
-  getHoleInputConfigs,
   helixAngleInputConfig,
   helixDirectionInputConfig,
   helicalLengthInputConfig,
   helicalSystemInputConfig,
-  holeInputConfigs,
   lengthInputConfig,
   moduleInputConfig,
   numberOfTeethInputConfig,
@@ -23,30 +21,9 @@ import {
   radialThicknessInputConfig,
   rackWidthInputConfig,
 } from "@/configs/inputs/gear/inputs";
-
-import { IconAdjustmentsAlt, IconAdjustmentsPlus, IconSettings } from '@tabler/icons-react';
-import { AccordionSection, GearCardWithForm } from "@/types/gearCards";
-
-const gearBaseParamsFormSection: AccordionSection = {
-  label: "Base",
-  description: "Required gear parameters",
-  icon: IconAdjustmentsAlt,
-  inputs: []
-}
-
-const gearAdvancedParamsFormSection: AccordionSection = {
-  label: "Advanced",
-  description: "Advanced gear parameters",
-  icon: IconAdjustmentsPlus,
-  inputs: []
-}
-
-const holeTypeSelectorFormSection: AccordionSection = {
-  label: "Hole",
-  description: "Configure hole type and dimensions",
-  icon: IconSettings,
-  inputs: holeInputConfigs,
-}
+import { getHoleInputConfigs } from "@/configs/inputs/hole/inputs";
+import { GearCardWithForm } from "@/types/gearCards";
+import { gearAdvancedParamsFormSection, gearBaseParamsFormSection, holeTypeSelectorFormSection } from "../cardHeaders";
 
 export const GearCards: GearCardWithForm[] = [
   {
