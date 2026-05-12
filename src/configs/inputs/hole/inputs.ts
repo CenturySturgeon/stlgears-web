@@ -1,7 +1,24 @@
 import { InputConfig } from "@/types/inputConfigs";
-import { genericDistanceInputConfig  } from "../generics";
+import { genericDistanceInputConfig } from "../generics";
 import LabeledSegmentedControl from "@/components/Form/Inputs/LabeledSegmentedControl/LabeledSegmentedControl";
+import { inStringSet, mergeValidations } from "@/lib/common/validations";
 
+const holeTypeSelectorInputConfig: InputConfig = {
+    InputComponent: LabeledSegmentedControl,
+    inputProps: {
+        name: "hole_type",
+        label: "Hole type",
+        data: [
+            { label: 'None', value: 'none' },
+            { label: 'Hexagonal', value: 'hexagonal' },
+            { label: 'Circular', value: 'circular' },
+            { label: 'Keyway', value: 'keyway' },
+        ],
+        color: "slate.6",
+        defaultValue: 'none',
+    },
+    validate: inStringSet(['none', 'hexagonal', 'circular', 'keyway'], "Hole type is not in allowed list."),
+};
 
 const radiusInputConfig = {
     ...genericDistanceInputConfig,
@@ -61,22 +78,6 @@ const keywayBoreDiameterPlusKeyHeightInputConfig = {
     },
     helpImage: "/images/gears/holes/keyway_bore_plus_key.svg",
     helpText: "Nominal length of the keyway, measured from the center of the key's top to the bore diameter."
-};
-
-const holeTypeSelectorInputConfig: InputConfig = {
-    InputComponent: LabeledSegmentedControl,
-    inputProps: {
-        name: "hole_type",
-        label: "Hole type",
-        data: [
-            { label: 'None', value: 'none' },
-            { label: 'Hexagonal', value: 'hexagonal' },
-            { label: 'Circular', value: 'circular' },
-            { label: 'Keyway', value: 'keyway' },
-        ],
-        color: "slate.6",
-        defaultValue: 'none',
-    },
 };
 
 export const getHoleInputConfigs = (prefix: string = ''): InputConfig[] => {

@@ -22,6 +22,15 @@ export function required(message: string = "This field is required.") {
     };
 }
 
+export function inStringSet(set: string[] = [], message: string = "Value is not in allowed list.") {
+    return (value: any): string | null => {
+        if (!set.includes(value)) {
+            return message;
+        }
+        return null;
+    };
+}
+
 export function mergeValidations(
     ...validators: Array<(value: any) => string | null>
 ): (value: any) => string | null {
