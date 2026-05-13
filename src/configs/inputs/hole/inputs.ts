@@ -1,7 +1,8 @@
 import { InputConfig } from "@/types/inputConfigs";
 import { genericDistanceInputConfig } from "../generics";
 import LabeledSegmentedControl from "@/components/Form/Inputs/LabeledSegmentedControl/LabeledSegmentedControl";
-import { inStringSet, mergeValidations } from "@/lib/common/validations";
+import { required, inRange, maxRadius, inStringSet, mergeValidations } from "@/lib/common/validations";
+import { UNITS } from "@/lib/common/constants";
 
 const holeTypeSelectorInputConfig: InputConfig = {
     InputComponent: LabeledSegmentedControl,
@@ -26,8 +27,13 @@ const radiusInputConfig = {
         ...genericDistanceInputConfig.inputProps,
         name: 'radius',
         label: 'Radius',
+        defaultValue: 5,
     },
     helpImage: "/images/gears/holes/radius.svg",
+    validate: mergeValidations(
+        inRange(0.05, 400, UNITS.milimiters, 'radius'),
+        maxRadius("module", "number_of_teeth", "profile_shift_coefficient", "helix_angle")
+    ),
 };
 
 const hexagonalCircumradiusInputConfig = {
@@ -35,16 +41,31 @@ const hexagonalCircumradiusInputConfig = {
     inputProps: {
         ...genericDistanceInputConfig.inputProps,
         name: 'circumradius',
-        label: 'Circumradius'
+        label: 'Circumradius',
+        defaultValue: 5,
     },
     helpImage: "/images/gears/holes/hexagonal_circumradius.svg",
-    helpText: "The distance from the center to one of the hexagon's vertices."
+    helpText: "The distance from the center to one of the hexagon's vertices.",
+    validate: mergeValidations(
+        inRange(0.05, 400, UNITS.milimiters, 'circumradius'),
+        maxRadius("module", "number_of_teeth", "profile_shift_coefficient", "helix_angle")
+    ),
 }
 
 const squareCircumradiusInputConfig = {
     ...hexagonalCircumradiusInputConfig,
+    inputProps: {
+        ...hexagonalCircumradiusInputConfig.inputProps,
+        name: 'squareCircumradius',
+        label: 'Circumradius'
+    },
     helpImage: "/images/gears/holes/square_circumradius.svg",
-    helpText: "The distance from the center to one of the square's vertices."
+    helpText: "The distance from the center to one of the square's vertices.",
+    validate: mergeValidations(
+        required(),
+        inRange(0.05, 400, UNITS.milimiters, 'squareCircumradius'),
+        maxRadius("module", "number_of_teeth", "profile_shift_coefficient", "helix_angle")
+    ),
 }
 
 const keywayBoreDiameterInputConfig = {
