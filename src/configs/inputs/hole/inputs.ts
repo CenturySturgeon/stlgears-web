@@ -1,5 +1,5 @@
 import { InputConfig } from "@/types/inputConfigs";
-import { genericDistanceInputConfig } from "../generics";
+import { genericDistanceInputConfig } from "../base";
 import LabeledSegmentedControl from "@/components/Form/Inputs/LabeledSegmentedControl/LabeledSegmentedControl";
 import { required, inRange, maxRadius, inStringSet, mergeValidations, whenFieldIs } from "@/lib/common/validations";
 import { UNITS } from "@/lib/common/constants";

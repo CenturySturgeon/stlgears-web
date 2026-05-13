@@ -15,7 +15,7 @@ import {
     UNITS
 } from "@/lib/common/constants";
 import { inRange, required, mergeValidations } from "@/lib/common/validations";
-import { genericAngleInputConfig, genericDistanceInputConfig, genericNumericInputConfig  } from "../generics";
+import { genericAngleInputConfig, genericDistanceInputConfig, genericNumericInputConfig  } from "../base";
 
 
 export const moduleInputConfig: InputConfig = {
