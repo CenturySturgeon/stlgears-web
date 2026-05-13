@@ -1,5 +1,4 @@
 import { NumberInput } from "@mantine/core"
-import { InputConfig } from "@/types/inputConfigs";
 import { UNITS } from "@/lib/common/constants";
 
 export const genericAngleInputConfig = {
@@ -35,3 +34,68 @@ export const genericNumericInputConfig = {
         allowNegative: true,
     },
 };
+
+// Validations might need to access the name of the input props
+// best if I can centralize label and description while at it
+// helpText and image are only for the input so no need to be here
+export const baseInputProps = {
+    bevel_pinion: {
+        name: 'pinion_number_of_teeth',
+        label: "Pinion's number of teeth",
+    },
+    bevel_wheel: {
+        name: 'wheel_number_of_teeth',
+        label: "Wheel's number of teeth",
+    },
+    helical_system: {
+        name: 'helical_system',
+        label: 'Helical system',
+        description: 'Determines tooth profile on the transverse plane',
+    },
+    helix_angle: {
+        name: 'helix_angle',
+        label: 'Helix angle',
+        description: 'The angle between the helix and the axis of rotation',
+    },
+    helix_direction: {
+        name: 'helix_direction',
+        label: "Helix direction",
+        description: "Controls direction of the helix",
+    },
+    length: {
+        name: 'length',
+        label: 'Length',
+        description: 'Length of the cylindrical face',
+    },
+    module: {
+        name: 'module',
+        label: 'Module',
+        description: 'Controls tooth size',
+    },
+    numer_of_teeth: {
+        name: 'number_of_teeth',
+        label: 'Number of teeth',
+    },
+    pressure_angle: {
+        name: 'pressure_angle',
+        label: 'Pressure angle',
+        description: 'Controls the line of action\'s inclination',
+    },
+    profile_shift_coefficient: {
+        name: 'profile_shift_coefficient',
+        label: 'Profile shift coefficient',
+        description: 'Alters tooth geometry',
+    },
+    rack_base_height: {
+        label: 'Base height',
+        name: "base_height"
+    },
+    rack_width: {
+        label: 'Base width',
+        name: "base_width"
+    },
+    radial_thickness: {
+        name: 'radial_thickness',
+        label: 'Radial thickness',
+    },
+}

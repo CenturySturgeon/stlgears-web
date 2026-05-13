@@ -15,15 +15,13 @@ import {
     UNITS
 } from "@/lib/common/constants";
 import { inRange, required, mergeValidations } from "@/lib/common/validations";
-import { genericAngleInputConfig, genericDistanceInputConfig, genericNumericInputConfig  } from "../base";
+import { baseInputProps, genericAngleInputConfig, genericDistanceInputConfig, genericNumericInputConfig } from "../base";
 
 
 export const moduleInputConfig: InputConfig = {
     ...genericDistanceInputConfig,
     inputProps: {
-        name: 'module',
-        label: 'Module',
-        description: 'Controls tooth size',
+        ...baseInputProps.module,
         defaultValue: 1,
         min: MODULE_MIN,
         max: MODULE_MAX,
@@ -43,9 +41,7 @@ export const moduleInputConfig: InputConfig = {
 export const pressureAngleInputConfig: InputConfig = {
     ...genericAngleInputConfig,
     inputProps: {
-        name: 'pressure_angle',
-        label: 'Pressure angle',
-        description: 'Controls the line of action\'s inclination',
+        ...baseInputProps.pressure_angle,
         defaultValue: 20,
         min: PRESSURE_ANGLE_MIN,
         max: PRESSURE_ANGLE_MAX,
@@ -65,9 +61,7 @@ export const pressureAngleInputConfig: InputConfig = {
 export const helixAngleInputConfig: InputConfig = {
     ...genericAngleInputConfig,
     inputProps: {
-        name: 'helix_angle',
-        label: 'Helix angle',
-        description: 'The angle between the helix and the axis of rotation',
+        ...baseInputProps.helix_angle,
         defaultValue: 15,
         min: HELIX_ANGLE_MIN,
         max: HELIX_ANGLE_MAX,
@@ -88,8 +82,7 @@ export const helixAngleInputConfig: InputConfig = {
 export const numberOfTeethInputConfig: InputConfig = {
     ...genericNumericInputConfig,
     inputProps: {
-        name: 'number_of_teeth',
-        label: 'Number of teeth',
+        ...baseInputProps.numer_of_teeth,
         defaultValue: 17,
         min: NUMBER_OF_TEETH_MIN,
         max: NUMBER_OF_TEETH_MAX,
@@ -104,9 +97,7 @@ export const numberOfTeethInputConfig: InputConfig = {
 export const profileShiftCoefficientInputConfig = {
     ...genericNumericInputConfig,
     inputProps: {
-        name: 'profile_shift_coefficient',
-        label: 'Profile shift coefficient',
-        description: 'Controls tooth size',
+        ...baseInputProps.profile_shift_coefficient,
         defaultValue: 0,
         min: -1,
         max: 1,
@@ -126,8 +117,7 @@ export const bevelPinpionNumberOfTeethInputConfig = {
     ...numberOfTeethInputConfig,
     inputProps: {
         ...numberOfTeethInputConfig.inputProps,
-        name: 'pinion_number_of_teeth',
-        label: "Pinion's number of teeth",
+        ...baseInputProps.bevel_pinion,
     },
     helpText: "By convention, the Pinion is the smaller gear."
 };
@@ -136,8 +126,7 @@ export const bevelWheelNumberOfTeethInputConfig = {
     InputComponent: NumberInput,
     inputProps: {
         ...numberOfTeethInputConfig.inputProps,
-        name: 'wheel_number_of_teeth',
-        label: "Wheel's number of teeth",
+        ...baseInputProps.bevel_wheel,
     },
     helpText: "By convention, the Wheel is the larger gear."
 };
@@ -145,10 +134,8 @@ export const bevelWheelNumberOfTeethInputConfig = {
 export const helicalSystemInputConfig = {
     InputComponent: LabeledSegmentedControl,
     inputProps: {
-        name: 'helical_system',
+        ...baseInputProps.helical_system,
         color: "slate.6",
-        label: 'Helical system',
-        description: 'Determines tooth profile on the transverse plane',
         data: ['Normal', 'Radial'],
         defaultValue: "Normal",
     },
@@ -162,9 +149,7 @@ export const helicalSystemInputConfig = {
 export const lengthInputConfig = {
     InputComponent: NumberInput,
     inputProps: {
-        name: 'length',
-        label: 'Length',
-        description: 'Length of the cylindrical face',
+        ...baseInputProps.length,
         defaultValue: 10,
         placeholder: UNITS.milimiters,
         suffix: ' ' + UNITS.milimiters,
@@ -184,8 +169,7 @@ export const lengthInputConfig = {
 export const radialThicknessInputConfig = {
     InputComponent: NumberInput,
     inputProps: {
-        name: 'radial_thickness',
-        label: 'Radial thickness',
+        ...baseInputProps.radial_thickness,
         defaultValue: 10,
         placeholder: 'mm',
         suffix: ' mm',
@@ -201,10 +185,8 @@ export const radialThicknessInputConfig = {
 export const helixDirectionInputConfig = {
     InputComponent: LabeledSegmentedControl,
     inputProps: {
-        name: 'helix_direction',
+        ...baseInputProps.helix_direction,
         color: "slate.6",
-        label: "Helix direction",
-        description: "Controls direction of the helix",
         data: ['Clock wise', 'Counter clock wise'],
         defaultValue: "Clock wise",
     },
@@ -215,6 +197,7 @@ export const doubleHelicalLengthInputConfig = {
     ...lengthInputConfig,
     helpImage: "/images/gears/inputs/double_helical_length.svg"
 }
+
 export const helicalLengthInputConfig = {
     ...lengthInputConfig,
     helpImage: "/images/gears/inputs/helical_length.svg"
@@ -246,14 +229,20 @@ export const rackLengthInputConfig = {
 
 export const rackWidthInputConfig = {
     ...lengthInputConfig,
-    inputProps: { ...lengthInputConfig.inputProps, label: 'Base width', name: "base_width" },
+    inputProps: {
+        ...lengthInputConfig.inputProps,
+        ...baseInputProps.rack_width,
+    },
     helpImage: "/images/gears/inputs/rack_width.svg",
     helpText: "Width of the rack\'s base."
 };
 
 export const rackBaseHeightInputConfig = {
     ...lengthInputConfig,
-    inputProps: { ...lengthInputConfig.inputProps, label: 'Base height', name: "base_height" },
+    inputProps: {
+        ...lengthInputConfig.inputProps,
+        ...baseInputProps.rack_base_height,
+    },
     helpImage: "/images/gears/inputs/rack_base_height.svg",
     helpText: "Distance between the base and the bottom of the teeth."
 };
