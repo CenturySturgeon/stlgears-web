@@ -15,13 +15,13 @@ import {
     UNITS
 } from "@/lib/common/constants";
 import { inRange, required, mergeValidations } from "@/lib/common/validations";
-import { baseInputProps, genericAngleInputConfig, genericDistanceInputConfig, genericNumericInputConfig } from "../base";
+import { baseGearInputProps, genericAngleInputConfig, genericDistanceInputConfig, genericNumericInputConfig } from "../base";
 
 
 export const helicalSystemInputConfig = {
     InputComponent: LabeledSegmentedControl,
     inputProps: {
-        ...baseInputProps.helical_system,
+        ...baseGearInputProps.helical_system,
         color: "slate.6",
         data: ['Normal', 'Radial'],
         defaultValue: "Normal",
@@ -36,7 +36,7 @@ export const helicalSystemInputConfig = {
 export const helixAngleInputConfig: InputConfig = {
     ...genericAngleInputConfig,
     inputProps: {
-        ...baseInputProps.helix_angle,
+        ...baseGearInputProps.helix_angle,
         defaultValue: 15,
         min: HELIX_ANGLE_MIN,
         max: HELIX_ANGLE_MAX,
@@ -57,7 +57,7 @@ export const helixAngleInputConfig: InputConfig = {
 export const moduleInputConfig: InputConfig = {
     ...genericDistanceInputConfig,
     inputProps: {
-        ...baseInputProps.module,
+        ...baseGearInputProps.module,
         defaultValue: 1,
         min: MODULE_MIN,
         max: MODULE_MAX,
@@ -77,7 +77,7 @@ export const moduleInputConfig: InputConfig = {
 export const numberOfTeethInputConfig: InputConfig = {
     ...genericNumericInputConfig,
     inputProps: {
-        ...baseInputProps.numer_of_teeth,
+        ...baseGearInputProps.numer_of_teeth,
         defaultValue: 17,
         min: NUMBER_OF_TEETH_MIN,
         max: NUMBER_OF_TEETH_MAX,
@@ -93,7 +93,7 @@ export const bevelPinpionNumberOfTeethInputConfig = {
     ...numberOfTeethInputConfig,
     inputProps: {
         ...numberOfTeethInputConfig.inputProps,
-        ...baseInputProps.bevel_pinion,
+        ...baseGearInputProps.bevel_pinion,
     },
     helpText: "By convention, the Pinion is the smaller gear."
 };
@@ -102,7 +102,7 @@ export const bevelWheelNumberOfTeethInputConfig = {
     InputComponent: NumberInput,
     inputProps: {
         ...numberOfTeethInputConfig.inputProps,
-        ...baseInputProps.bevel_wheel,
+        ...baseGearInputProps.bevel_wheel,
     },
     helpText: "By convention, the Wheel is the larger gear."
 };
@@ -110,7 +110,7 @@ export const bevelWheelNumberOfTeethInputConfig = {
 export const lengthInputConfig = {
     InputComponent: NumberInput,
     inputProps: {
-        ...baseInputProps.length,
+        ...baseGearInputProps.length,
         defaultValue: 10,
         placeholder: UNITS.milimiters,
         suffix: ' ' + UNITS.milimiters,
@@ -141,7 +141,7 @@ export const helicalLengthInputConfig = {
 export const helixDirectionInputConfig = {
     InputComponent: LabeledSegmentedControl,
     inputProps: {
-        ...baseInputProps.helix_direction,
+        ...baseGearInputProps.helix_direction,
         color: "slate.6",
         data: ['Clock wise', 'Counter clock wise'],
         defaultValue: "Clock wise",
@@ -152,7 +152,7 @@ export const helixDirectionInputConfig = {
 export const pressureAngleInputConfig: InputConfig = {
     ...genericAngleInputConfig,
     inputProps: {
-        ...baseInputProps.pressure_angle,
+        ...baseGearInputProps.pressure_angle,
         defaultValue: 20,
         min: PRESSURE_ANGLE_MIN,
         max: PRESSURE_ANGLE_MAX,
@@ -172,7 +172,7 @@ export const pressureAngleInputConfig: InputConfig = {
 export const profileShiftCoefficientInputConfig = {
     ...genericNumericInputConfig,
     inputProps: {
-        ...baseInputProps.profile_shift_coefficient,
+        ...baseGearInputProps.profile_shift_coefficient,
         defaultValue: 0,
         min: -1,
         max: 1,
@@ -192,7 +192,7 @@ export const rackBaseHeightInputConfig = {
     ...lengthInputConfig,
     inputProps: {
         ...lengthInputConfig.inputProps,
-        ...baseInputProps.rack_base_height,
+        ...baseGearInputProps.rack_base_height,
     },
     helpImage: "/images/gears/inputs/rack_base_height.svg",
     helpText: "Distance between the base and the bottom of the teeth."
@@ -226,7 +226,7 @@ export const rackWidthInputConfig = {
     ...lengthInputConfig,
     inputProps: {
         ...lengthInputConfig.inputProps,
-        ...baseInputProps.rack_width,
+        ...baseGearInputProps.rack_width,
     },
     helpImage: "/images/gears/inputs/rack_width.svg",
     helpText: "Width of the rack\'s base."
@@ -235,7 +235,7 @@ export const rackWidthInputConfig = {
 export const radialThicknessInputConfig = {
     InputComponent: NumberInput,
     inputProps: {
-        ...baseInputProps.radial_thickness,
+        ...baseGearInputProps.radial_thickness,
         defaultValue: 10,
         placeholder: 'mm',
         suffix: ' mm',
