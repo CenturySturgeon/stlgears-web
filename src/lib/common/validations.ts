@@ -51,7 +51,52 @@ export function validateKeyWidth(boreDiameterField: string,
   };
 }
 
-export function validateKeywayCenterToKeyCornerRadius(keyWidthField: number, boreDiameterField: number, boreDiameterPlusKeyHeightField: number,
+export function validateBoreDiameter(
+  moduleField: string, numberOfTeethField: string, profileShiftCoefficientField: string, helixAngleField: string
+) { 
+  return (value: number, values: Record<string, any>): string | null => {
+
+    const module: number = values[moduleField];
+    const numberOfTeeth: number = values[numberOfTeethField];
+    const profileShiftCoefficient: number = values[profileShiftCoefficientField];
+    const helixAngle: number = values[helixAngleField] ?? 0; // Not all gears have helix angle input
+
+    const maxRadius = getGearPolygonRadius(module, numberOfTeeth, profileShiftCoefficient, helixAngle);
+
+    if (value >= maxRadius){
+      return `Bore diameter is larger than the gear's max of ${maxRadius}${UNITS.milimiters}.`
+    }
+
+    return null;
+  };
+}
+
+export function validateBoreDiameterPlusKeyHeight(
+  boreDiameterField: string,
+  moduleField: string, numberOfTeethField: string, profileShiftCoefficientField: string, helixAngleField: string
+) { 
+  return (value: number, values: Record<string, any>): string | null => {
+    const boreDiameter: number = values[boreDiameterField];
+
+    const module: number = values[moduleField];
+    const numberOfTeeth: number = values[numberOfTeethField];
+    const profileShiftCoefficient: number = values[profileShiftCoefficientField];
+    const helixAngle: number = values[helixAngleField] ?? 0; // Not all gears have helix angle input
+
+    const maxRadius = getGearPolygonRadius(module, numberOfTeeth, profileShiftCoefficient, helixAngle);
+
+    if (value <= boreDiameter) {
+      return "Bore diameter can't be larger than itself plus key length."
+    }
+    if (value >= maxRadius){
+      return `Bore diameter plus key length is larger than the gear's max of ${maxRadius}${UNITS.milimiters}.`
+    }
+
+    return null;
+  };
+}
+
+export function validateKeywayCenterToKeyCornerRadius(keyWidthField: string, boreDiameterField: string, boreDiameterPlusKeyHeightField: string,
   moduleField: string, numberOfTeethField: string, profileShiftCoefficientField: string, helixAngleField: string
 ) {
   // Single input's value is irrelevant; this is a group validation
@@ -69,13 +114,12 @@ export function validateKeywayCenterToKeyCornerRadius(keyWidthField: number, bor
     const keywayRadius = getKeywayTotalRadius(keyWidth, boreDiameter, boreDiameterPlusKeyHeight)
 
     if (keywayRadius > maxRadius) {
-      return `Key width can't exceed this gear's max of ${maxRadius}${UNITS.milimiters}`
+      return `Keyway's center to key corner can't exceed gear's max of ${maxRadius}${UNITS.milimiters}`
     }
 
     return null;
   };
 }
-
 
 export function inRange(
   min: number,

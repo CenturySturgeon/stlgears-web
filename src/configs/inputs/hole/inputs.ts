@@ -5,8 +5,8 @@ import {
     holeRadiusFitsInGear,
     inRange,
     inStringSet,
-    mergeValidations,
-    required,
+    validateBoreDiameter,
+    validateBoreDiameterPlusKeyHeight,
     validateKeywayCenterToKeyCornerRadius,
     validateKeyWidth,
     whenFieldIs
@@ -43,7 +43,7 @@ const radiusInputConfig = {
     validate: whenFieldIs(
         baseHoleTypeInputProps.hole_type.name,
         baseHoleTypeInputProps.circular.name,
-        inRange(0.05, 400, UNITS.milimiters, 'radius'),
+        inRange(0.05, 400, UNITS.milimiters, 'Radius'),
         holeRadiusFitsInGear(
             baseGearInputProps.module.name,
             baseGearInputProps.numer_of_teeth.name,
@@ -65,7 +65,7 @@ const hexagonalCircumradiusInputConfig = {
     validate: whenFieldIs(
         baseHoleTypeInputProps.hole_type.name,
         baseHoleTypeInputProps.hexagonal.name,
-        inRange(0.05, 400, UNITS.milimiters, 'radius'),
+        inRange(0.05, 400, UNITS.milimiters, 'Circumradius'),
         holeRadiusFitsInGear(
             baseGearInputProps.module.name,
             baseGearInputProps.numer_of_teeth.name,
@@ -86,7 +86,7 @@ const squareCircumradiusInputConfig = {
     validate: whenFieldIs(
         baseHoleTypeInputProps.hole_type.name,
         baseHoleTypeInputProps.square.name,
-        inRange(0.05, 400, UNITS.milimiters, 'radius'),
+        inRange(0.05, 400, UNITS.milimiters, 'Circumradius'),
         holeRadiusFitsInGear(
             baseGearInputProps.module.name,
             baseGearInputProps.numer_of_teeth.name,
@@ -101,21 +101,30 @@ const keywayBoreDiameterInputConfig = {
     inputProps: {
         ...genericDistanceInputConfig.inputProps,
         ...baseHoleInputProps.keywayBoreDiameter,
+        min: 0.5,
     },
     helpImage: "/images/gears/holes/keyway_bore.svg",
     helpText: "Diameter for the cylindrical portion of the keyway.",
-    // validate: whenFieldIs(
-    //     baseHoleTypeInputProps.hole_type.name,
-    //     baseHoleTypeInputProps.keyway.name,
-    //     inRange(0.05, 400, UNITS.milimiters, baseHoleInputProps.keywayBoreDiameter.label),
-    //     holeRadiusFitsInGear(
-    //         baseGearInputProps.module.name,
-    //         baseGearInputProps.numer_of_teeth.name,
-    //         baseGearInputProps.profile_shift_coefficient.name,
-    //         baseGearInputProps.helix_angle.name
-    //     ),
-    //     // validateKeywayCenterToKeyCornerRadius()
-    // ),
+    validate: whenFieldIs(
+        baseHoleTypeInputProps.hole_type.name,
+        baseHoleTypeInputProps.keyway.name,
+        inRange(0.05, 400, UNITS.milimiters, baseHoleInputProps.keywayBoreDiameter.label),
+        validateBoreDiameter(
+            baseGearInputProps.module.name,
+            baseGearInputProps.numer_of_teeth.name,
+            baseGearInputProps.profile_shift_coefficient.name,
+            baseGearInputProps.helix_angle.name
+        ),
+        validateKeywayCenterToKeyCornerRadius(
+            baseHoleInputProps.keywayKeyWidth.name,
+            baseHoleInputProps.keywayBoreDiameter.name,
+            baseHoleInputProps.keywayBoreDiameterPlusKeyLength.name,
+            baseGearInputProps.module.name,
+            baseGearInputProps.numer_of_teeth.name,
+            baseGearInputProps.profile_shift_coefficient.name,
+            baseGearInputProps.helix_angle.name
+        )
+    ),
 }
 
 const keywayKeyWidthInputConfig = {
@@ -136,7 +145,15 @@ const keywayKeyWidthInputConfig = {
             baseGearInputProps.profile_shift_coefficient.name,
             baseGearInputProps.helix_angle.name
         ),
-        // validateKeywayCenterToKeyCornerRadius()
+        validateKeywayCenterToKeyCornerRadius(
+            baseHoleInputProps.keywayKeyWidth.name,
+            baseHoleInputProps.keywayBoreDiameter.name,
+            baseHoleInputProps.keywayBoreDiameterPlusKeyLength.name,
+            baseGearInputProps.module.name,
+            baseGearInputProps.numer_of_teeth.name,
+            baseGearInputProps.profile_shift_coefficient.name,
+            baseGearInputProps.helix_angle.name
+        )
     ),
 }
 
@@ -147,7 +164,27 @@ const keywayBoreDiameterPlusKeyHeightInputConfig = {
         ...baseHoleInputProps.keywayBoreDiameterPlusKeyLength
     },
     helpImage: "/images/gears/holes/keyway_bore_plus_key.svg",
-    helpText: "Nominal length of the keyway, measured from the center of the key's top to the bore diameter."
+    helpText: "Nominal length of the keyway, measured from the center of the key's top to the bore diameter.",
+    validate: whenFieldIs(
+        baseHoleTypeInputProps.hole_type.name,
+        baseHoleTypeInputProps.keyway.name,
+        validateBoreDiameterPlusKeyHeight(
+            baseHoleInputProps.keywayBoreDiameter.name,
+            baseGearInputProps.module.name,
+            baseGearInputProps.numer_of_teeth.name,
+            baseGearInputProps.profile_shift_coefficient.name,
+            baseGearInputProps.helix_angle.name
+        ),
+        validateKeywayCenterToKeyCornerRadius(
+            baseHoleInputProps.keywayKeyWidth.name,
+            baseHoleInputProps.keywayBoreDiameter.name,
+            baseHoleInputProps.keywayBoreDiameterPlusKeyLength.name,
+            baseGearInputProps.module.name,
+            baseGearInputProps.numer_of_teeth.name,
+            baseGearInputProps.profile_shift_coefficient.name,
+            baseGearInputProps.helix_angle.name
+        )
+    ),
 };
 
 export const getHoleInputConfigs = (prefix: string = ''): InputConfig[] => {
