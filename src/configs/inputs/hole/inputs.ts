@@ -1,7 +1,7 @@
 import { InputConfig } from "@/types/inputConfigs";
 import { genericDistanceInputConfig } from "../generics";
 import LabeledSegmentedControl from "@/components/Form/Inputs/LabeledSegmentedControl/LabeledSegmentedControl";
-import { required, inRange, maxRadius, inStringSet, mergeValidations } from "@/lib/common/validations";
+import { required, inRange, maxRadius, inStringSet, mergeValidations, whenFieldIs } from "@/lib/common/validations";
 import { UNITS } from "@/lib/common/constants";
 
 const holeTypeSelectorInputConfig: InputConfig = {
@@ -30,7 +30,9 @@ const radiusInputConfig = {
         defaultValue: 5,
     },
     helpImage: "/images/gears/holes/radius.svg",
-    validate: mergeValidations(
+    validate: whenFieldIs(
+        'hole_type',
+        'circular',
         inRange(0.05, 400, UNITS.milimiters, 'radius'),
         maxRadius("module", "number_of_teeth", "profile_shift_coefficient", "helix_angle")
     ),

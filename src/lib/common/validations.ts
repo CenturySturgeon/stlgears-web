@@ -64,6 +64,24 @@ export function maxRadius(moduleField: string, numberOfTeethField: string, profi
   };
 }
 
+/**
+ * Combines multiple validation functions into a single validator.
+ * Runs each validator in order and returns the first error encountered.
+ * If all validators pass, returns `null`.
+ *
+ * @param validators - Array of validator functions. Each validator receives
+ *                     `(value: any, values: Record<string, any>)` and returns
+ *                     `string | null` (error message or `null` if valid).
+ * @returns A merged validator function that executes all input validators sequentially.
+ *
+ * @example
+ * ```typescript
+ * const validateAge = mergeValidations(
+ *   (value) => (value < 0 ? "Age cannot be negative" : null),
+ *   (value) => (value > 120 ? "Age cannot exceed 120" : null)
+ * );
+ * ```
+ */
 export function mergeValidations(
   ...validators: Array<(value: any, values: Record<string, any>) => string | null>
 ): (value: any, values: Record<string, any>) => string | null {
@@ -73,5 +91,43 @@ export function mergeValidations(
       if (error) return error;
     }
     return null; // All validations passed
+  };
+};
+
+/**
+ * Wraps a set of validators to only run them if a specified field in `values`
+ * matches the expected value. Useful for conditional validation (e.g., validate
+ * `radius` only if `hole_type === 'circular'`).
+ *
+ * @param fieldName - The name of the field in `values` to check.
+ * @param expectedValue - The value the field must match for validators to run.
+ * @param validators - One or more validator functions to apply conditionally.
+ *                     Each receives `(value: any, values: Record<string, any>)`.
+ * @returns A validator function that runs the input validators only if the
+ *          field condition is met; otherwise, returns `null`.
+ *
+ * @example
+ * ```typescript
+ * const validateRadius = whenFieldIs(
+ *   'hole_type',
+ *   'circular',
+ *   inRange(0.05, 400, 'mm', 'radius'),
+ *   radiusIsLesserThan(401)
+ * );
+ * ```
+ *
+ * @remarks
+ * - If `fieldName` is missing in `values` or its value doesn't match `expectedValue`,
+ *   all validators are skipped (returns `null`).
+ * - Uses strict equality (`===`) for comparison.
+ */
+export function whenFieldIs(
+  fieldName: string,
+  expectedValue: any,
+  ...validators: Array<(value: any, values: Record<string, any>) => string | null>
+): (value: any, values: Record<string, any>) => string | null {
+  return (value, values) => {
+    if (values[fieldName] !== expectedValue) return null;
+    return mergeValidations(...validators)(value, values);
   };
 }
