@@ -38,7 +38,7 @@ export const genericNumericInputConfig = {
 // Validations might need to access the name of the input props
 // best if I can centralize label and description while at it
 // helpText and image are only for the input so no need to be here
-export const baseInputProps = {
+export const baseGearInputProps = {
     bevel_pinion: {
         name: 'pinion_number_of_teeth',
         label: "Pinion's number of teeth",
@@ -98,4 +98,58 @@ export const baseInputProps = {
         name: 'radial_thickness',
         label: 'Radial thickness',
     },
+}
+
+export const baseHoleTypeInputProps = {
+    hole_type: {
+        name: 'hole_type',
+        label: 'Hole type'
+    },
+    none: {
+        name: 'none',
+        label: "None",
+    },
+    circular: {
+        name: 'circular',
+        label: 'Circular'
+    },
+    hexagonal: {
+        name: 'hexagonal',
+        label: 'Hexagonal'
+    },
+    square: {
+        name: 'square',
+        label: 'Square',
+    },
+    keyway: {
+        name: 'keyway',
+        label: 'Keyway'
+    }
+}
+
+export const baseHoleInputProps = {
+    circleRadius: {
+        name: 'radius',
+        label: 'Radius'
+    },
+    hexagonalCircumradius: {
+        name: 'hexagonal_circumradius',
+        label: 'Circumradius',
+    },
+    keywayBoreDiameter: {
+        name: 'bore_diameter',
+        label: 'Bore diameter',
+    },
+    keywayBoreDiameterPlusKeyLength: {
+        name: 'bore_diameter_plus_key_height',
+        label: 'Bore diameter + key length',
+    },
+    keywayKeyWidth: {
+        name: 'key_width',
+        label: 'Keyway key Width',
+    },
+    squareCircumradius: {
+        name: 'square_circumradius',
+        label: 'Circumradius',
+    }
 }
