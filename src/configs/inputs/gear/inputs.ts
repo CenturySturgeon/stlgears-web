@@ -1,21 +1,24 @@
 import { NumberInput } from "@mantine/core"
 import { InputConfig } from "@/types/inputConfigs";
 import LabeledSegmentedControl from "@/components/Form/Inputs/LabeledSegmentedControl/LabeledSegmentedControl"
-import {
-    HELIX_ANGLE_MAX,
-    HELIX_ANGLE_MIN,
-    LENGTH_MIN,
-    LENGTH_MAX,
-    MODULE_MAX,
-    MODULE_MIN,
-    NUMBER_OF_TEETH_MAX,
-    NUMBER_OF_TEETH_MIN,
-    PRESSURE_ANGLE_MAX,
-    PRESSURE_ANGLE_MIN,
-    UNITS
-} from "@/lib/common/constants";
+import { UNITS } from "@/lib/common/constants";
 import { inRange, required, mergeValidations } from "@/lib/common/validations";
 import { baseGearInputProps, genericAngleInputConfig, genericDistanceInputConfig, genericNumericInputConfig } from "../base";
+
+const HELIX_ANGLE_MIN = 5;
+const HELIX_ANGLE_MAX = 45;
+
+const LENGTH_MIN = 0.5;
+const LENGTH_MAX = 400;
+
+const MODULE_MIN = 0.3;
+const MODULE_MAX = 75;
+
+const NUMBER_OF_TEETH_MIN = 6;
+const NUMBER_OF_TEETH_MAX = 150;
+
+const PRESSURE_ANGLE_MIN = 14.5;
+const PRESSURE_ANGLE_MAX = 35;
 
 
 export const helicalSystemInputConfig = {
