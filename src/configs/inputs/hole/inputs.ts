@@ -14,10 +14,18 @@ import {
 import { UNITS } from "@/lib/common/constants";
 import { baseGearInputProps, baseHoleTypeInputProps } from "../base";
 
-const holeTypeSelectorInputConfig: InputConfig = {
+// Helper type for the factory parameters
+export type PrefixModifiers = {
+    name: (key: string) => string;
+    label: (key: string) => string;
+};
+
+const createHoleTypeSelectorConfig = ({ name, label }: PrefixModifiers): InputConfig => ({
     InputComponent: LabeledSegmentedControl,
     inputProps: {
         ...baseHoleTypeInputProps.hole_type,
+        name: name(baseHoleTypeInputProps.hole_type.name),
+        label: label(baseHoleTypeInputProps.hole_type.label),
         data: [
             ...Object.values(baseHoleTypeInputProps)
                 .filter(item => item.name !== 'hole_type' && item.name != 'square')
@@ -30,162 +38,178 @@ const holeTypeSelectorInputConfig: InputConfig = {
         defaultValue: 'none',
     },
     validate: inStringSet(['none', 'hexagonal', 'circular', 'keyway'], "Hole type is not in allowed list."),
-};
+});
 
-const radiusInputConfig = {
+const createRadiusInputConfig = ({ name, label }: PrefixModifiers): InputConfig => ({
     ...genericDistanceInputConfig,
     inputProps: {
         ...genericDistanceInputConfig.inputProps,
-        ...baseHoleInputProps.circleRadius,
+        name: name(baseHoleInputProps.circleRadius.name),
+        label: label(baseHoleInputProps.circleRadius.label),
         defaultValue: 5,
     },
     helpImage: "/images/gears/holes/radius.svg",
+    showWhen: (values) => values[name(baseHoleTypeInputProps.hole_type.name)] === baseHoleTypeInputProps.circular.name,
     validate: whenFieldIs(
-        baseHoleTypeInputProps.hole_type.name,
-        baseHoleTypeInputProps.circular.name,
+        name(baseHoleTypeInputProps.hole_type.name),
+        baseHoleTypeInputProps.circular.name, // Selector target match value, do not prefix
         inRange(0.05, 400, UNITS.milimiters, 'Radius'),
         holeRadiusFitsInGear(
-            baseGearInputProps.module.name,
-            baseGearInputProps.numer_of_teeth.name,
-            baseGearInputProps.profile_shift_coefficient.name,
-            baseGearInputProps.helix_angle.name
+            name(baseGearInputProps.module.name),
+            name(baseGearInputProps.numer_of_teeth.name),
+            name(baseGearInputProps.profile_shift_coefficient.name),
+            name(baseGearInputProps.helix_angle.name)
         )
     ),
-};
+});
 
-const hexagonalCircumradiusInputConfig = {
+const createHexagonalCircumradiusInputConfig = ({ name, label }: PrefixModifiers): InputConfig => ({
     ...genericDistanceInputConfig,
     inputProps: {
         ...genericDistanceInputConfig.inputProps,
         ...baseHoleInputProps.hexagonalCircumradius,
+        name: name(baseHoleInputProps.hexagonalCircumradius.name),
+        label: label(baseHoleInputProps.hexagonalCircumradius.label),
         defaultValue: 5,
     },
     helpImage: "/images/gears/holes/hexagonal_circumradius.svg",
     helpText: "The distance from the center to one of the hexagon's vertices.",
+    showWhen: (values) => values[name(baseHoleTypeInputProps.hole_type.name)] === baseHoleTypeInputProps.hexagonal.name,
     validate: whenFieldIs(
-        baseHoleTypeInputProps.hole_type.name,
+        name(baseHoleTypeInputProps.hole_type.name),
         baseHoleTypeInputProps.hexagonal.name,
         inRange(0.05, 400, UNITS.milimiters, 'Circumradius'),
         holeRadiusFitsInGear(
-            baseGearInputProps.module.name,
-            baseGearInputProps.numer_of_teeth.name,
-            baseGearInputProps.profile_shift_coefficient.name,
-            baseGearInputProps.helix_angle.name
+            name(baseGearInputProps.module.name),
+            name(baseGearInputProps.numer_of_teeth.name),
+            name(baseGearInputProps.profile_shift_coefficient.name),
+            name(baseGearInputProps.helix_angle.name)
         )
     ),
-}
+});
 
-const squareCircumradiusInputConfig = {
-    ...hexagonalCircumradiusInputConfig,
+const createSquareCircumradiusInputConfig = ({ name, label }: PrefixModifiers): InputConfig => ({
+    ...genericDistanceInputConfig,
     inputProps: {
-        ...hexagonalCircumradiusInputConfig.inputProps,
+        ...genericDistanceInputConfig.inputProps,
         ...baseHoleInputProps.squareCircumradius,
+        name: name(baseHoleInputProps.squareCircumradius.name),
+        label: label(baseHoleInputProps.squareCircumradius.label),
     },
     helpImage: "/images/gears/holes/square_circumradius.svg",
     helpText: "The distance from the center to one of the square's vertices.",
+    showWhen: (values) => values[name(baseHoleTypeInputProps.hole_type.name)] === baseHoleTypeInputProps.square.name,
     validate: whenFieldIs(
-        baseHoleTypeInputProps.hole_type.name,
+        name(baseHoleTypeInputProps.hole_type.name),
         baseHoleTypeInputProps.square.name,
         inRange(0.05, 400, UNITS.milimiters, 'Circumradius'),
         holeRadiusFitsInGear(
-            baseGearInputProps.module.name,
-            baseGearInputProps.numer_of_teeth.name,
-            baseGearInputProps.profile_shift_coefficient.name,
-            baseGearInputProps.helix_angle.name
+            name(baseGearInputProps.module.name),
+            name(baseGearInputProps.numer_of_teeth.name),
+            name(baseGearInputProps.profile_shift_coefficient.name),
+            name(baseGearInputProps.helix_angle.name)
         )
     ),
-}
+});
 
-const keywayBoreDiameterInputConfig = {
+const createKeywayBoreDiameterInputConfig = ({ name, label }: PrefixModifiers): InputConfig => ({
     ...genericDistanceInputConfig,
     inputProps: {
         ...genericDistanceInputConfig.inputProps,
         ...baseHoleInputProps.keywayBoreDiameter,
-        min: 0.5,
+        name: name(baseHoleInputProps.keywayBoreDiameter.name),
+        label: label(baseHoleInputProps.keywayBoreDiameter.label),
     },
     helpImage: "/images/gears/holes/keyway_bore.svg",
     helpText: "Diameter for the cylindrical portion of the keyway.",
+    showWhen: (values) => values[name(baseHoleTypeInputProps.hole_type.name)] === baseHoleTypeInputProps.keyway.name,
     validate: whenFieldIs(
-        baseHoleTypeInputProps.hole_type.name,
+        name(baseHoleTypeInputProps.hole_type.name),
         baseHoleTypeInputProps.keyway.name,
         inRange(0.05, 400, UNITS.milimiters, baseHoleInputProps.keywayBoreDiameter.label),
         validateBoreDiameter(
-            baseGearInputProps.module.name,
-            baseGearInputProps.numer_of_teeth.name,
-            baseGearInputProps.profile_shift_coefficient.name,
-            baseGearInputProps.helix_angle.name
+            name(baseGearInputProps.module.name),
+            name(baseGearInputProps.numer_of_teeth.name),
+            name(baseGearInputProps.profile_shift_coefficient.name),
+            name(baseGearInputProps.helix_angle.name)
         ),
         validateKeywayCenterToKeyCornerRadius(
-            baseHoleInputProps.keywayKeyWidth.name,
-            baseHoleInputProps.keywayBoreDiameter.name,
-            baseHoleInputProps.keywayBoreDiameterPlusKeyLength.name,
-            baseGearInputProps.module.name,
-            baseGearInputProps.numer_of_teeth.name,
-            baseGearInputProps.profile_shift_coefficient.name,
-            baseGearInputProps.helix_angle.name
+            name(baseHoleInputProps.keywayKeyWidth.name),
+            name(baseHoleInputProps.keywayBoreDiameter.name),
+            name(baseHoleInputProps.keywayBoreDiameterPlusKeyLength.name),
+            name(baseGearInputProps.module.name),
+            name(baseGearInputProps.numer_of_teeth.name),
+            name(baseGearInputProps.profile_shift_coefficient.name),
+            name(baseGearInputProps.helix_angle.name)
         )
     ),
-}
+});
 
-const keywayKeyWidthInputConfig = {
+const createKeywayKeyWidthInputConfig = ({ name, label }: PrefixModifiers): InputConfig => ({
     ...genericDistanceInputConfig,
     inputProps: {
         ...genericDistanceInputConfig.inputProps,
         ...baseHoleInputProps.keywayKeyWidth,
+        name: name(baseHoleInputProps.keywayKeyWidth.name),
+        label: label(baseHoleInputProps.keywayKeyWidth.label),
     },
     helpImage: "/images/gears/holes/keyway_key_width.svg",
     helpText: "The distance between the two paralel faces of the key.",
+    showWhen: (values) => values[name(baseHoleTypeInputProps.hole_type.name)] === baseHoleTypeInputProps.keyway.name,
     validate: whenFieldIs(
-        baseHoleTypeInputProps.hole_type.name,
+        name(baseHoleTypeInputProps.hole_type.name),
         baseHoleTypeInputProps.keyway.name,
         validateKeyWidth(
-            baseHoleInputProps.keywayBoreDiameter.name,
-            baseGearInputProps.module.name,
-            baseGearInputProps.numer_of_teeth.name,
-            baseGearInputProps.profile_shift_coefficient.name,
-            baseGearInputProps.helix_angle.name
+            name(baseHoleInputProps.keywayBoreDiameter.name),
+            name(baseGearInputProps.module.name),
+            name(baseGearInputProps.numer_of_teeth.name),
+            name(baseGearInputProps.profile_shift_coefficient.name),
+            name(baseGearInputProps.helix_angle.name)
         ),
         validateKeywayCenterToKeyCornerRadius(
-            baseHoleInputProps.keywayKeyWidth.name,
-            baseHoleInputProps.keywayBoreDiameter.name,
-            baseHoleInputProps.keywayBoreDiameterPlusKeyLength.name,
-            baseGearInputProps.module.name,
-            baseGearInputProps.numer_of_teeth.name,
-            baseGearInputProps.profile_shift_coefficient.name,
-            baseGearInputProps.helix_angle.name
+            name(baseHoleInputProps.keywayKeyWidth.name),
+            name(baseHoleInputProps.keywayBoreDiameter.name),
+            name(baseHoleInputProps.keywayBoreDiameterPlusKeyLength.name),
+            name(baseGearInputProps.module.name),
+            name(baseGearInputProps.numer_of_teeth.name),
+            name(baseGearInputProps.profile_shift_coefficient.name),
+            name(baseGearInputProps.helix_angle.name)
         )
     ),
-}
+});
 
-const keywayBoreDiameterPlusKeyHeightInputConfig = {
+const createKeywayBoreDiameterPlusKeyHeightInputConfig = ({ name, label }: PrefixModifiers): InputConfig => ({
     ...genericDistanceInputConfig,
     inputProps: {
         ...genericDistanceInputConfig.inputProps,
-        ...baseHoleInputProps.keywayBoreDiameterPlusKeyLength
+        ...baseHoleInputProps.keywayBoreDiameterPlusKeyLength,
+        name: name(baseHoleInputProps.keywayBoreDiameterPlusKeyLength.name),
+        label: label(baseHoleInputProps.keywayBoreDiameterPlusKeyLength.label),
     },
     helpImage: "/images/gears/holes/keyway_bore_plus_key.svg",
     helpText: "Nominal length of the keyway, measured from the center of the key's top to the bore diameter.",
+    showWhen: (values) => values[name(baseHoleTypeInputProps.hole_type.name)] === baseHoleTypeInputProps.keyway.name,
     validate: whenFieldIs(
-        baseHoleTypeInputProps.hole_type.name,
+        name(baseHoleTypeInputProps.hole_type.name),
         baseHoleTypeInputProps.keyway.name,
         validateBoreDiameterPlusKeyHeight(
-            baseHoleInputProps.keywayBoreDiameter.name,
-            baseGearInputProps.module.name,
-            baseGearInputProps.numer_of_teeth.name,
-            baseGearInputProps.profile_shift_coefficient.name,
-            baseGearInputProps.helix_angle.name
+            name(baseHoleInputProps.keywayBoreDiameter.name),
+            name(baseGearInputProps.module.name),
+            name(baseGearInputProps.numer_of_teeth.name),
+            name(baseGearInputProps.profile_shift_coefficient.name),
+            name(baseGearInputProps.helix_angle.name)
         ),
         validateKeywayCenterToKeyCornerRadius(
-            baseHoleInputProps.keywayKeyWidth.name,
-            baseHoleInputProps.keywayBoreDiameter.name,
-            baseHoleInputProps.keywayBoreDiameterPlusKeyLength.name,
-            baseGearInputProps.module.name,
-            baseGearInputProps.numer_of_teeth.name,
-            baseGearInputProps.profile_shift_coefficient.name,
-            baseGearInputProps.helix_angle.name
+            name(baseHoleInputProps.keywayKeyWidth.name),
+            name(baseHoleInputProps.keywayBoreDiameter.name),
+            name(baseHoleInputProps.keywayBoreDiameterPlusKeyLength.name),
+            name(baseGearInputProps.module.name),
+            name(baseGearInputProps.numer_of_teeth.name),
+            name(baseGearInputProps.profile_shift_coefficient.name),
+            name(baseGearInputProps.helix_angle.name)
         )
     ),
-};
+});
 
 export const getHoleInputConfigs = (prefix: string = ''): InputConfig[] => {
     const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
@@ -195,62 +219,15 @@ export const getHoleInputConfigs = (prefix: string = ''): InputConfig[] => {
     const label = (key: string) =>
         prefix ? `${upperAndLower(prefix + " " + key)}` : key;
 
-    const holeTypeFieldName = holeTypeSelectorInputConfig.inputProps.name;
-
+    const modifiers: PrefixModifiers = { name, label };
 
     return [
-        {
-            ...holeTypeSelectorInputConfig,
-            inputProps: {
-                ...holeTypeSelectorInputConfig.inputProps,
-                name: name(holeTypeFieldName),
-                label: label(holeTypeSelectorInputConfig.inputProps.label)
-            },
-        },
-        {
-            ...radiusInputConfig,
-            inputProps: {
-                ...radiusInputConfig.inputProps,
-                name: name(radiusInputConfig.inputProps.name),
-                label: label(radiusInputConfig.inputProps.label)
-            },
-            showWhen: (values) => values[name(holeTypeFieldName)] === baseHoleTypeInputProps.circular.name,
-        },
-        {
-            ...hexagonalCircumradiusInputConfig,
-            inputProps: {
-                ...hexagonalCircumradiusInputConfig.inputProps,
-                name: name(hexagonalCircumradiusInputConfig.inputProps.name),
-                label: label(hexagonalCircumradiusInputConfig.inputProps.label)
-            },
-            showWhen: (values) => values[name(holeTypeFieldName)] === baseHoleTypeInputProps.hexagonal.name,
-        },
-        {
-            ...keywayBoreDiameterInputConfig,
-            inputProps: {
-                ...keywayBoreDiameterInputConfig.inputProps,
-                name: name(keywayBoreDiameterInputConfig.inputProps.name),
-                label: label(keywayBoreDiameterInputConfig.inputProps.label)
-            },
-            showWhen: (values) => values[name('hole_type')] === baseHoleTypeInputProps.keyway.name,
-        },
-        {
-            ...keywayBoreDiameterPlusKeyHeightInputConfig,
-            inputProps: {
-                ...keywayBoreDiameterPlusKeyHeightInputConfig.inputProps,
-                name: name(keywayBoreDiameterPlusKeyHeightInputConfig.inputProps.name),
-                label: label(keywayBoreDiameterPlusKeyHeightInputConfig.inputProps.label)
-            },
-            showWhen: (values) => values[name('hole_type')] === baseHoleTypeInputProps.keyway.name,
-        },
-        {
-            ...keywayKeyWidthInputConfig,
-            inputProps: {
-                ...keywayKeyWidthInputConfig.inputProps,
-                name: name(keywayKeyWidthInputConfig.inputProps.name),
-                label: label(keywayKeyWidthInputConfig.inputProps.label)
-            },
-            showWhen: (values) => values[name('hole_type')] === baseHoleTypeInputProps.keyway.name,
-        },
+        createHoleTypeSelectorConfig(modifiers),
+        createRadiusInputConfig(modifiers),
+        createHexagonalCircumradiusInputConfig(modifiers),
+        // createSquareCircumradiusInputConfig(modifiers), 
+        createKeywayBoreDiameterInputConfig(modifiers),
+        createKeywayBoreDiameterPlusKeyHeightInputConfig(modifiers),
+        createKeywayKeyWidthInputConfig(modifiers),
     ];
 };
