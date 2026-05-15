@@ -1,4 +1,5 @@
 import { UNITS } from "./constants";
+import { baseGearInputProps, baseHoleInputProps, baseHoleTypeInputProps } from "@/configs/inputs/base";
 
 function degToRad(degrees: number) {
   return degrees * (Math.PI / 180);
@@ -13,6 +14,7 @@ function getGearPolygonRadius(module: number, numberOfTeeth: number, profileShif
   const transverseRootDiameter = transversePitchDiameter - 2.5 * module; // Yes, uses the normal module since the root height doesn't care about the plane
 
   const polygonRadius = (transverseRootDiameter / 2) - 0.5;
+  console.log(polygonRadius)
   return polygonRadius;
 }
 
@@ -53,7 +55,7 @@ export function validateKeyWidth(boreDiameterField: string,
 
 export function validateBoreDiameter(
   moduleField: string, numberOfTeethField: string, profileShiftCoefficientField: string, helixAngleField: string
-) { 
+) {
   return (value: number, values: Record<string, any>): string | null => {
 
     const module: number = values[moduleField];
@@ -63,7 +65,7 @@ export function validateBoreDiameter(
 
     const maxRadius = getGearPolygonRadius(module, numberOfTeeth, profileShiftCoefficient, helixAngle);
 
-    if (value >= maxRadius){
+    if (value >= maxRadius) {
       return `Bore diameter is larger than the gear's max of ${maxRadius}${UNITS.milimiters}.`
     }
 
@@ -74,7 +76,7 @@ export function validateBoreDiameter(
 export function validateBoreDiameterPlusKeyHeight(
   boreDiameterField: string,
   moduleField: string, numberOfTeethField: string, profileShiftCoefficientField: string, helixAngleField: string
-) { 
+) {
   return (value: number, values: Record<string, any>): string | null => {
     const boreDiameter: number = values[boreDiameterField];
 
@@ -88,7 +90,7 @@ export function validateBoreDiameterPlusKeyHeight(
     if (value <= boreDiameter) {
       return "Bore diameter can't be larger than itself plus key length."
     }
-    if (value >= maxRadius){
+    if (value >= maxRadius) {
       return `Bore diameter plus key length is larger than the gear's max of ${maxRadius}${UNITS.milimiters}.`
     }
 
@@ -235,4 +237,157 @@ export function whenFieldIs(
     if (values[fieldName] !== expectedValue) return null;
     return mergeValidations(...validators)(value, values);
   };
+}
+
+const createHoleValidations = (
+  prefix: string = '',
+  getMaxRadius: (values: Record<string, any>, nameFn: (key: string) => string) => number
+) => {
+  const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
+
+  return {
+    // Validation for the circular radius
+    [name(baseHoleInputProps.circleRadius.name)]: (value: number, values: Record<string, any>) => {
+      // Only validate if this hole type is currently selected 
+      // (baseHoleTypeInputProps.circular does not neet the prefix as it's a value for the selector
+      if (values[name(baseHoleTypeInputProps.hole_type.name)] !== baseHoleTypeInputProps.circular.name) return null;
+
+      const maxRadius = getMaxRadius(values, name);
+
+      if (value >= maxRadius) {
+        return `Radius too big, max allowed is ${maxRadius}mm.`;
+      }
+      return null;
+    },
+
+    // Validation for the hexagonal radius
+    [name(baseHoleInputProps.hexagonalCircumradius.name)]: (value: number, values: Record<string, any>) => {
+      // Only validate if this hole type is currently selected 
+      // (baseHoleTypeInputProps.hexagonal does not neet the prefix as it's a value for the selector
+      if (values[name(baseHoleTypeInputProps.hole_type.name)] !== baseHoleTypeInputProps.hexagonal.name) return null;
+
+      const maxRadius = getMaxRadius(values, name);
+
+      if (value >= maxRadius) {
+        return `Radius too big, max allowed is ${maxRadius}mm.`;
+      }
+      return null;
+    },
+
+    [name(baseHoleInputProps.squareCircumradius.name)]: (value: number, values: Record<string, any>) => {
+      // Only validate if this hole type is currently selected 
+      // (baseHoleTypeInputProps.square does not neet the prefix as it's a value for the selector
+      if (values[name(baseHoleTypeInputProps.hole_type.name)] !== baseHoleTypeInputProps.square.name) return null;
+
+      const maxRadius = getMaxRadius(values, name);
+
+      if (value >= maxRadius) {
+        return `Radius too big, max allowed is ${maxRadius}mm.`;
+      }
+      return null;
+    },
+
+    // Validation for the Keyway Bore
+    [name(baseHoleInputProps.keywayBoreDiameter.name)]: (value: number, values: Record<string, any>) => {
+      if (values[name(baseHoleTypeInputProps.hole_type.name)] !== baseHoleTypeInputProps.keyway.name) return null;
+
+      const maxRadius = getMaxRadius(values, name);
+      const keywayVirtualRadius = getKeywayTotalRadius(
+        values[name(baseHoleInputProps.keywayKeyWidth.name)],
+        values[name(baseHoleInputProps.keywayBoreDiameter.name)],
+        values[name(baseHoleInputProps.keywayBoreDiameterPlusKeyLength.name)]
+      );
+
+      if (value / 2 >= maxRadius) {
+        return `Bore diameter is too big, max allowed is ${maxRadius}mm.`;
+      }
+      if (keywayVirtualRadius > maxRadius) {
+        return `Keyway's bore center to key corner can't exceed gear's max of ${maxRadius}${UNITS.milimiters}`
+      }
+      return null;
+    },
+
+    // Validation for the Keyway's key width
+    [name(baseHoleInputProps.keywayKeyWidth.name)]: (value: number, values: Record<string, any>) => {
+      if (values[name(baseHoleTypeInputProps.hole_type.name)] !== baseHoleTypeInputProps.keyway.name) return null;
+
+      const maxRadius = getMaxRadius(values, name);
+      const keywayVirtualRadius = getKeywayTotalRadius(
+        values[name(baseHoleInputProps.keywayKeyWidth.name)],
+        values[name(baseHoleInputProps.keywayBoreDiameter.name)],
+        values[name(baseHoleInputProps.keywayBoreDiameterPlusKeyLength.name)]
+      );
+
+      if (value > values[name(baseHoleInputProps.keywayBoreDiameter.name)]) {
+        return "Key width can't be larger than the bore diameter."
+      }
+      if (value > maxRadius) {
+        return `Key width can't exceed this gear's max of ${maxRadius}${UNITS.milimiters}`
+      }
+      if (keywayVirtualRadius > maxRadius) {
+        return `Keyway's bore center to key corner can't exceed gear's max of ${maxRadius}${UNITS.milimiters}`
+      }
+      return null;
+    },
+
+    // Validation for the Keyway's key width
+    [name(baseHoleInputProps.keywayKeyWidth.name)]: (value: number, values: Record<string, any>) => {
+      if (values[name(baseHoleTypeInputProps.hole_type.name)] !== baseHoleTypeInputProps.keyway.name) return null;
+
+      const maxRadius = getMaxRadius(values, name);
+      const keywayVirtualRadius = getKeywayTotalRadius(
+        values[name(baseHoleInputProps.keywayKeyWidth.name)],
+        values[name(baseHoleInputProps.keywayBoreDiameter.name)],
+        values[name(baseHoleInputProps.keywayBoreDiameterPlusKeyLength.name)]
+      );
+
+      if (value > values[name(baseHoleInputProps.keywayBoreDiameter.name)]) {
+        return "Key width can't be larger than the bore diameter."
+      }
+      if (value > maxRadius) {
+        return `Key width can't exceed this gear's max of ${maxRadius}${UNITS.milimiters}`
+      }
+      if (keywayVirtualRadius > maxRadius) {
+        return `Keyway's bore center to key corner can't exceed gear's max of ${maxRadius}${UNITS.milimiters}`
+      }
+      return null;
+    },
+
+    // Validation for the Keyway's bore plus key length
+    [name(baseHoleInputProps.keywayBoreDiameterPlusKeyLength.name)]: (value: number, values: Record<string, any>) => {
+      if (values[name(baseHoleTypeInputProps.hole_type.name)] !== baseHoleTypeInputProps.keyway.name) return null;
+
+      const maxRadius = getMaxRadius(values, name);
+      const keywayVirtualRadius = getKeywayTotalRadius(
+        values[name(baseHoleInputProps.keywayKeyWidth.name)],
+        values[name(baseHoleInputProps.keywayBoreDiameter.name)],
+        values[name(baseHoleInputProps.keywayBoreDiameterPlusKeyLength.name)]
+      );
+
+      if (value <= values[name(baseHoleInputProps.keywayBoreDiameter.name)]) {
+        return "Bore diameter can't be larger than itself plus key length."
+      }
+      if (value >= maxRadius) {
+        return `Bore diameter plus key length is larger than the gear's max of ${maxRadius}${UNITS.milimiters}.`
+      }
+      if (keywayVirtualRadius > maxRadius) {
+        return `Keyway's bore center to key corner can't exceed gear's max of ${maxRadius}${UNITS.milimiters}`
+      }
+      return null;
+    },
+  };
+};
+
+const standardGearExtractor = (values: Record<string, any>, name: (key: string) => string) => {
+  return getGearPolygonRadius(
+    values[name(baseGearInputProps.module.name)],
+    values[name(baseGearInputProps.numer_of_teeth.name)],
+    values[name(baseGearInputProps.profile_shift_coefficient.name)],
+    values[name(baseGearInputProps.helix_angle.name)] ?? 0
+  );
+};
+
+export const standardGearHoleValidations = (
+) => {
+  return createHoleValidations('', standardGearExtractor);
 }

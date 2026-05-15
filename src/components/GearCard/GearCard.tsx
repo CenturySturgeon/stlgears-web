@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 import { Button, Card } from '@mantine/core';
-import GearCardHeader from './GearCardHeader';
 import FormModal from '@/components/Form/FormModal/FormModal';
+import GearCardHeader from './GearCardHeader';
 import GearCardForm from './GearCardForm';
-import { GearCardType } from '@/app/generators/stl/config';
+import { GearCardWithForm } from '@/types/gearCards';
 
-export default function GearCard(gearCard: GearCardType) {
+export default function GearCard(gearCard: GearCardWithForm) {
     const [opened, setOpened] = useState(false);
 
     return (
@@ -39,7 +39,7 @@ export default function GearCard(gearCard: GearCardType) {
                 onClose={() => setOpened(false)}
                 title={gearCard.title}
             >
-                <GearCardForm gearType={gearCard.type} formSections={gearCard.formSections} />
+                <GearCardForm type={gearCard.type} formSections={gearCard.formSections} validate={gearCard.validate} />
             </FormModal>
         </>
     );

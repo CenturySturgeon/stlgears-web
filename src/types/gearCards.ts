@@ -15,5 +15,6 @@ export type AccordionSection = {
 };
 
 export type GearCardWithForm = GearCardHeader & {
-    formSections: AccordionSection[],
+    formSections: AccordionSection[];
+    validate?: Record<string, (value: any, values: Record<string, any>) => string | null>;
 }

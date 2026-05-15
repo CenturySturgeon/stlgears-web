@@ -1,25 +1,15 @@
 import { useForm } from '@mantine/form';
 import { Accordion, Button, Center, Container, Grid, NumberInput, Text } from '@mantine/core';
 import HoverCardInput from '@/components/Form/Inputs/HoverCardInput/HoverCardInput';
-import { AccordionSection } from '@/types/gearCards';
+import { GearCardWithForm } from '@/types/gearCards';
 
-export default function GearCardForm({ gearType, formSections }: {
-    gearType: string,
-    formSections: AccordionSection[];
-}) {
+type GearCardFormProps = Pick<GearCardWithForm, "type" | "formSections" | "validate">
+
+export default function GearCardForm({ type: gearType, formSections, validate: validations }: GearCardFormProps) {
 
     const allInputConfigs = formSections.flatMap(section =>
         section.inputs
     );
-
-    const validations = Object.fromEntries(
-        allInputConfigs
-            .filter((config) => config.validate)
-            .map((config) => [
-                config.inputProps.name,
-                (value: any) => config.validate!(value, form.values),
-            ])
-    )
 
     // Build initial values from gear type and input configs
     const initialValues = {
@@ -33,7 +23,7 @@ export default function GearCardForm({ gearType, formSections }: {
 
     const form = useForm({
         initialValues,
-        validate: validations,
+        validate: validations || {},
     });
 
     return (

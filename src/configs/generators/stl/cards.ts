@@ -21,6 +21,7 @@ import {
   radialThicknessInputConfig,
   rackWidthInputConfig,
 } from "@/configs/inputs/gear/inputs";
+import { standardGearHoleValidations } from "@/lib/common/validations";
 import { getHoleInputConfigs } from "@/configs/inputs/hole/inputs";
 import { gearAdvancedParamsFormSection, gearBaseParamsFormSection, holeTypeSelectorFormSection } from "../cardHeaders";
 
@@ -47,7 +48,10 @@ export const GearCards: GearCardWithForm[] = [
           profileShiftCoefficientInputConfig,
         ],
       },
-    ]
+    ],
+    validate: {
+      ...standardGearHoleValidations()
+    }
   },
   {
     ...gearCardHeaders.spur,
@@ -183,12 +187,13 @@ export const GearCards: GearCardWithForm[] = [
         ],
 
       },
-      { ...holeTypeSelectorFormSection,
+      {
+        ...holeTypeSelectorFormSection,
         inputs: [
           ...getHoleInputConfigs('Pinion'),
           ...getHoleInputConfigs('Wheel'),
         ]
-       }, // TODO: Mod the component so you can add two (pinion and wheel)
+      }, // TODO: Mod the component so you can add two (pinion and wheel)
     ]
   },
 ];
