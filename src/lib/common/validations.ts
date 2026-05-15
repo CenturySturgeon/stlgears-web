@@ -29,101 +29,7 @@ function getKeywayTotalRadius(keyWidth: number, boreDiameter: number, boreDiamet
   return Math.sqrt(((boreDiameterPlusKeyHeight - boreRadius) ** 2) + (keyWidth ** 2));
 }
 
-export function validateKeyWidth(boreDiameterField: string,
-  moduleField: string, numberOfTeethField: string, profileShiftCoefficientField: string, helixAngleField: string
-) {
-  return (value: number, values: Record<string, any>): string | null => {
-    const boreDiameter: number = values[boreDiameterField];
-
-    const module: number = values[moduleField];
-    const numberOfTeeth: number = values[numberOfTeethField];
-    const profileShiftCoefficient: number = values[profileShiftCoefficientField];
-    const helixAngle: number = values[helixAngleField] ?? 0; // Not all gears have helix angle input
-
-    const maxRadius = getGearPolygonRadius(module, numberOfTeeth, profileShiftCoefficient, helixAngle);
-
-    if (value > boreDiameter) {
-      return "Key width can't be larger than the bore diameter."
-    }
-    if (value > maxRadius) {
-      return `Key width can't exceed this gear's max of ${maxRadius}${UNITS.milimiters}`
-    }
-
-    return null;
-  };
-}
-
-export function validateBoreDiameter(
-  moduleField: string, numberOfTeethField: string, profileShiftCoefficientField: string, helixAngleField: string
-) {
-  return (value: number, values: Record<string, any>): string | null => {
-
-    const module: number = values[moduleField];
-    const numberOfTeeth: number = values[numberOfTeethField];
-    const profileShiftCoefficient: number = values[profileShiftCoefficientField];
-    const helixAngle: number = values[helixAngleField] ?? 0; // Not all gears have helix angle input
-
-    const maxRadius = getGearPolygonRadius(module, numberOfTeeth, profileShiftCoefficient, helixAngle);
-
-    if (value >= maxRadius) {
-      return `Bore diameter is larger than the gear's max of ${maxRadius}${UNITS.milimiters}.`
-    }
-
-    return null;
-  };
-}
-
-export function validateBoreDiameterPlusKeyHeight(
-  boreDiameterField: string,
-  moduleField: string, numberOfTeethField: string, profileShiftCoefficientField: string, helixAngleField: string
-) {
-  return (value: number, values: Record<string, any>): string | null => {
-    const boreDiameter: number = values[boreDiameterField];
-
-    const module: number = values[moduleField];
-    const numberOfTeeth: number = values[numberOfTeethField];
-    const profileShiftCoefficient: number = values[profileShiftCoefficientField];
-    const helixAngle: number = values[helixAngleField] ?? 0; // Not all gears have helix angle input
-
-    const maxRadius = getGearPolygonRadius(module, numberOfTeeth, profileShiftCoefficient, helixAngle);
-
-    if (value <= boreDiameter) {
-      return "Bore diameter can't be larger than itself plus key length."
-    }
-    if (value >= maxRadius) {
-      return `Bore diameter plus key length is larger than the gear's max of ${maxRadius}${UNITS.milimiters}.`
-    }
-
-    return null;
-  };
-}
-
-export function validateKeywayCenterToKeyCornerRadius(keyWidthField: string, boreDiameterField: string, boreDiameterPlusKeyHeightField: string,
-  moduleField: string, numberOfTeethField: string, profileShiftCoefficientField: string, helixAngleField: string
-) {
-  // Single input's value is irrelevant; this is a group validation
-  return (_: number, values: Record<string, any>): string | null => {
-    const keyWidth: number = values[keyWidthField];
-    const boreDiameter: number = values[boreDiameterField];
-    const boreDiameterPlusKeyHeight: number = values[boreDiameterPlusKeyHeightField];
-
-    const module: number = values[moduleField];
-    const numberOfTeeth: number = values[numberOfTeethField];
-    const profileShiftCoefficient: number = values[profileShiftCoefficientField];
-    const helixAngle: number = values[helixAngleField] ?? 0; // Not all gears have helix angle input
-
-    const maxRadius = getGearPolygonRadius(module, numberOfTeeth, profileShiftCoefficient, helixAngle);
-    const keywayRadius = getKeywayTotalRadius(keyWidth, boreDiameter, boreDiameterPlusKeyHeight)
-
-    if (keywayRadius > maxRadius) {
-      return `Keyway's center to key corner can't exceed gear's max of ${maxRadius}${UNITS.milimiters}`
-    }
-
-    return null;
-  };
-}
-
-export function inRange(
+function inRange(
   min: number,
   max: number,
   unit: string,
@@ -138,7 +44,7 @@ export function inRange(
 }
 
 // Required field validator
-export function required(message: string = "This field is required.") {
+function required(message: string = "This field is required.") {
   return (value: any): string | null => {
     if (value === undefined || value === null || value === '') {
       return message;
@@ -147,25 +53,10 @@ export function required(message: string = "This field is required.") {
   };
 }
 
-export function inStringSet(set: string[] = [], message: string = "Value is not in allowed list.") {
+function inStringSet(set: string[] = [], message: string = "Value is not in allowed list.") {
   return (value: any): string | null => {
     if (!set.includes(value)) {
       return message;
-    }
-    return null;
-  };
-}
-
-export function holeRadiusFitsInGear(moduleField: string, numberOfTeethField: string, profileShiftCoefficientField: string, helixAngleField: string) {
-  return (value: number, values: Record<string, any>): string | null => {
-    const module: number = values[moduleField];
-    const numberOfTeeth: number = values[numberOfTeethField];
-    const profileShiftCoefficient: number = values[profileShiftCoefficientField];
-    const helixAngle: number = values[helixAngleField] ?? 0; // Not all gears have helix angle input
-
-    const maxRadius = getGearPolygonRadius(module, numberOfTeeth, profileShiftCoefficient, helixAngle);
-    if (value >= maxRadius) {
-      return `Radius too big, this gear's max allowed is ${maxRadius}${UNITS.milimiters}.`;
     }
     return null;
   };
@@ -189,7 +80,7 @@ export function holeRadiusFitsInGear(moduleField: string, numberOfTeethField: st
  * );
  * ```
  */
-export function mergeValidations(
+function mergeValidations(
   ...validators: Array<(value: any, values: Record<string, any>) => string | null>
 ): (value: any, values: Record<string, any>) => string | null {
   return (value: any, values: Record<string, any>) => {
@@ -228,7 +119,7 @@ export function mergeValidations(
  *   all validators are skipped (returns `null`).
  * - Uses strict equality (`===`) for comparison.
  */
-export function whenFieldIs(
+function whenFieldIs(
   fieldName: string,
   expectedValue: any,
   ...validators: Array<(value: any, values: Record<string, any>) => string | null>

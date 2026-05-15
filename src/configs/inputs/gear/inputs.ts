@@ -2,7 +2,6 @@ import { NumberInput } from "@mantine/core"
 import { InputConfig } from "@/types/inputConfigs";
 import LabeledSegmentedControl from "@/components/Form/Inputs/LabeledSegmentedControl/LabeledSegmentedControl"
 import { UNITS } from "@/lib/common/constants";
-import { inRange, required, mergeValidations } from "@/lib/common/validations";
 import { baseGearInputProps, genericAngleInputConfig, genericDistanceInputConfig, genericNumericInputConfig } from "../base";
 
 const HELIX_ANGLE_MIN = 5;
@@ -51,10 +50,6 @@ export const helixAngleInputConfig: InputConfig = {
         href: '/',
         label: 'Learn more'
     },
-    validate: mergeValidations(
-        required(),
-        inRange(HELIX_ANGLE_MIN, HELIX_ANGLE_MAX, UNITS.degrees, 'Helix angle'),
-    )
 };
 
 export const moduleInputConfig: InputConfig = {
@@ -71,10 +66,6 @@ export const moduleInputConfig: InputConfig = {
         href: '/theory/module',
         label: 'Learn more'
     },
-    validate: mergeValidations(
-        required(),
-        inRange(MODULE_MIN, MODULE_MAX, UNITS.milimiters, 'Module'),
-    )
 };
 
 export const numberOfTeethInputConfig: InputConfig = {
@@ -86,10 +77,6 @@ export const numberOfTeethInputConfig: InputConfig = {
         max: NUMBER_OF_TEETH_MAX,
         allowNegative: false,
     },
-    validate: mergeValidations(
-        required(),
-        inRange(NUMBER_OF_TEETH_MIN, NUMBER_OF_TEETH_MAX, "", 'Number of teeth'),
-    ),
 };
 
 export const bevelPinpionNumberOfTeethInputConfig = {
@@ -124,10 +111,6 @@ export const lengthInputConfig = {
     },
     helpImage: "/images/gears/inputs/spur_length.svg",
     helpText: "The distance between the gear's bottom and top face.",
-    validate: mergeValidations(
-        required(),
-        inRange(LENGTH_MIN, LENGTH_MAX, UNITS.milimiters, 'Length'),
-    ),
 };
 
 
@@ -166,10 +149,6 @@ export const pressureAngleInputConfig: InputConfig = {
         href: '/',
         label: 'Learn more'
     },
-    validate: mergeValidations(
-        required(),
-        inRange(PRESSURE_ANGLE_MIN, PRESSURE_ANGLE_MAX, UNITS.degrees, 'Pressure angle'),
-    )
 };
 
 export const profileShiftCoefficientInputConfig = {
