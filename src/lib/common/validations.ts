@@ -1,4 +1,5 @@
 import { UNITS } from "./constants";
+import { gearInputsData } from "@/configs/inputs/gear/inputs";
 import { baseGearInputProps, baseHoleInputProps, baseHoleTypeInputProps } from "@/configs/inputs/base";
 
 function degToRad(degrees: number) {
@@ -30,105 +31,179 @@ function getKeywayTotalRadius(keyWidth: number, boreDiameter: number, boreDiamet
 }
 
 function inRange(
+  value: number,
   min: number,
   max: number,
   unit: string,
-  fieldName: string = "This field"
+  fieldLabel: string = "This field"
 ) {
-  return (value: number): string | null => {
-    if (value < min || value > max) {
-      return `${fieldName} must be in range [${min}${unit}, ${max}${unit}].`;
-    }
-    return null;
-  };
+  if (value < min || value > max) {
+    return `${fieldLabel} must be in range [${min}${unit}, ${max}${unit}].`;
+  }
+  return null;
 }
 
 // Required field validator
-function required(message: string = "This field is required.") {
-  return (value: any): string | null => {
-    if (value === undefined || value === null || value === '') {
-      return message;
-    }
-    return null;
-  };
+function required(value: string | number, message: string = "This field is required.") {
+  if (value === undefined || value === null || value === '') {
+    return message;
+  }
+  return null;
 }
 
-function inStringSet(set: string[] = [], message: string = "Value is not in allowed list.") {
-  return (value: any): string | null => {
-    if (!set.includes(value)) {
-      return message;
-    }
-    return null;
-  };
+function inStringSet(value: string, set: string[] = [], message: string = "Value is not in allowed list.") {
+  if (!set.includes(value)) {
+    return message;
+  }
+  return null;
 }
 
-/**
- * Combines multiple validation functions into a single validator.
- * Runs each validator in order and returns the first error encountered.
- * If all validators pass, returns `null`.
- *
- * @param validators - Array of validator functions. Each validator receives
- *                     `(value: any, values: Record<string, any>)` and returns
- *                     `string | null` (error message or `null` if valid).
- * @returns A merged validator function that executes all input validators sequentially.
- *
- * @example
- * ```typescript
- * const validateAge = mergeValidations(
- *   (value) => (value < 0 ? "Age cannot be negative" : null),
- *   (value) => (value > 120 ? "Age cannot exceed 120" : null)
- * );
- * ```
- */
-function mergeValidations(
-  ...validators: Array<(value: any, values: Record<string, any>) => string | null>
-): (value: any, values: Record<string, any>) => string | null {
-  return (value: any, values: Record<string, any>) => {
-    for (const validator of validators) {
-      const error = validator(value, values); // Return the first error found
-      if (error) return error;
-    }
-    return null; // All validations passed
-  };
-};
+const createCoreGearValidations = (prefix: string = '') => {
+  const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
+  return {
+    [name(baseGearInputProps.module.name)]: (value: number) => {
 
-/**
- * Wraps a set of validators to only run them if a specified field in `values`
- * matches the expected value. Useful for conditional validation (e.g., validate
- * `radius` only if `hole_type === 'circular'`).
- *
- * @param fieldName - The name of the field in `values` to check.
- * @param expectedValue - The value the field must match for validators to run.
- * @param validators - One or more validator functions to apply conditionally.
- *                     Each receives `(value: any, values: Record<string, any>)`.
- * @returns A validator function that runs the input validators only if the
- *          field condition is met; otherwise, returns `null`.
- *
- * @example
- * ```typescript
- * const validateRadius = whenFieldIs(
- *   'hole_type',
- *   'circular',
- *   inRange(0.05, 400, 'mm', 'radius'),
- *   radiusIsLesserThan(401)
- * );
- * ```
- *
- * @remarks
- * - If `fieldName` is missing in `values` or its value doesn't match `expectedValue`,
- *   all validators are skipped (returns `null`).
- * - Uses strict equality (`===`) for comparison.
- */
-function whenFieldIs(
-  fieldName: string,
-  expectedValue: any,
-  ...validators: Array<(value: any, values: Record<string, any>) => string | null>
-): (value: any, values: Record<string, any>) => string | null {
-  return (value, values) => {
-    if (values[fieldName] !== expectedValue) return null;
-    return mergeValidations(...validators)(value, values);
-  };
+      const required_error = required(value);
+      if (required_error) {
+        return required(value);
+      }
+
+      const range_error = inRange(
+        value,
+        gearInputsData.module.min,
+        gearInputsData.module.max,
+        UNITS.milimiters,
+        baseGearInputProps.module.label
+      );
+      if (range_error) {
+        return range_error;
+      }
+
+      return null;
+    },
+    [name(baseGearInputProps.numer_of_teeth.name)]: (value: number) => {
+
+      const required_error = required(value);
+      if (required_error) {
+        return required(value);
+      }
+
+      const range_error = inRange(
+        value,
+        gearInputsData.numberOfTeeth.min,
+        gearInputsData.numberOfTeeth.max,
+        '',
+        baseGearInputProps.numer_of_teeth.label
+      );
+      if (range_error) {
+        return range_error;
+      }
+
+      return null;
+    },
+    [name(baseGearInputProps.pressure_angle.name)]: (value: number) => {
+
+      const required_error = required(value);
+      if (required_error) {
+        return required(value);
+      }
+
+      const range_error = inRange(
+        value,
+        gearInputsData.pressureAngle.min,
+        gearInputsData.pressureAngle.max,
+        UNITS.degrees,
+        baseGearInputProps.pressure_angle.label
+      );
+      if (range_error) {
+        return range_error;
+      }
+
+      return null;
+    },
+  }
 }
+
+const createCoreExternalGearValidations = (prefix: string = '', isHelical: boolean) => {
+  const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
+  return {
+    ...createCoreGearValidations(prefix),
+    [name(baseGearInputProps.length.name)]: (value: number) => {
+
+      const required_error = required(value);
+      if (required_error) {
+        return required(value);
+      }
+
+      const range_error = inRange(
+        value,
+        gearInputsData.length.min,
+        gearInputsData.length.max,
+        UNITS.milimiters,
+        baseGearInputProps.length.label
+      );
+      if (range_error) {
+        return range_error;
+      }
+
+      return null;
+    },
+    ...(
+      isHelical && {
+        [name(baseGearInputProps.helical_system.name)]: (value: string) => {
+
+          const required_error = required(value);
+          if (required_error) {
+            return required(value);
+          }
+
+          const invalid_error = inStringSet(value, gearInputsData.helicalSystem.data);
+          if (invalid_error) {
+            return invalid_error;
+          }
+
+          return null;
+        },
+        [name(baseGearInputProps.helix_angle.name)]: (value: number) => {
+
+          const required_error = required(value);
+          if (required_error) {
+            return required(value);
+          }
+
+          const range_error = inRange(
+            value,
+            gearInputsData.helixAngle.min,
+            gearInputsData.helixAngle.max,
+            UNITS.degrees,
+            baseGearInputProps.helix_angle.label
+          );
+          if (range_error) {
+            return range_error;
+          }
+
+          return null;
+        },
+        [name(baseGearInputProps.helix_direction.name)]: (value: string) => {
+
+          const required_error = required(value);
+          if (required_error) {
+            return required(value);
+          }
+
+          const invalid_error = inStringSet(value, gearInputsData.helixDirection.data);
+          if (invalid_error) {
+            return invalid_error;
+          }
+
+          return null;
+        },
+      }
+    )
+  }
+}
+
+
 
 const createHoleValidations = (
   prefix: string = '',
@@ -269,7 +344,7 @@ const createHoleValidations = (
   };
 };
 
-const standardGearExtractor = (values: Record<string, any>, name: (key: string) => string) => {
+const externalGearMaxRadiusGetter = (values: Record<string, any>, name: (key: string) => string) => {
   return getGearPolygonRadius(
     values[name(baseGearInputProps.module.name)],
     values[name(baseGearInputProps.numer_of_teeth.name)],
@@ -278,7 +353,9 @@ const standardGearExtractor = (values: Record<string, any>, name: (key: string) 
   );
 };
 
-export const standardGearHoleValidations = (
-) => {
-  return createHoleValidations('', standardGearExtractor);
+export const externalGearValidations = (isHelical: boolean) => {
+  return {
+    ...createCoreExternalGearValidations('', isHelical),
+    ...createHoleValidations('', externalGearMaxRadiusGetter)
+  }
 }

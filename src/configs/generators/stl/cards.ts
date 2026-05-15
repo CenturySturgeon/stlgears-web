@@ -21,7 +21,7 @@ import {
   radialThicknessInputConfig,
   rackWidthInputConfig,
 } from "@/configs/inputs/gear/inputs";
-import { standardGearHoleValidations } from "@/lib/common/validations";
+import { externalGearValidations } from "@/lib/common/validations";
 import { getHoleInputConfigs } from "@/configs/inputs/hole/inputs";
 import { gearAdvancedParamsFormSection, gearBaseParamsFormSection, holeTypeSelectorFormSection } from "../cardHeaders";
 
@@ -50,7 +50,7 @@ export const GearCards: GearCardWithForm[] = [
       },
     ],
     validate: {
-      ...standardGearHoleValidations()
+      ...externalGearValidations(true),
     }
   },
   {
@@ -75,7 +75,10 @@ export const GearCards: GearCardWithForm[] = [
         ],
 
       },
-    ]
+    ],
+    validate: {
+      ...externalGearValidations(false),
+    }
   },
   {
     ...gearCardHeaders.helical,
@@ -102,7 +105,10 @@ export const GearCards: GearCardWithForm[] = [
         ],
 
       },
-    ]
+    ],
+    validate: {
+      ...externalGearValidations(false),
+    }
   },
   {
     ...gearCardHeaders.internal_double_helical,
