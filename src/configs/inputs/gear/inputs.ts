@@ -4,29 +4,50 @@ import LabeledSegmentedControl from "@/components/Form/Inputs/LabeledSegmentedCo
 import { UNITS } from "@/lib/common/constants";
 import { baseGearInputProps, genericAngleInputConfig, genericDistanceInputConfig, genericNumericInputConfig } from "../base";
 
-const HELIX_ANGLE_MIN = 5;
-const HELIX_ANGLE_MAX = 45;
-
-const LENGTH_MIN = 0.5;
-const LENGTH_MAX = 400;
-
-const MODULE_MIN = 0.3;
-const MODULE_MAX = 75;
-
-const NUMBER_OF_TEETH_MIN = 6;
-const NUMBER_OF_TEETH_MAX = 150;
-
-const PRESSURE_ANGLE_MIN = 14.5;
-const PRESSURE_ANGLE_MAX = 35;
-
+export const gearInputsData = {
+    helicalSystem: {
+        data: ['Normal', 'Radial'],
+    },
+    helixAngle: {
+        min: 5,
+        max: 45,
+    },
+    helixDirection: {
+        data: ['Clock wise', 'Counter clock wise'],
+    },
+    length: {
+        min: 0.5,
+        max: 400,
+    },
+    module: {
+        min: 0.3,
+        max: 75
+    },
+    numberOfTeeth: {
+        min: 6,
+        max: 150,
+    },
+    pressureAngle: {
+        min: 14.5,
+        max: 35
+    },
+    profileShiftCoefficient: {
+        min: -1,
+        max: 1
+    },
+    radialThickness: {
+        min: 0.05,
+        max: 200
+    }
+}
 
 export const helicalSystemInputConfig = {
     InputComponent: LabeledSegmentedControl,
     inputProps: {
         ...baseGearInputProps.helical_system,
         color: "slate.6",
-        data: ['Normal', 'Radial'],
-        defaultValue: "Normal",
+        data: gearInputsData.helicalSystem.data,
+        defaultValue: gearInputsData.helicalSystem.data[0],
     },
     helpText: `**Radial system** \n - Preserves the profile of the spur gear on the transverse plane. \n - Can't be manufactured through conventional methods.\n\n**Normal system**\n - Can be manufactured from a single hob cutter. \n - Tooth profile dimensions are different from the spur gear's.`,
     helpLink: {
@@ -38,10 +59,11 @@ export const helicalSystemInputConfig = {
 export const helixAngleInputConfig: InputConfig = {
     ...genericAngleInputConfig,
     inputProps: {
+        ...genericAngleInputConfig.inputProps,
         ...baseGearInputProps.helix_angle,
         defaultValue: 15,
-        min: HELIX_ANGLE_MIN,
-        max: HELIX_ANGLE_MAX,
+        min: gearInputsData.helixAngle.min,
+        max: gearInputsData.helixAngle.max,
         allowDecimal: false,
     },
     helpImage: "/images/gears/inputs/helix_angle.svg",
@@ -55,10 +77,11 @@ export const helixAngleInputConfig: InputConfig = {
 export const moduleInputConfig: InputConfig = {
     ...genericDistanceInputConfig,
     inputProps: {
+        ...genericDistanceInputConfig.inputProps,
         ...baseGearInputProps.module,
         defaultValue: 1,
-        min: MODULE_MIN,
-        max: MODULE_MAX,
+        min: gearInputsData.module.min,
+        max: gearInputsData.module.max,
     },
     helpText: 'The module controls the size of the tooth and thus the total size of the gear.',
     helpImage: "/images/gears/inputs/module.svg",
@@ -73,8 +96,8 @@ export const numberOfTeethInputConfig: InputConfig = {
     inputProps: {
         ...baseGearInputProps.numer_of_teeth,
         defaultValue: 17,
-        min: NUMBER_OF_TEETH_MIN,
-        max: NUMBER_OF_TEETH_MAX,
+        min: gearInputsData.numberOfTeeth.min,
+        max: gearInputsData.numberOfTeeth.max,
         allowNegative: false,
     },
 };
@@ -104,8 +127,8 @@ export const lengthInputConfig = {
         defaultValue: 10,
         placeholder: UNITS.milimiters,
         suffix: ' ' + UNITS.milimiters,
-        min: LENGTH_MIN,
-        max: LENGTH_MAX,
+        min: gearInputsData.length.min,
+        max: gearInputsData.length.max,
         decimalScale: 2,
         allowNegative: false,
     },
@@ -129,7 +152,7 @@ export const helixDirectionInputConfig = {
     inputProps: {
         ...baseGearInputProps.helix_direction,
         color: "slate.6",
-        data: ['Clock wise', 'Counter clock wise'],
+        data: gearInputsData.helixDirection.data,
         defaultValue: "Clock wise",
     },
     helpText: "For paralel shaft helical gears to mesh, their helix angle must be equal in magnitude but opposite in direction."
@@ -138,10 +161,11 @@ export const helixDirectionInputConfig = {
 export const pressureAngleInputConfig: InputConfig = {
     ...genericAngleInputConfig,
     inputProps: {
+        ...genericAngleInputConfig.inputProps,
         ...baseGearInputProps.pressure_angle,
         defaultValue: 20,
-        min: PRESSURE_ANGLE_MIN,
-        max: PRESSURE_ANGLE_MAX,
+        min: gearInputsData.pressureAngle.min,
+        max: gearInputsData.pressureAngle.max,
     },
     helpText: 'The angle between the line of action and the tangent to the pitch circle, typically 20° or 25°.',
     helpImage: "/images/gears/inputs/pressure_angle.svg",
@@ -156,8 +180,8 @@ export const profileShiftCoefficientInputConfig = {
     inputProps: {
         ...baseGearInputProps.profile_shift_coefficient,
         defaultValue: 0,
-        min: -1,
-        max: 1,
+        min: gearInputsData.profileShiftCoefficient.min,
+        max: gearInputsData.profileShiftCoefficient.max,
         allowDecimal: true,
         decimalScale: 2,
         allowNegative: true,
@@ -221,8 +245,8 @@ export const radialThicknessInputConfig = {
         defaultValue: 10,
         placeholder: 'mm',
         suffix: ' mm',
-        min: 0.05,
-        max: 400,
+        min: gearInputsData.radialThickness.min,
+        max: gearInputsData.radialThickness.max,
         decimalScale: 2,
         allowNegative: false,
     },
