@@ -6,6 +6,14 @@ function degToRad(degrees: number) {
   return degrees * (Math.PI / 180);
 }
 
+
+function getPolygonApothem(gearPolygonRadius: number, gearPolygonNumberOfVertices: number) {
+  let centralAngle = 2 * Math.PI / gearPolygonNumberOfVertices;
+  let apothem = gearPolygonRadius * Math.cos(centralAngle / 2);
+  return apothem;
+}
+
+
 function getGearPolygonRadius(module: number, numberOfTeeth: number, profileShiftCoefficient: number, helixAngle: number = 0) {
   const transverseModule = helixAngle != 0 ? Math.cos(degToRad(helixAngle)) : module;
 
@@ -19,29 +27,26 @@ function getGearPolygonRadius(module: number, numberOfTeeth: number, profileShif
   return polygonRadius;
 }
 
-function getPolygonApothem(gearPolygonRadius: number, gearPolygonNumberOfVertices: number) {
-  let centralAngle = 2 * Math.PI / gearPolygonNumberOfVertices;
-  let apothem = gearPolygonRadius * Math.cos(centralAngle / 2);
-  return apothem;
-}
+
+const getBevelGearMaxRadius = (module: number, numberOfTeeth: number, numberOfTeethPartner: number,): number => {
+  const gama = Math.atan(numberOfTeeth / numberOfTeethPartner);
+  return (module * numberOfTeeth) - (2.5 * Math.cos(gama));
+};
+
 
 function getKeywayTotalRadius(keyWidth: number, boreDiameter: number, boreDiameterPlusKeyHeight: number) {
   const boreRadius = boreDiameter / 2;
   return Math.sqrt(((boreDiameterPlusKeyHeight - boreRadius) ** 2) + (keyWidth ** 2));
 }
 
-function inRange(
-  value: number,
-  min: number,
-  max: number,
-  unit: string,
-  fieldLabel: string = "This field"
-) {
+
+function inRange(value: number, min: number, max: number, unit: string, fieldLabel: string = "This field") {
   if (value < min || value > max) {
     return `${fieldLabel} must be in range [${min}${unit}, ${max}${unit}].`;
   }
   return null;
 }
+
 
 // Required field validator
 function required(value: string | number, message: string = "This field is required.") {
@@ -51,12 +56,14 @@ function required(value: string | number, message: string = "This field is requi
   return null;
 }
 
+
 function inStringSet(value: string, set: string[] = [], message: string = "Value is not in allowed list.") {
   if (!set.includes(value)) {
     return message;
   }
   return null;
 }
+
 
 const createCoreGearValidations = (prefix: string = '') => {
   const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
@@ -123,6 +130,7 @@ const createCoreGearValidations = (prefix: string = '') => {
     },
   }
 }
+
 
 const createCoreExternalGearValidations = (prefix: string = '', isHelical: boolean) => {
   const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
@@ -202,7 +210,6 @@ const createCoreExternalGearValidations = (prefix: string = '', isHelical: boole
     )
   }
 }
-
 
 
 const createHoleValidations = (
@@ -344,6 +351,7 @@ const createHoleValidations = (
   };
 };
 
+
 const externalGearMaxRadiusGetter = (values: Record<string, any>, name: (key: string) => string) => {
   return getGearPolygonRadius(
     values[name(baseGearInputProps.module.name)],
@@ -353,9 +361,125 @@ const externalGearMaxRadiusGetter = (values: Record<string, any>, name: (key: st
   );
 };
 
+const createBevelGearMaxRadiusGetter = (isPinion: boolean, pinion_prefix: string, wheel_prefix: string) => {
+  return (values: Record<string, any>, name: (key: string) => string) => {
+
+    // "name" automatically applies the current prefix ('Pinion' or 'Wheel')
+    // Just construct the helper for the opposing gear
+    const opposingPrefix = isPinion ? wheel_prefix : pinion_prefix;
+    const opposingName = (key: string) => `${opposingPrefix}_${key}`;
+
+    // Module is shared, no prefix!
+    const moduleValue = values[baseGearInputProps.module.name];
+
+    const currentGearTeeth = values[name(baseGearInputProps.numer_of_teeth.name)];
+    const opposingGearTeeth = values[opposingName(baseGearInputProps.numer_of_teeth.name)];
+
+    return getBevelGearMaxRadius(
+      moduleValue,
+      currentGearTeeth,
+      opposingGearTeeth
+    );
+  };
+};
+
+
 export const externalGearValidations = (isHelical: boolean) => {
   return {
     ...createCoreExternalGearValidations('', isHelical),
     ...createHoleValidations('', externalGearMaxRadiusGetter)
   }
 }
+
+export const straightBevelGearValidations = (pinion_prefix: string = 'pinion', wheel_prefix: string = 'wheel') => {
+  const name = (key: string, prefix: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
+  return {
+    ...{
+      [baseGearInputProps.module.name]: (value: number) => {
+
+        const required_error = required(value);
+        if (required_error) {
+          return required(value);
+        }
+
+        const range_error = inRange(
+          value,
+          gearInputsData.module.min,
+          gearInputsData.module.max,
+          UNITS.milimiters,
+          baseGearInputProps.module.label
+        );
+        if (range_error) {
+          return range_error;
+        }
+
+        return null;
+      },
+      [baseGearInputProps.pressure_angle.name]: (value: number) => {
+
+        const required_error = required(value);
+        if (required_error) {
+          return required(value);
+        }
+
+        const range_error = inRange(
+          value,
+          gearInputsData.pressureAngle.min,
+          gearInputsData.pressureAngle.max,
+          UNITS.degrees,
+          baseGearInputProps.pressure_angle.label
+        );
+        if (range_error) {
+          return range_error;
+        }
+
+        return null;
+      },
+      [name(baseGearInputProps.numer_of_teeth.name, pinion_prefix)]: (value: number) => {
+
+        const required_error = required(value);
+        if (required_error) {
+          return required(value);
+        }
+
+        const range_error = inRange(
+          value,
+          gearInputsData.numberOfTeeth.min,
+          gearInputsData.numberOfTeeth.max,
+          '',
+          baseGearInputProps.numer_of_teeth.label
+        );
+        if (range_error) {
+          return range_error;
+        }
+
+        return null;
+      },
+      [name(baseGearInputProps.numer_of_teeth.name, wheel_prefix)]: (value: number) => {
+        const required_error = required(value);
+        if (required_error) {
+          return required(value);
+        }
+
+        const range_error = inRange(
+          value,
+          gearInputsData.numberOfTeeth.min,
+          gearInputsData.numberOfTeeth.max,
+          '',
+          baseGearInputProps.numer_of_teeth.label
+        );
+        if (range_error) {
+          return range_error;
+        }
+
+        return null;
+      },
+    },
+
+    // Inject the Pinion context (isPinion = true)
+    ...createHoleValidations('pinion', createBevelGearMaxRadiusGetter(true, pinion_prefix, wheel_prefix)),
+
+    // Inject the Wheel context (isPinion = false)
+    ...createHoleValidations('wheel', createBevelGearMaxRadiusGetter(false, pinion_prefix, wheel_prefix))
+  };
+};

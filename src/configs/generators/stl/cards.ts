@@ -21,7 +21,7 @@ import {
   radialThicknessInputConfig,
   rackWidthInputConfig,
 } from "@/configs/inputs/gear/inputs";
-import { externalGearValidations } from "@/lib/common/validations";
+import { externalGearValidations, straightBevelGearValidations } from "@/lib/common/validations";
 import { getHoleInputConfigs } from "@/configs/inputs/hole/inputs";
 import { gearAdvancedParamsFormSection, gearBaseParamsFormSection, holeTypeSelectorFormSection } from "../cardHeaders";
 
@@ -199,7 +199,10 @@ export const GearCards: GearCardWithForm[] = [
           ...getHoleInputConfigs('Pinion'),
           ...getHoleInputConfigs('Wheel'),
         ]
-      }, // TODO: Mod the component so you can add two (pinion and wheel)
-    ]
+      },
+    ],
+    validate: {
+      ...straightBevelGearValidations()
+    }
   },
 ];
