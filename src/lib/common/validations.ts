@@ -1,5 +1,6 @@
 import { UNITS } from "./constants";
 import { gearInputsData } from "@/configs/inputs/gear/inputs";
+import { HOLES_MAX_DISTANCE, HOLES_MIN_DISTANCE } from "@/configs/inputs/hole/inputs";
 import { baseGearInputProps, baseHoleInputProps, baseHoleTypeInputProps } from "@/configs/inputs/base";
 
 function degToRad(degrees: number) {
@@ -23,7 +24,6 @@ function getGearPolygonRadius(module: number, numberOfTeeth: number, profileShif
   const transverseRootDiameter = transversePitchDiameter - 2.5 * module; // Yes, uses the normal module since the root height doesn't care about the plane
 
   const polygonRadius = (transverseRootDiameter / 2) - 0.5;
-  console.log(polygonRadius)
   return polygonRadius;
 }
 
@@ -131,6 +131,32 @@ const createCoreGearValidations = (prefix: string = '') => {
   }
 }
 
+const createAdvancedGearValidations = (prefix: string = '') => {
+  const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
+  return {
+
+    [name(baseGearInputProps.profile_shift_coefficient.name)]: (value: number) => {
+
+      const required_error = required(value);
+      if (required_error) {
+        return required(value);
+      }
+
+      const range_error = inRange(
+        value,
+        gearInputsData.profileShiftCoefficient.min,
+        gearInputsData.profileShiftCoefficient.max,
+        '',
+        baseGearInputProps.profile_shift_coefficient.label
+      );
+      if (range_error) {
+        return range_error;
+      }
+      return null;
+    },
+  }
+}
+
 
 const createCoreExternalGearValidations = (prefix: string = '', isHelical: boolean) => {
   const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
@@ -226,6 +252,11 @@ const createHoleValidations = (
       if (values[name(baseHoleTypeInputProps.hole_type.name)] !== baseHoleTypeInputProps.circular.name) return null;
 
       const maxRadius = getMaxRadius(values, name);
+      const range_error = inRange(value, HOLES_MIN_DISTANCE, HOLES_MAX_DISTANCE, UNITS.milimiters);
+
+      if (range_error) {
+        return range_error;
+      }
 
       if (value >= maxRadius) {
         return `Radius too big, max allowed is ${maxRadius}mm.`;
@@ -240,6 +271,11 @@ const createHoleValidations = (
       if (values[name(baseHoleTypeInputProps.hole_type.name)] !== baseHoleTypeInputProps.hexagonal.name) return null;
 
       const maxRadius = getMaxRadius(values, name);
+      const range_error = inRange(value, HOLES_MIN_DISTANCE, HOLES_MAX_DISTANCE, UNITS.milimiters);
+
+      if (range_error) {
+        return range_error;
+      }
 
       if (value >= maxRadius) {
         return `Radius too big, max allowed is ${maxRadius}mm.`;
@@ -253,6 +289,11 @@ const createHoleValidations = (
       if (values[name(baseHoleTypeInputProps.hole_type.name)] !== baseHoleTypeInputProps.square.name) return null;
 
       const maxRadius = getMaxRadius(values, name);
+      const range_error = inRange(value, HOLES_MIN_DISTANCE, HOLES_MAX_DISTANCE, UNITS.milimiters);
+
+      if (range_error) {
+        return range_error;
+      }
 
       if (value >= maxRadius) {
         return `Radius too big, max allowed is ${maxRadius}mm.`;
@@ -270,6 +311,11 @@ const createHoleValidations = (
         values[name(baseHoleInputProps.keywayBoreDiameter.name)],
         values[name(baseHoleInputProps.keywayBoreDiameterPlusKeyLength.name)]
       );
+      const range_error = inRange(value, HOLES_MIN_DISTANCE, HOLES_MAX_DISTANCE, UNITS.milimiters);
+
+      if (range_error) {
+        return range_error;
+      }
 
       if (value / 2 >= maxRadius) {
         return `Bore diameter is too big, max allowed is ${maxRadius}mm.`;
@@ -290,6 +336,11 @@ const createHoleValidations = (
         values[name(baseHoleInputProps.keywayBoreDiameter.name)],
         values[name(baseHoleInputProps.keywayBoreDiameterPlusKeyLength.name)]
       );
+      const range_error = inRange(value, HOLES_MIN_DISTANCE, HOLES_MAX_DISTANCE, UNITS.milimiters);
+
+      if (range_error) {
+        return range_error;
+      }
 
       if (value > values[name(baseHoleInputProps.keywayBoreDiameter.name)]) {
         return "Key width can't be larger than the bore diameter."
@@ -313,6 +364,11 @@ const createHoleValidations = (
         values[name(baseHoleInputProps.keywayBoreDiameter.name)],
         values[name(baseHoleInputProps.keywayBoreDiameterPlusKeyLength.name)]
       );
+      const range_error = inRange(value, HOLES_MIN_DISTANCE, HOLES_MAX_DISTANCE, UNITS.milimiters);
+
+      if (range_error) {
+        return range_error;
+      }
 
       if (value > values[name(baseHoleInputProps.keywayBoreDiameter.name)]) {
         return "Key width can't be larger than the bore diameter."
@@ -336,6 +392,11 @@ const createHoleValidations = (
         values[name(baseHoleInputProps.keywayBoreDiameter.name)],
         values[name(baseHoleInputProps.keywayBoreDiameterPlusKeyLength.name)]
       );
+      const range_error = inRange(value, HOLES_MIN_DISTANCE, HOLES_MAX_DISTANCE, UNITS.milimiters);
+
+      if (range_error) {
+        return range_error;
+      }
 
       if (value <= values[name(baseHoleInputProps.keywayBoreDiameter.name)]) {
         return "Bore diameter can't be larger than itself plus key length."
@@ -361,6 +422,7 @@ const externalGearMaxRadiusGetter = (values: Record<string, any>, name: (key: st
   );
 };
 
+
 const createBevelGearMaxRadiusGetter = (isPinion: boolean, pinion_prefix: string, wheel_prefix: string) => {
   return (values: Record<string, any>, name: (key: string) => string) => {
 
@@ -384,12 +446,21 @@ const createBevelGearMaxRadiusGetter = (isPinion: boolean, pinion_prefix: string
 };
 
 
+
 export const externalGearValidations = (isHelical: boolean) => {
   return {
     ...createCoreExternalGearValidations('', isHelical),
     ...createHoleValidations('', externalGearMaxRadiusGetter)
   }
-}
+};
+
+
+export const advancedGearValidations = () => {
+  return {
+    ...createAdvancedGearValidations(''),
+  }
+};
+
 
 export const straightBevelGearValidations = (pinion_prefix: string = 'pinion', wheel_prefix: string = 'wheel') => {
   const name = (key: string, prefix: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;

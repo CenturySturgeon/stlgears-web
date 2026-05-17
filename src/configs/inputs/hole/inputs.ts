@@ -3,8 +3,12 @@ import { baseHoleInputProps, genericDistanceInputConfig } from "../base";
 import LabeledSegmentedControl from "@/components/Form/Inputs/LabeledSegmentedControl/LabeledSegmentedControl";
 import { baseHoleTypeInputProps } from "../base";
 
+export const HOLES_MIN_DISTANCE = 0.5;
+export const HOLES_MAX_DISTANCE = 400;
+export const DEFAULT_RADIUS_VALUE = 5;
+
 // Helper type for the factory parameters
-export type PrefixModifiers = {
+type PrefixModifiers = {
     name: (key: string) => string;
     label: (key: string) => string;
 };
@@ -34,7 +38,7 @@ const createRadiusInputConfig = ({ name, label }: PrefixModifiers): InputConfig 
         ...genericDistanceInputConfig.inputProps,
         name: name(baseHoleInputProps.circleRadius.name),
         label: label(baseHoleInputProps.circleRadius.label),
-        defaultValue: 5,
+        defaultValue: DEFAULT_RADIUS_VALUE,
     },
     helpImage: "/images/gears/holes/radius.svg",
     showWhen: (values) => values[name(baseHoleTypeInputProps.hole_type.name)] === baseHoleTypeInputProps.circular.name,
@@ -47,7 +51,7 @@ const createHexagonalCircumradiusInputConfig = ({ name, label }: PrefixModifiers
         ...baseHoleInputProps.hexagonalCircumradius,
         name: name(baseHoleInputProps.hexagonalCircumradius.name),
         label: label(baseHoleInputProps.hexagonalCircumradius.label),
-        defaultValue: 5,
+        defaultValue: DEFAULT_RADIUS_VALUE,
     },
     helpImage: "/images/gears/holes/hexagonal_circumradius.svg",
     helpText: "The distance from the center to one of the hexagon's vertices.",
