@@ -16,7 +16,7 @@ type PrefixModifiers = {
 const createHoleTypeSelectorConfig = ({ name, label }: PrefixModifiers): InputConfig => ({
     InputComponent: LabeledSegmentedControl,
     inputProps: {
-        ...baseHoleTypeInputProps.hole_type,
+        ...baseHoleTypeInputProps.hole_type, // in case name is null
         name: name(baseHoleTypeInputProps.hole_type.name),
         label: label(baseHoleTypeInputProps.hole_type.label),
         data: [

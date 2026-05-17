@@ -38,6 +38,9 @@ export const gearInputsData = {
     radialThickness: {
         min: 0.05,
         max: 200
+    },
+    rackLength: {
+        data: ["By teeth", "Length"]
     }
 }
 

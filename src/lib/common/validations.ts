@@ -475,7 +475,6 @@ const createBevelGearMaxRadiusGetter = (isPinion: boolean, pinion_prefix: string
 };
 
 
-
 export const externalGearValidations = (isHelical: boolean) => {
   return {
     ...createCoreExternalGearValidations('', isHelical),
@@ -483,11 +482,13 @@ export const externalGearValidations = (isHelical: boolean) => {
   }
 };
 
+
 export const internalGearValidations = (isHelical: boolean) => {
   return {
     ...createCoreInternalGearValidations('', isHelical),
   }
 };
+
 
 export const advancedGearValidations = () => {
   return {
