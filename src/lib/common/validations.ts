@@ -1,7 +1,7 @@
 import { UNITS } from "./constants";
-import { gearInputsData } from "@/configs/inputs/gear/inputs";
-import { HOLES_MAX_DISTANCE, HOLES_MIN_DISTANCE } from "@/configs/inputs/hole/inputs";
-import { baseGearInputProps, baseHoleInputProps, baseHoleTypeInputProps } from "@/configs/inputs/base";
+import { gearInputsData } from "@/forms/configs/inputs/gear/inputs";
+import { HOLES_MAX_DISTANCE, HOLES_MIN_DISTANCE } from "@/forms/configs/inputs/hole/inputs";
+import { baseGearInputProps, baseHoleInputProps, baseHoleTypeInputProps } from "@/forms/configs/inputs/base";
 
 function degToRad(degrees: number) {
   return degrees * (Math.PI / 180);

@@ -1,5 +1,5 @@
 import { GearCardWithForm } from "@/types/gearCards";
-import { gearCardHeaders } from "@/configs/generators/cardHeaders"
+import { gearCardHeaders } from "@/forms/configs/generators/cardHeaders"
 import {
     getRackLengthSelector,
     moduleInputConfig,
@@ -11,7 +11,7 @@ import {
     rackPressureAngleInputConfig,
     radialThicknessInputConfig,
     rackWidthInputConfig,
-} from "@/configs/inputs/gear/inputs";
+} from "@/forms/configs/inputs/gear/inputs";
 import { gearAdvancedParamsFormSection, gearBaseParamsFormSection, holeTypeSelectorFormSection } from "../cardHeaders";
 import { advancedGearValidations, coreGearValidations, internalGearValidations, straightBevelGearValidations } from "@/lib/common/validations";
 

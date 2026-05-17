@@ -1,5 +1,5 @@
 import { InputConfig } from "@/types/inputConfigs";
-import { baseHoleInputProps, baseHoleTypeInputProps, createConditionalInputConfigs, genericDistanceInputConfig } from "@/configs/inputs/base";
+import { baseHoleInputProps, baseHoleTypeInputProps, createConditionalInputConfigs, genericDistanceInputConfig } from "@/forms/configs/inputs/base";
 
 export const HOLES_MIN_DISTANCE = 0.5;
 export const HOLES_MAX_DISTANCE = 400;

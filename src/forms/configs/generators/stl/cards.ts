@@ -1,5 +1,5 @@
 import { GearCardWithForm } from "@/types/gearCards";
-import { gearCardHeaders } from "@/configs/generators/cardHeaders"
+import { gearCardHeaders } from "@/forms/configs/generators/cardHeaders"
 import {
   bevelPinpionNumberOfTeethInputConfig,
   bevelWheelNumberOfTeethInputConfig,
@@ -19,9 +19,9 @@ import {
   radialThicknessInputConfig,
   rackWidthInputConfig,
   rackNumberOfTeethInputConfig,
-} from "@/configs/inputs/gear/inputs";
+} from "@/forms/configs/inputs/gear/inputs";
 import { advancedGearValidations, externalGearValidations, internalGearValidations, lengthValidation, straightBevelGearValidations } from "@/lib/common/validations";
-import { getHoleInputConfigs } from "@/configs/inputs/hole/inputs";
+import { getHoleInputConfigs } from "@/forms/configs/inputs/hole/inputs";
 import { gearAdvancedParamsFormSection, gearBaseParamsFormSection, holeTypeSelectorFormSection } from "../cardHeaders";
 
 export const GearCards: GearCardWithForm[] = [

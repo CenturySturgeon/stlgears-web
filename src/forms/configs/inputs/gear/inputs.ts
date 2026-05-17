@@ -2,7 +2,7 @@ import { NumberInput } from "@mantine/core"
 import { InputConfig } from "@/types/inputConfigs";
 import LabeledSegmentedControl from "@/components/Form/Inputs/LabeledSegmentedControl/LabeledSegmentedControl"
 import { UNITS } from "@/lib/common/constants";
-import { baseGearInputProps, createConditionalInputConfigs, genericAngleInputConfig, genericDistanceInputConfig, genericNumericInputConfig } from "@/configs/inputs/base";
+import { baseGearInputProps, createConditionalInputConfigs, genericAngleInputConfig, genericDistanceInputConfig, genericNumericInputConfig } from "@/forms/configs/inputs/base";
 
 export const gearInputsData = {
     helicalSystem: {

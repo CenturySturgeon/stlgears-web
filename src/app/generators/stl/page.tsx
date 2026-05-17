@@ -1,7 +1,7 @@
 'use client' // This comes from the 'icon' in the AccordionSection Type in stl/config
 
 import { SITE_CONFIG } from '@/config';
-import { GearCards } from "@/configs/generators/stl/cards";
+import { GearCards } from "@/forms/configs/generators/stl/cards";
 import { Box, Container, SimpleGrid, Text, Title } from "@mantine/core";
 import GearCard from "@/components/GearCard/GearCard";
 import ButtonLink from "@/components/ButtonLink/ButtonLink";
