@@ -2,7 +2,7 @@ import { NumberInput } from "@mantine/core"
 import { InputConfig } from "@/types/inputConfigs";
 import LabeledSegmentedControl from "@/components/Form/Inputs/LabeledSegmentedControl/LabeledSegmentedControl"
 import { UNITS } from "@/lib/common/constants";
-import { baseGearInputProps, createConditionalInputConfigs, genericAngleInputConfig, genericDistanceInputConfig, genericNumericInputConfig } from "@/forms/configs/inputs/base";
+import { baseGearInputProps, baseHoleInputProps, createConditionalInputConfigs, genericAngleInputConfig, genericDistanceInputConfig, genericNumericInputConfig } from "@/forms/configs/inputs/base";
 
 export const gearInputsData = {
     helicalSystem: {
@@ -38,6 +38,15 @@ export const gearInputsData = {
     radialThickness: {
         min: 0.05,
         max: 200
+    },
+    rackBaseHeight: {
+        min: 0.05,
+        max: 300,
+        
+    },
+    rackBaseWidth: {
+        min: 0.05,
+        max: 300,  
     },
     rackLength: {
         data: ["By teeth", "Length"]
@@ -202,6 +211,7 @@ export const rackBaseHeightInputConfig = {
     inputProps: {
         ...lengthInputConfig.inputProps,
         ...baseGearInputProps.rack_base_height,
+        description: "Distance from bottom face to the teeth's root."
     },
     helpImage: "/images/gears/inputs/rack_base_height.svg",
     helpText: "Distance between the base and the bottom of the teeth."
@@ -270,9 +280,9 @@ export const getRackLengthSelector = (prefix: string = '') => createConditionalI
     {
         prefix,
         selector: {
-            name: "rack_length",
-            label: "Rack length",
-            data: [{ value: "by_teeth", label: "By number of teeth" }, { value: "by_length", label: "By distance" }],
+            name: baseGearInputProps.rack_length_selector.name,
+            label: baseGearInputProps.rack_length_selector.label,
+            data: baseGearInputProps.rack_length_selector.data,
             color: "slate.6",
             defaultValue: 'by_teeth',
         },

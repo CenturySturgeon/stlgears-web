@@ -93,6 +93,11 @@ export const baseGearInputProps = {
         label: 'Base height',
         name: "base_height"
     },
+    rack_length_selector: {
+        name: "rack_length_selector",
+        label: "Rack length",
+        data: [{ value: "by_teeth", label: "By number of teeth" }, { value: "by_length", label: "By distance" }],
+    },
     rack_width: {
         label: 'Base width',
         name: "base_width"
