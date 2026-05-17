@@ -1,3 +1,4 @@
+import { rackBaseHeightInputConfig } from "../configs/inputs/gear/inputs";
 import {
   bevelGearHoleValidations,
   gearHoleValidations,
@@ -9,6 +10,11 @@ import {
   numberOfTeethValidation,
   pressureAngleValidation,
   profileShiftValidation,
+  rackBaseHeightValidation,
+  rackBaseWidhtValidation,
+  rackLengthValidation,
+  rackNumberOfTeethValidation,
+  rackSelectorValidation,
   radialThicknessValidation,
 } from "./inputs";
 
@@ -73,4 +79,22 @@ export const straightBevelGearValidations = (pinionPrefix: string = 'pinion', wh
     ...bevelGearHoleValidations(pinionPrefix),
     ...bevelGearHoleValidations(wheelPrefix)
   };
+};
+
+export const rackValidations = (prefix: string, hasLengthSelector: boolean) => {
+  return {
+    ...moduleValidation(prefix),
+    ...pressureAngleValidation(prefix),
+    ...rackBaseHeightValidation(prefix),
+    ...rackBaseWidhtValidation(prefix),
+    ...(
+      hasLengthSelector ? {
+        ...rackSelectorValidation(prefix),
+        ...rackNumberOfTeethValidation(prefix),
+        ...rackLengthValidation(prefix),
+      } : {
+        ...numberOfTeethValidation(prefix)
+      }
+    )
+  }
 };

@@ -208,6 +208,127 @@ export const profileShiftValidation = (prefix: string = '') => {
 };
 
 
+export const rackBaseHeightValidation = (prefix: string = '') => {
+  const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
+  return {
+    [name(baseGearInputProps.rack_base_height.name)]: (value: number) => {
+
+      const required_error = required(value);
+      if (required_error) {
+        return required(value);
+      }
+
+      const range_error = inRange(
+        value,
+        gearInputsData.rackBaseHeight.min,
+        gearInputsData.rackBaseHeight.max,
+        UNITS.milimiters,
+        baseGearInputProps.length.label
+      );
+      if (range_error) {
+        return range_error;
+      }
+
+      return null;
+    },
+  }
+};
+
+
+export const rackBaseWidhtValidation = (prefix: string = '') => {
+  const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
+  return {
+    [name(baseGearInputProps.rack_width.name)]: (value: number) => {
+
+      const required_error = required(value);
+      if (required_error) {
+        return required(value);
+      }
+
+      const range_error = inRange(
+        value,
+        gearInputsData.rackBaseWidth.min,
+        gearInputsData.rackBaseWidth.max,
+        UNITS.milimiters,
+        baseGearInputProps.length.label
+      );
+      if (range_error) {
+        return range_error;
+      }
+
+      return null;
+    },
+  }
+};
+
+
+export const rackLengthValidation = (prefix: string = '') => {
+  const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
+  return {
+    [name(baseGearInputProps.length.name)]: (value: number, values: Record<string, any>) => {
+
+      if (values[name(baseGearInputProps.rack_length_selector.name)] !== "by_length") return null;
+      const range_error = inRange(
+        value,
+        gearInputsData.length.min,
+        gearInputsData.length.max,
+        UNITS.milimiters,
+        baseGearInputProps.length.label
+      );
+      if (range_error) {
+        return range_error;
+      }
+      return null;
+    },
+  }
+};
+
+
+export const rackNumberOfTeethValidation = (prefix: string = '') => {
+  const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
+  return {
+    [name(baseGearInputProps.numer_of_teeth.name)]: (value: number, values: Record<string, any>) => {
+      if (values[name(baseGearInputProps.rack_length_selector.name)] !== "by_teeth") return null;
+
+      const range_error = inRange(
+        value,
+        gearInputsData.numberOfTeeth.min,
+        gearInputsData.numberOfTeeth.max,
+        '',
+        baseGearInputProps.numer_of_teeth.label
+      );
+      if (range_error) {
+        return range_error;
+      }
+
+      return null;
+    },
+  }
+};
+
+
+export const rackSelectorValidation = (prefix: string = '') => {
+  const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
+  return {
+    [name(baseGearInputProps.rack_length_selector.name)]: (value: string) => {
+
+      const required_error = required(value);
+      if (required_error) {
+        return required(value);
+      }
+
+      // TODO unify hole selector data
+      const invalid_error = inStringSet(value, [baseGearInputProps.rack_length_selector.data[0].value, baseHoleTypeInputProps.circular.name, baseHoleTypeInputProps.hexagonal.name, baseGearInputProps.rack_length_selector.data[1].value]);
+      if (invalid_error) {
+        return invalid_error;
+      }
+
+      return null;
+    },
+  }
+};
+
+
 export const radialThicknessValidation = (prefix: string = '') => {
   const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
   return {
@@ -430,8 +551,6 @@ const createHoleValidations = (
   prefix: string = '',
   getMaxRadius: (values: Record<string, any>, nameFn: (key: string) => string) => number
 ) => {
-  const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
-
   return {
     // Validation for the selector itself
     ...holeSelectorValidation(prefix),
@@ -498,4 +617,4 @@ export const bevelGearHoleValidations = (pinioPrefix: string = 'pinion', wheelPr
     ...createHoleValidations(pinioPrefix, createBevelGearMaxRadiusGetter(true, pinioPrefix, wheelPrefix)),
     ...createHoleValidations(wheelPrefix, createBevelGearMaxRadiusGetter(false, pinioPrefix, wheelPrefix))
   };
-}
+};

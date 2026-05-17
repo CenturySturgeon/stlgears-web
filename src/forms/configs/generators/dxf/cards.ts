@@ -13,7 +13,7 @@ import {
     rackWidthInputConfig,
 } from "@/forms/configs/inputs/gear/inputs";
 import { gearAdvancedParamsFormSection, gearBaseParamsFormSection, holeTypeSelectorFormSection } from "../cardHeaders";
-import { externalGearValidations, internalGearValidations } from "@/forms/validation/gears";
+import { externalGearValidations, internalGearValidations, rackValidations } from "@/forms/validation/gears";
 
 
 export const GearCards: GearCardWithForm[] = [
@@ -75,6 +75,8 @@ export const GearCards: GearCardWithForm[] = [
 
             },
         ],
-        // validations here
+        validate: {
+            ...rackValidations('', true),
+        }
     },
 ];
