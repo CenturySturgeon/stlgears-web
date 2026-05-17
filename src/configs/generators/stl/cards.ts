@@ -20,7 +20,7 @@ import {
   rackWidthInputConfig,
   rackNumberOfTeethInputConfig,
 } from "@/configs/inputs/gear/inputs";
-import { advancedGearValidations, externalGearValidations, internalGearValidations, straightBevelGearValidations } from "@/lib/common/validations";
+import { advancedGearValidations, externalGearValidations, internalGearValidations, lengthValidation, straightBevelGearValidations } from "@/lib/common/validations";
 import { getHoleInputConfigs } from "@/configs/inputs/hole/inputs";
 import { gearAdvancedParamsFormSection, gearBaseParamsFormSection, holeTypeSelectorFormSection } from "../cardHeaders";
 
@@ -50,6 +50,7 @@ export const GearCards: GearCardWithForm[] = [
     ],
     validate: {
       ...externalGearValidations(true),
+      ...lengthValidation(''),
       ...advancedGearValidations()
     }
   },
@@ -78,6 +79,7 @@ export const GearCards: GearCardWithForm[] = [
     ],
     validate: {
       ...externalGearValidations(false),
+      ...lengthValidation(''),
       ...advancedGearValidations()
     }
   },
@@ -109,6 +111,7 @@ export const GearCards: GearCardWithForm[] = [
     ],
     validate: {
       ...externalGearValidations(false),
+      ...lengthValidation(''),
       ...advancedGearValidations()
     }
   },
@@ -130,7 +133,8 @@ export const GearCards: GearCardWithForm[] = [
       },
     ],
     validate: {
-      ...internalGearValidations(true)
+      ...internalGearValidations(true),
+      ...lengthValidation('')
     }
   },
   {
@@ -148,7 +152,8 @@ export const GearCards: GearCardWithForm[] = [
       },
     ],
     validate: {
-      ...internalGearValidations(false)
+      ...internalGearValidations(false),
+      ...lengthValidation('')
     }
   },
   {
@@ -170,7 +175,8 @@ export const GearCards: GearCardWithForm[] = [
       },
     ],
     validate: {
-      ...internalGearValidations(true)
+      ...internalGearValidations(true),
+      ...lengthValidation('')
     }
   },
   {

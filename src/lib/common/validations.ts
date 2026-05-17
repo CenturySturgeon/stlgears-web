@@ -92,7 +92,7 @@ const createAdvancedGearValidations = (prefix: string = '') => {
 };
 
 
-const createCoreGearValidations = (prefix: string = '') => {
+export const coreGearValidations = (prefix: string = '') => {
   const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
   return {
     [name(baseGearInputProps.module.name)]: (value: number) => {
@@ -162,27 +162,7 @@ const createCoreGearValidations = (prefix: string = '') => {
 const createCoreExternalGearValidations = (prefix: string = '', isHelical: boolean) => {
   const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
   return {
-    ...createCoreGearValidations(prefix),
-    [name(baseGearInputProps.length.name)]: (value: number) => {
-
-      const required_error = required(value);
-      if (required_error) {
-        return required(value);
-      }
-
-      const range_error = inRange(
-        value,
-        gearInputsData.length.min,
-        gearInputsData.length.max,
-        UNITS.milimiters,
-        baseGearInputProps.length.label
-      );
-      if (range_error) {
-        return range_error;
-      }
-
-      return null;
-    },
+    ...coreGearValidations(prefix),
     ...(
       isHelical && {
         [name(baseGearInputProps.helical_system.name)]: (value: string) => {
@@ -235,6 +215,33 @@ const createCoreExternalGearValidations = (prefix: string = '', isHelical: boole
         },
       }
     )
+  }
+};
+
+export const lengthValidation = (prefix: string = '') => {
+  const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
+  return {
+    ...coreGearValidations(prefix),
+    [name(baseGearInputProps.length.name)]: (value: number) => {
+
+      const required_error = required(value);
+      if (required_error) {
+        return required(value);
+      }
+
+      const range_error = inRange(
+        value,
+        gearInputsData.length.min,
+        gearInputsData.length.max,
+        UNITS.milimiters,
+        baseGearInputProps.length.label
+      );
+      if (range_error) {
+        return range_error;
+      }
+
+      return null;
+    },
   }
 };
 

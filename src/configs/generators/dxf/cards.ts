@@ -13,6 +13,8 @@ import {
     rackWidthInputConfig,
 } from "@/configs/inputs/gear/inputs";
 import { gearAdvancedParamsFormSection, gearBaseParamsFormSection, holeTypeSelectorFormSection } from "../cardHeaders";
+import { advancedGearValidations, coreGearValidations, internalGearValidations, straightBevelGearValidations } from "@/lib/common/validations";
+
 
 
 export const GearCards: GearCardWithForm[] = [
@@ -36,7 +38,12 @@ export const GearCards: GearCardWithForm[] = [
                     profileShiftCoefficientInputConfig,
                 ],
             },
-        ]
+        ],
+        validate: {
+            ...coreGearValidations(''),
+            // hole validations here
+            ...advancedGearValidations()
+        }
     },
     {
         ...gearCardHeaders.internal_spur,
@@ -51,7 +58,10 @@ export const GearCards: GearCardWithForm[] = [
                 ],
 
             },
-        ]
+        ],
+        validate: {
+            ...internalGearValidations(false)
+        }
     },
     {
         ...gearCardHeaders.rack,
@@ -67,6 +77,7 @@ export const GearCards: GearCardWithForm[] = [
                 ],
 
             },
-        ]
+        ],
+        // validations here
     },
 ];
