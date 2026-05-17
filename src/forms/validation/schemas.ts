@@ -27,7 +27,7 @@ const advancedGearValidations = (prefix: string = '') => {
   }
 };
 
-const externalGearValidations = (prefix: string = '', isHelical: boolean, is3D: boolean, hasAdvancedParams: boolean, hasHole: boolean = true) => {
+export const externalGearValidations = (prefix: string = '', isHelical: boolean, is3D: boolean, hasAdvancedParams: boolean = true, hasHole: boolean = true) => {
   return {
     ...coreGearValidations(prefix),
     ...(

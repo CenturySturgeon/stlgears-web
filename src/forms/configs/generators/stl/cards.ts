@@ -20,7 +20,7 @@ import {
   rackWidthInputConfig,
   rackNumberOfTeethInputConfig,
 } from "@/forms/configs/inputs/gear/inputs";
-import { advancedGearValidations, externalGearValidations, internalGearValidations, lengthValidation, straightBevelGearValidations } from "@/lib/common/validations";
+import { externalGearValidations, internalGearValidations, straightBevelGearValidations } from "@/forms/validation/schemas";
 import { getHoleInputConfigs } from "@/forms/configs/inputs/hole/inputs";
 import { gearAdvancedParamsFormSection, gearBaseParamsFormSection, holeTypeSelectorFormSection } from "../cardHeaders";
 
@@ -49,9 +49,7 @@ export const GearCards: GearCardWithForm[] = [
       },
     ],
     validate: {
-      ...externalGearValidations(true),
-      ...lengthValidation(''),
-      ...advancedGearValidations()
+      ...externalGearValidations('', true, true, true, true)
     }
   },
   {
@@ -78,9 +76,7 @@ export const GearCards: GearCardWithForm[] = [
       },
     ],
     validate: {
-      ...externalGearValidations(false),
-      ...lengthValidation(''),
-      ...advancedGearValidations()
+      ...externalGearValidations('', false, true, true, true)
     }
   },
   {
@@ -110,9 +106,7 @@ export const GearCards: GearCardWithForm[] = [
       },
     ],
     validate: {
-      ...externalGearValidations(false),
-      ...lengthValidation(''),
-      ...advancedGearValidations()
+      ...externalGearValidations('', true, true, true, true)
     }
   },
   {
@@ -133,8 +127,7 @@ export const GearCards: GearCardWithForm[] = [
       },
     ],
     validate: {
-      ...internalGearValidations(true),
-      ...lengthValidation('')
+      ...internalGearValidations('', true, true)
     }
   },
   {
@@ -152,8 +145,7 @@ export const GearCards: GearCardWithForm[] = [
       },
     ],
     validate: {
-      ...internalGearValidations(false),
-      ...lengthValidation('')
+      ...internalGearValidations('', false, true)
     }
   },
   {
@@ -175,8 +167,7 @@ export const GearCards: GearCardWithForm[] = [
       },
     ],
     validate: {
-      ...internalGearValidations(true),
-      ...lengthValidation('')
+      ...internalGearValidations('', true, true)
     }
   },
   {
