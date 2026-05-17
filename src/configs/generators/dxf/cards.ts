@@ -1,14 +1,13 @@
 import { GearCardWithForm } from "@/types/gearCards";
 import { gearCardHeaders } from "@/configs/generators/cardHeaders"
 import {
+    getRackLengthSelector,
     moduleInputConfig,
     numberOfTeethInputConfig,
     pressureAngleInputConfig,
     profileShiftCoefficientInputConfig,
     rackBaseHeightInputConfig,
-    rackLengthInputConfig,
     rackModuleInputConfig,
-    rackNumberOfTeethInputConfig,
     rackPressureAngleInputConfig,
     radialThicknessInputConfig,
     rackWidthInputConfig,
@@ -61,11 +60,10 @@ export const GearCards: GearCardWithForm[] = [
                 ...gearBaseParamsFormSection,
                 inputs: [
                     rackModuleInputConfig,
-                    rackNumberOfTeethInputConfig,
                     rackPressureAngleInputConfig,
-                    rackLengthInputConfig,
                     rackWidthInputConfig,
-                    rackBaseHeightInputConfig
+                    rackBaseHeightInputConfig,
+                    ...getRackLengthSelector(''),
                 ],
 
             },

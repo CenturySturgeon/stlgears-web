@@ -14,12 +14,11 @@ import {
   pressureAngleInputConfig,
   profileShiftCoefficientInputConfig,
   rackBaseHeightInputConfig,
-  rackLengthInputConfig,
   rackModuleInputConfig,
-  rackNumberOfTeethInputConfig,
   rackPressureAngleInputConfig,
   radialThicknessInputConfig,
   rackWidthInputConfig,
+  rackNumberOfTeethInputConfig,
 } from "@/configs/inputs/gear/inputs";
 import { advancedGearValidations, externalGearValidations, internalGearValidations, straightBevelGearValidations } from "@/lib/common/validations";
 import { getHoleInputConfigs } from "@/configs/inputs/hole/inputs";
@@ -181,11 +180,10 @@ export const GearCards: GearCardWithForm[] = [
         ...gearBaseParamsFormSection,
         inputs: [
           rackModuleInputConfig,
-          rackNumberOfTeethInputConfig,
           rackPressureAngleInputConfig,
-          rackLengthInputConfig,
           rackWidthInputConfig,
-          rackBaseHeightInputConfig
+          rackBaseHeightInputConfig,
+          rackNumberOfTeethInputConfig
         ],
 
       },

@@ -2,7 +2,7 @@ import { NumberInput } from "@mantine/core"
 import { InputConfig } from "@/types/inputConfigs";
 import LabeledSegmentedControl from "@/components/Form/Inputs/LabeledSegmentedControl/LabeledSegmentedControl"
 import { UNITS } from "@/lib/common/constants";
-import { baseGearInputProps, genericAngleInputConfig, genericDistanceInputConfig, genericNumericInputConfig } from "../base";
+import { baseGearInputProps, createConditionalInputConfigs, genericAngleInputConfig, genericDistanceInputConfig, genericNumericInputConfig } from "@/configs/inputs/base";
 
 export const gearInputsData = {
     helicalSystem: {
@@ -209,6 +209,10 @@ export const rackBaseHeightInputConfig = {
 
 export const rackLengthInputConfig = {
     ...lengthInputConfig,
+    inputProps: {
+        ...lengthInputConfig.inputProps,
+        description: "Rack's length determines number of teeth."
+    },
     helpImage: "/images/gears/inputs/rack_length.svg",
     helpText: "The rack's total number of teeth is in function of the length its base."
 }
@@ -221,6 +225,10 @@ export const rackModuleInputConfig = {
 
 export const rackNumberOfTeethInputConfig = {
     ...numberOfTeethInputConfig,
+    inputProps: {
+        ...numberOfTeethInputConfig.inputProps,
+        description: "Rack's length is determined by number of teeth."
+    },
     helpImage: "/images/gears/inputs/rack_length.svg",
     helpText: "The rack's length is defined by the number of teeth."
 }
@@ -236,6 +244,7 @@ export const rackWidthInputConfig = {
     inputProps: {
         ...lengthInputConfig.inputProps,
         ...baseGearInputProps.rack_width,
+        description: "Thickness of the rack's base."
     },
     helpImage: "/images/gears/inputs/rack_width.svg",
     helpText: "Width of the rack\'s base."
@@ -257,3 +266,29 @@ export const radialThicknessInputConfig = {
     helpText: "Distance between the root diameter (closest to the cylindrical face) and the outer diameter.",
 };
 
+export const getRackLengthSelector = (prefix: string = '') => createConditionalInputConfigs(
+    {
+        prefix,
+        selector: {
+            name: "rack_length",
+            label: "Rack length",
+            data: [{ value: "by_teeth", label: "By number of teeth" }, { value: "by_length", label: "By distance" }],
+            color: "slate.6",
+            defaultValue: 'by_teeth',
+        },
+        inputs: [
+            {
+                config: {
+                    ...rackNumberOfTeethInputConfig
+                },
+                showWhenValue: "by_teeth",
+            },
+            {
+                config: {
+                    ...rackLengthInputConfig
+                },
+                showWhenValue: "by_length",
+            },
+        ],
+    }
+);
