@@ -5,14 +5,14 @@ import { baseGearInputProps, baseHoleInputProps, baseHoleTypeInputProps } from "
 
 function degToRad(degrees: number) {
   return degrees * (Math.PI / 180);
-}
+};
 
 
 function getPolygonApothem(gearPolygonRadius: number, gearPolygonNumberOfVertices: number) {
   let centralAngle = 2 * Math.PI / gearPolygonNumberOfVertices;
   let apothem = gearPolygonRadius * Math.cos(centralAngle / 2);
   return apothem;
-}
+};
 
 
 function getGearPolygonRadius(module: number, numberOfTeeth: number, profileShiftCoefficient: number, helixAngle: number = 0) {
@@ -25,7 +25,7 @@ function getGearPolygonRadius(module: number, numberOfTeeth: number, profileShif
 
   const polygonRadius = (transverseRootDiameter / 2) - 0.5;
   return polygonRadius;
-}
+};
 
 
 const getBevelGearMaxRadius = (module: number, numberOfTeeth: number, numberOfTeethPartner: number,): number => {
@@ -37,7 +37,7 @@ const getBevelGearMaxRadius = (module: number, numberOfTeeth: number, numberOfTe
 function getKeywayTotalRadius(keyWidth: number, boreDiameter: number, boreDiameterPlusKeyHeight: number) {
   const boreRadius = boreDiameter / 2;
   return Math.sqrt(((boreDiameterPlusKeyHeight - boreRadius) ** 2) + (keyWidth ** 2));
-}
+};
 
 
 function inRange(value: number, min: number, max: number, unit: string, fieldLabel: string = "This field") {
@@ -45,7 +45,7 @@ function inRange(value: number, min: number, max: number, unit: string, fieldLab
     return `${fieldLabel} must be in range [${min}${unit}, ${max}${unit}].`;
   }
   return null;
-}
+};
 
 
 // Required field validator
@@ -54,7 +54,7 @@ function required(value: string | number, message: string = "This field is requi
     return message;
   }
   return null;
-}
+};
 
 
 function inStringSet(value: string, set: string[] = [], message: string = "Value is not in allowed list.") {
@@ -62,7 +62,34 @@ function inStringSet(value: string, set: string[] = [], message: string = "Value
     return message;
   }
   return null;
-}
+};
+
+
+const createAdvancedGearValidations = (prefix: string = '') => {
+  const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
+  return {
+
+    [name(baseGearInputProps.profile_shift_coefficient.name)]: (value: number) => {
+
+      const required_error = required(value);
+      if (required_error) {
+        return required(value);
+      }
+
+      const range_error = inRange(
+        value,
+        gearInputsData.profileShiftCoefficient.min,
+        gearInputsData.profileShiftCoefficient.max,
+        '',
+        baseGearInputProps.profile_shift_coefficient.label
+      );
+      if (range_error) {
+        return range_error;
+      }
+      return null;
+    },
+  }
+};
 
 
 const createCoreGearValidations = (prefix: string = '') => {
@@ -129,33 +156,7 @@ const createCoreGearValidations = (prefix: string = '') => {
       return null;
     },
   }
-}
-
-const createAdvancedGearValidations = (prefix: string = '') => {
-  const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
-  return {
-
-    [name(baseGearInputProps.profile_shift_coefficient.name)]: (value: number) => {
-
-      const required_error = required(value);
-      if (required_error) {
-        return required(value);
-      }
-
-      const range_error = inRange(
-        value,
-        gearInputsData.profileShiftCoefficient.min,
-        gearInputsData.profileShiftCoefficient.max,
-        '',
-        baseGearInputProps.profile_shift_coefficient.label
-      );
-      if (range_error) {
-        return range_error;
-      }
-      return null;
-    },
-  }
-}
+};
 
 
 const createCoreExternalGearValidations = (prefix: string = '', isHelical: boolean) => {
@@ -235,7 +236,35 @@ const createCoreExternalGearValidations = (prefix: string = '', isHelical: boole
       }
     )
   }
-}
+};
+
+
+const createCoreInternalGearValidations = (prefix: string = '', isHelical: boolean) => {
+  const name = (key: string) => prefix ? `${prefix.toLowerCase()}_${key}` : key;
+  return {
+    ...createCoreExternalGearValidations(prefix, isHelical),
+    [name(baseGearInputProps.radial_thickness.name)]: (value: number) => {
+
+      const required_error = required(value);
+      if (required_error) {
+        return required(value);
+      }
+
+      const range_error = inRange(
+        value,
+        gearInputsData.radialThickness.min,
+        gearInputsData.radialThickness.max,
+        UNITS.milimiters,
+        baseGearInputProps.radial_thickness.label
+      );
+      if (range_error) {
+        return range_error;
+      }
+
+      return null;
+    },
+  }
+};
 
 
 const createHoleValidations = (
@@ -454,6 +483,11 @@ export const externalGearValidations = (isHelical: boolean) => {
   }
 };
 
+export const internalGearValidations = (isHelical: boolean) => {
+  return {
+    ...createCoreInternalGearValidations('', isHelical),
+  }
+};
 
 export const advancedGearValidations = () => {
   return {
