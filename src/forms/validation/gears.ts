@@ -10,7 +10,7 @@ import {
   pressureAngleValidation,
   profileShiftValidation,
   radialThicknessValidation,
-} from "./input";
+} from "./inputs";
 
 
 const coreGearValidations = (prefix: string = '') => {

@@ -20,7 +20,7 @@ import {
   rackWidthInputConfig,
   rackNumberOfTeethInputConfig,
 } from "@/forms/configs/inputs/gear/inputs";
-import { externalGearValidations, internalGearValidations, straightBevelGearValidations } from "@/forms/validation/schemas";
+import { externalGearValidations, internalGearValidations, straightBevelGearValidations } from "@/forms/validation/gears";
 import { getHoleInputConfigs } from "@/forms/configs/inputs/hole/inputs";
 import { gearAdvancedParamsFormSection, gearBaseParamsFormSection, holeTypeSelectorFormSection } from "../cardHeaders";
 
