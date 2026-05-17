@@ -20,7 +20,7 @@ import {
   rackWidthInputConfig,
   rackNumberOfTeethInputConfig,
 } from "@/forms/configs/inputs/gear/inputs";
-import { externalGearValidations, internalGearValidations, straightBevelGearValidations } from "@/forms/validation/gears";
+import { externalGearValidations, internalGearValidations, rackValidations, straightBevelGearValidations } from "@/forms/validation/gears";
 import { getHoleInputConfigs } from "@/forms/configs/inputs/hole/inputs";
 import { gearAdvancedParamsFormSection, gearBaseParamsFormSection, holeTypeSelectorFormSection } from "../cardHeaders";
 
@@ -184,7 +184,10 @@ export const GearCards: GearCardWithForm[] = [
         ],
 
       },
-    ]
+    ],
+    validate: {
+      ...rackValidations('', false)
+    }
   },
   {
     ...gearCardHeaders.straight_bevel,
