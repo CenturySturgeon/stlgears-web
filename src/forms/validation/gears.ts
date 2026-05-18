@@ -1,4 +1,3 @@
-import { rackBaseHeightInputConfig } from "../configs/inputs/gear/inputs";
 import {
   bevelGearHoleValidations,
   gearHoleValidations,
