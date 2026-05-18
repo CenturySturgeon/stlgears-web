@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { SITE_CONFIG } from '@/config';
 import { Box, Button, Burger, Container, Drawer, Group, Image, Menu, NavLink, Text, UnstyledButton, rem, ActionIcon, useComputedColorScheme, useMantineColorScheme } from '@mantine/core';
+import { Divider } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconChevronDown, IconHome, IconTools, IconBook, IconInfoCircle, IconNews, IconMoon, IconSun } from '@tabler/icons-react';
 
@@ -98,6 +99,7 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
                 <Menu.Item component={Link} href="/theory/equations">
                   Equations
                 </Menu.Item>
+                <Menu.Divider /> 
                 {theoryLinks.length > 0 ? (
                   theoryLinks.map((link) => (
                     <Menu.Item key={link.href} component={Link} href={link.href}>
@@ -212,6 +214,7 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
             label="Equations"
             onClick={toggle}
           />
+          <Divider my="xs"/>
           {theoryLinks.map((link) => (
             <NavLink
               key={link.href}
