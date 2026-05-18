@@ -92,6 +92,9 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
                 </UnstyledButton>
               </Menu.Target>
               <Menu.Dropdown>
+                <Menu.Item component={Link} href="/theory/all">
+                  All
+                </Menu.Item>
                 <Menu.Item component={Link} href="/theory/equations">
                   Equations
                 </Menu.Item>
@@ -197,6 +200,12 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
           leftSection={<IconBook size={20} />}
           childrenOffset={28}
         >
+          <NavLink
+            component={Link}
+            href="/theory/all"
+            label="All"
+            onClick={toggle}
+          />
           <NavLink
             component={Link}
             href="/theory/equations"
