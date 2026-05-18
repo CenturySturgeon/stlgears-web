@@ -8,6 +8,8 @@ import { AppShell, AppShellHeader, AppShellMain, ColorSchemeScript, createTheme,
 import { Header } from "@/components/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
 import { getTheoryNavigation } from '@/lib/markdown';
+import { GoogleAnalytics } from '@next/third-parties/google';
+
 
 // Font families
 const jakarta = Plus_Jakarta_Sans({
@@ -62,11 +64,27 @@ export default function RootLayout({
 }>) {
   // Fetch sorted links on the server
   const theoryLinks = getTheoryNavigation();
+  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <ColorSchemeScript />
+        {/* Google Analytics 4 */}
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
+            `,
+          }}
+        />
       </head>
       <body>
         <MantineProvider theme={theme}>
@@ -74,7 +92,7 @@ export default function RootLayout({
             header={{ height: 60 }}
           >
             <AppShellHeader>
-              <Header theoryLinks={theoryLinks}/>
+              <Header theoryLinks={theoryLinks} />
             </AppShellHeader>
 
             <AppShellMain style={{
@@ -89,6 +107,7 @@ export default function RootLayout({
             </AppShellMain>
           </AppShell>
         </MantineProvider>
+        {gaId && <GoogleAnalytics gaId={gaId} />}
       </body>
     </html>
   );
