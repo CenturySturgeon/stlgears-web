@@ -16,12 +16,12 @@ interface EquationProps {
 
 export default function EquationBlock({ number, name, formula, description, copyText }: EquationProps) {
   return (
-    <Box 
-      my="xl" 
-      p="md" 
-      style={{ 
-        borderRadius: 'var(--mantine-radius-md)', 
-        border: '1px solid var(--mantine-color-slate-3)' 
+    <Box
+      my="xl"
+      p="md"
+      style={{
+        borderRadius: 'var(--mantine-radius-md)',
+        border: '1px solid var(--mantine-color-slate-3)'
       }}
     >
       <Group align="flex-start" justify="space-between">
@@ -29,7 +29,7 @@ export default function EquationBlock({ number, name, formula, description, copy
           <Text size="sm" c="dimmed" mb="xs" fw={500}>
             [ {number} ] {name}
           </Text>
-          
+
           <Tooltip label={description} multiline w={300} withArrow position="bottom-start">
             <Box style={{ cursor: 'help' }}>
               <ReactMarkdown
@@ -45,9 +45,9 @@ export default function EquationBlock({ number, name, formula, description, copy
         <CopyButton value={copyText} timeout={2000}>
           {({ copied, copy }) => (
             <Tooltip label={copied ? 'Copied!' : 'Copy'} withArrow position="left">
-              <ActionIcon 
-                color={copied ? 'teal' : 'logoBlue'} 
-                variant="subtle" 
+              <ActionIcon
+                color={copied ? 'teal' : 'logoBlue'}
+                variant="subtle"
                 onClick={copy}
                 aria-label="Copy equation"
               >
