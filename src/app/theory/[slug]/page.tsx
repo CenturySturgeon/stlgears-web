@@ -92,7 +92,7 @@ export default async function TheoryPage({
                     border: '1px solid var(--mantine-color-gray-3)',
                     maxWidth: '100%',
                     maxHeight: '40vh',
-                    backgroundColor: 'var(--mantine-color-body)'
+                    backgroundColor: 'white'
                   }}
                   {...props}
                 />
