@@ -1,7 +1,7 @@
 ---
 title: 'Gear design in a hurry'
 description: 'Learn the most widely used concepts!'
-order: 1
+order: 99
 ---
 
 ### Module
