@@ -4,7 +4,7 @@ description: 'Learn the most widely used concepts!'
 order: 1
 ---
 
-## Module
+### Module
 
 The **module** controls the size of the teeth, and thus, the size of the gear. Overall, the impact of the module on gear design can be summarized as follows:
 
@@ -17,7 +17,7 @@ In the image above, the **black** dashed line represents the root circumference 
 - The pitch circle is where the teeth make contact when two gear's pitch circles are tangent.
 
 
-## Pressure angle
+### Pressure angle
 
 The pressure angle affects the load capacity, the efficiency and the transmission error of a gear system. A higher pressure angle generally results in a stronger, more efficient and more accurate transmission, but also in higher friction and noise. In practice, a pressure angle of 20° to 25° is commonly used for gears.
 
@@ -27,7 +27,7 @@ The pressure angle affects the load capacity, the efficiency and the transmissio
 
 With an increase in pressure angle, the teeth become sharper. This, in turn, influences the minimum number of teeth required, as a higher pressure angle allows for fewer teeth in the gear.
 
-## Gear dimensions
+### Gear dimensions
 
 Two factors come into play when manufacturing and assembling gears together, the **addendum circle** and the **pitch circle**. The formulas for their respective diameters:
 
@@ -40,7 +40,7 @@ Two factors come into play when manufacturing and assembling gears together, the
 
 If you're planning to machine gears, the addendum circle represents the size of your material previous to the cutting. The pitch circle is just a reference for assembling gears together.
 
-## Gear meshing
+### Gear meshing
 
 When assembling gears together, the distance between centers is derived from the position they take when their pitch circles are tangent. For external gears, the distance follows the expresion:
 
@@ -54,7 +54,7 @@ And for internal gears:
 
 ![Distance between centers for an external and ring gear pair.](../../public/images/theory/internal_center_distance.svg)
 
-## Gear pairs
+### Gear pairs
 
 For gear pairs, the principles of the transmission between them can be expressed as follows:
 
