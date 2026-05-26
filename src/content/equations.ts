@@ -127,19 +127,19 @@ export const EQUATIONS = {
     description: "The tooth thickness, expressed as an angle, at a given radius.",
     copyText: 'angular_tooth_thickness_at_radius = tooth_thickness_at_radius / radius'
   },
+  transmissionRatio: {
+    number: 19,
+    name: "Transmission ratio in a gear mesh.",
+    formula: 'i = \\frac{\\omega_{Driving}}{\\omega_{Driven}} = \\frac{T_{Driven}}{T_{Driving}} = \\frac{z_{Driven}}{z_{Driving}}',
+    description: 'General equation to determining the torque|speed ratio between the input and output of a gear mesh.',
+    copyText: 'i = (driving_gear_rotational_speed / driven_gear_rotational_speed), i = (driven_gear_torque / driving_gear_torque), i = (n'
+  },
   // internalGearDistanceBetweenCenters: {
   //   number: 6,
   //   name: "Distance between centers for an external and ring gear pair.",
   //   formula: 'C = \\frac{d_{ring} - d_{external}}{2}',
   //   description: 'The distance between the centers of an external and ring gear pair when their pitch circles are tangent.',
   //   copyText: 'C = (pitch_diameter_internal_gear - pitch_diameter_external_gear) / 2'
-  // },
-  // transmissionRatio: {
-  //   number: 7,
-  //   name: "Transmission ratio in a gear mesh.",
-  //   formula: 'i = \\frac{\\omega_{Driving}}{\\omega_{Driven}} = \\frac{T_{Driven}}{T_{Driving}} = \\frac{z_{Driven}}{z_{Driving}}',
-  //   description: 'General equation to determining the torque|speed ratio between the input and output of a gear mesh.',
-  //   copyText: 'i = (driving_gear_rotational_speed / driven_gear_rotational_speed), i = (driven_gear_torque / driving_gear_torque), i = (n'
   // },
 } as const;
 
