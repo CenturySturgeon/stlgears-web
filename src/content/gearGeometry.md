@@ -100,7 +100,7 @@ This expression allows to eassily rotate the involute, if you're insterested in 
 
 - **Note**: If the sigma value makes you uncomfortable, you can remove it and use a rotation matrix instead.
 
-While the length of the involute curve is typically not a critical factor in most CAD software, it can be useful to control it. In such cases, parameter 't' in the equations [{{eq:involuteXAxis.number}}], [{{eq:involuteYAxis.number}}], can be used to set the length of the curve (say, to make it stop at the addendum radius).
+While the length of the involute curve is typically not a critical factor in most CAD software, it can be useful to control it. In such cases, parameter 't' in the equations [{{eq:involuteXAxis.index}}], [{{eq:involuteYAxis.index}}], can be used to set the length of the curve (say, to make it stop at the addendum radius).
 
 ![Involute roll angle](../../public/images/theory/involute_roll_angle.svg)
 

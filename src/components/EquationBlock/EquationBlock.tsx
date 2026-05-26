@@ -7,14 +7,14 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
 interface EquationProps {
-  number: number;
+  index: number;
   name: string,
   formula: string;
   description: string;
   copyText: string;
 }
 
-export default function EquationBlock({ number, name, formula, description, copyText }: EquationProps) {
+export default function EquationBlock({ index, name, formula, description, copyText }: EquationProps) {
   return (
     <Box
       my="xl"
@@ -27,7 +27,7 @@ export default function EquationBlock({ number, name, formula, description, copy
       <Group align="flex-start" justify="space-between">
         <Box>
           <Text size="sm" c="dimmed" mb="xs" fw={500}>
-            [ {number} ] {name}
+            [ {index} ] {name}
           </Text>
 
           <Tooltip label={description} multiline w={300} withArrow position="bottom-start">

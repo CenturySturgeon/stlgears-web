@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function EquationsPage() {
     // Convert the EQUATIONS object into an array and sort it by the equation number
-    const equationsList = Object.values(EQUATIONS).sort((a, b) => a.number - b.number);
+    const equationsList = Object.values(EQUATIONS).sort((a, b) => a.index - b.index);
 
     return (
         <Container size="md" py="xl">
@@ -26,8 +26,8 @@ export default function EquationsPage() {
             <Box>
                 {equationsList.map((eq) => (
                     <EquationBlock
-                        key={eq.number}
-                        number={eq.number}
+                        key={eq.index}
+                        index={eq.index}
                         name={eq.name}
                         formula={eq.formula}
                         description={eq.description}
