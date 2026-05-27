@@ -8,7 +8,7 @@ const rawFigures = {
         path: "/images/theory/lever_array.svg"
     },
     leverArraysWithForces: {
-        description: "Simplified version of figure [{{fig:leversArray.index}}] shown as two levers in contact",
+        description: "Simplified version of Figure {{fig:leverArrays.index}} shown as two levers in contact",
         path: "/images/theory/lever_array_wforces.svg"
     },
     tangentialDisks: {
