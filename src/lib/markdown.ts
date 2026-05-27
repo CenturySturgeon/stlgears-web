@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { EQUATIONS, EquationId } from '@/content/equations';
+import { FIGURES } from '@/content/figures';
 
 const contentDirectory = path.join(process.cwd(), 'src/content');
 
@@ -14,13 +15,25 @@ export async function getMarkdownData(slug: string) {
 
   /**
    * 1. Image Path Normalization
-   * Converts ![] (../../public/images/img.png) -> ![](/images/img.png)
-   * This makes images work in both VS Code and the browser.
    */
-  processedContent = processedContent.replace(
-    /!\[(.*?)\]\(\.\.\/\.\.\/public(.*?)\)/g,
-    '![$1]($2)'
-  );
+  processedContent = processedContent
+    // 1. Replace {{fig:id.property}} with the property value
+    .replace(/\{\{fig:([^}.]+)\.([^}]+)\}\}/g, (match, id, property) => {
+      const fig = FIGURES[id as keyof typeof FIGURES];
+      return fig ? String((fig as any)[property]) : match;
+    })
+    // 2. Replace {{fig:id}} with markdown image syntax
+    .replace(/\{\{fig:([^}]+)\}\}/g, (match, id) => {
+      const fig = FIGURES[id as keyof typeof FIGURES];
+      if (!fig) return match;
+      // Use the raw path (../../public/...) for VS Code preview
+      return `![${fig.description}](${fig.path})`;
+    })
+    // 3. Normalize paths (existing)
+    .replace(
+      /!\[(.*?)\]\(\.\.\/\.\.\/public(.*?)\)/g,
+      '![$1]($2)'
+    )
 
   /**
    * 2. Equation System
