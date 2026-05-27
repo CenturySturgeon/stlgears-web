@@ -5,9 +5,10 @@ import 'katex/dist/katex.min.css';
 
 import type { Metadata } from "next";
 import { notFound } from 'next/navigation';
+import { FIGURES } from '@/content/figures';
 import { getMarkdownData } from '@/lib/markdown';
 import { Container, Title, Text, Anchor, Code, Box, Image } from '@mantine/core';
-
+import FigureBlock from '@/components/FigureBlock/FigureBlock';
 import EquationBlock from '@/components/EquationBlock/EquationBlock';
 
 export async function generateMetadata({
@@ -81,35 +82,51 @@ export default async function TheoryPage({
 
             a: ({ node, ...props }) => <Anchor c="logoBlue.6" underline="hover" {...props} />,
 
-            img: ({ node, src, alt, ...props }) => (
-              <Box my="xl" component="span" style={{ display: 'block' }}>
-                <Image
-                  src={src}
-                  alt={alt}
-                  radius="md"
-                  fit="contain"
-                  style={{
-                    border: '1px solid var(--mantine-color-gray-3)',
-                    maxWidth: '100%',
-                    maxHeight: '40vh',
-                    backgroundColor: 'white'
-                  }}
-                  {...props}
-                />
-                {alt && (
-                  <Text
-                    component="span"
-                    c="dimmed"
-                    size="xs"
-                    ta="center"
-                    mt="xs"
-                    style={{ fontStyle: 'italic', display: 'block' }}
-                  >
-                    {alt}
-                  </Text>
-                )}
-              </Box>
-            ),
+            img: ({ node, src, alt, ...props }) => {
+              // Find the figure by matching the absolute path
+              const figure = Object.values(FIGURES).find((fig) => fig.path === src);
+
+              if (figure) {
+                return (
+                  <FigureBlock
+                    index={figure.index}
+                    description={figure.description}
+                    path={figure.path}
+                  />
+                );
+              }
+
+              // Fallback for non figure images (e.g., non registered images in figures.ts or external urls)
+              return (
+                <Box my="xl" component="span" style={{ display: 'block' }}>
+                  <Image
+                    src={src}
+                    alt={alt}
+                    radius="md"
+                    fit="contain"
+                    style={{
+                      border: '1px solid var(--mantine-color-gray-3)',
+                      maxWidth: '100%',
+                      maxHeight: '40vh',
+                      backgroundColor: 'white',
+                    }}
+                    {...props}
+                  />
+                  {alt && (
+                    <Text
+                      component="span"
+                      c="dimmed"
+                      size="xs"
+                      ta="center"
+                      mt="xs"
+                      style={{ fontStyle: 'italic', display: 'block' }}
+                    >
+                      {alt}
+                    </Text>
+                  )}
+                </Box>
+              );
+            },
 
             blockquote: ({ node, children, ...props }) => (
               <Box
