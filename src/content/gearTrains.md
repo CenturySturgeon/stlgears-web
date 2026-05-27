@@ -39,7 +39,7 @@ Before you dive into this sections, there are some core concepts you need to be 
 
 Simplifying the visualization of gears as circles in contact comes very handy when understanding their power and speed transmission.
 
-In a system of two tangent disks without slipping, as shown in image <TODO link to image 4>, the ratio of the diameters of both disks determines the relationship of their rotations. This relationship is called the transmission ratio, which can be expressed as:
+In a system of two tangent disks without slipping, as shown in figure {{fig:tangentialDisks.index}}, the ratio of the diameters of both disks determines the relationship of their rotations. This relationship is called the transmission ratio, which can be expressed as:
 
 $$
 i = \frac{Driven}{Driving}
@@ -74,7 +74,7 @@ Where $$T$$ is the torque.
 
 From these two equations, you can easily infer that the **speed is inversely proportional to the torque**. Meaning that if the speed goes up the torque must go down, which is what the following figure tries to display.
 
-![Transmission relationships in a gear mesh](../../public/images/theory/transmission_mesh.svg)
+![{{fig:transmissionRatioRelationships.description}}](../../public/images/theory/transmission_mesh.svg)
 
 In the image above, if the gray gear is driving the speed increases while the torque decreases (left arrows). The opposite happens if the blue gear drives the system.
 
@@ -96,7 +96,7 @@ Where $$\omega$$ is the rotational speed, $$T$$ is the torque, and $$z$$ is the 
 
 - **Remember**: For two gears to mesh, they need to share the same module and pressure angle.
 
-Using Image <TODO refer to image 16> as an example, if the left gear has 40 teeth and the right gear has 20 teeth, the transmission ratio could be 2:1 or 1:2, depending on which gear is the driving gear. 
+Using figure {{fig:transmissionRatioRelationships.index}} as an example, if the left gear has 40 teeth and the right gear has 20 teeth, the transmission ratio could be 2:1 or 1:2, depending on which gear is the driving gear. 
 
 - **If the smaller gear drives**, **the torque will increase** but the speed will decrease by the ratio.
 
@@ -106,9 +106,9 @@ Using Image <TODO refer to image 16> as an example, if the left gear has 40 teet
 
 Gear trains are mechanisms where two or more gear arrangements are put to work. There are two types: simple and compund gear trains. Simple gear trains are those where all the gears are aligned alongside each other as represented in the following image:
 
-![Simple gear train](../../public/images/theory/linear_gear_train.svg)
+![{{fig:gearTrain.description}}](../../public/images/theory/linear_gear_train.svg)
 
-The calculations for the transmission ratio in **simple gear trains** are very straightforward since **only the first and last gear matter**. For example, in image <TODO refer to image 17>, if gear #1 drives the system, what is the transmission ratio at gear #4 ? 
+The calculations for the transmission ratio in **simple gear trains** are very straightforward since **only the first and last gear matter**. For example, in figure {{fig:gearTrain.index}}, if gear #1 drives the system, what is the transmission ratio at gear #4 ? 
 The gray gears have 40 teeth each, and the dark blue gears have 20 teeth each.
 
 Using the general expression for the transmission ratio in a gear pair:
@@ -138,9 +138,9 @@ This proves that the transmission ratio is only affected by the first and last g
 
 Compound gear trains consist of gear pairs where the output gear drives the input gear of the next stage. Commonly, they are used to increase or decrease the speed or torque of a system.
 
-![Compound gear train](../../public/images/theory/compound_gear_train.svg)
+![{{fig:compoundGearTrain.description}}](../../public/images/theory/compound_gear_train.svg)
 
-Image <TODO reference image above> shows a compound gear train, where gears 1 and 4 have 40 teeth, and gears 2 and 3 have 20 teeth and are concentric. If gear 1 rotates at a speed of 10 rpm, what is the speed of gear 4?
+Figure {{fig:compoundGearTrain.index}} shows a compound gear train, where gears 1 and 4 have 40 teeth, and gears 2 and 3 have 20 teeth and are concentric. If gear 1 rotates at a speed of 10 rpm, what is the speed of gear 4?
 
 The transmission ratio is determined by the number of teeth on each gear, as given by the following expression:
 
@@ -164,9 +164,9 @@ This means that gear 4 is rotating at the same speed as gear 1, and the same is 
 
 - **Remember**: Torque is inversely proportional to speed. If the speed triples, the torque decreases to a third, if the speed stays the same so does the torque.
 
-Another example, in image <TODO reference img below>, the configuration for the gear train changes. If gear 1 is driving the system, what would be the transmission ratio at gear 4 ?
+Another example, in figure {{fig:reducerTrain.index}}, the configuration for the gear train changes. If gear 1 is driving the system, what would be the transmission ratio at gear 4 ?
 
-![Compound gear train: reducer](../../public/images/theory/compound_gear_train_reducer.svg)
+![{{fig:reducerTrain.description}}](../../public/images/theory/compound_gear_train_reducer.svg)
 
 Using the general expression for the transmission ratio in a gear pair:
 

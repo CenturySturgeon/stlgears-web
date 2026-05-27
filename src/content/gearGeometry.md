@@ -138,7 +138,7 @@ While the geometry of teeth have been discussed in the involute and rack geometr
 - **Note**: $$T_{ty}$$ represents an arc length, *not an angle*.
     - Unlike angles, which are measured in degrees or radians, arc lengths represent the distance along a curved path.
 
-The tooth thickness at an arbitrary radius, represented by the symbol , is illustrated in Figure {{fig:toothThicknessAtRadius.index}}. Which can be calculated using the following expression:
+The tooth thickness at an arbitrary radius, represented by the symbol , is illustrated in figure {{fig:toothThicknessAtRadius.index}}. Which can be calculated using the following expression:
 
 {{eq:toothThickness}}
 

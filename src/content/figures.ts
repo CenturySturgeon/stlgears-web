@@ -20,7 +20,7 @@ const rawFigures = {
         path: "/images/theory/gear_with_radii.svg",
     },
     gearMesh: {
-        description: "Simple two-gear mesh",
+        description: "Simple two gear mesh",
         path: "/images/theory/gear_mesh.svg",
     },
     rackToothGeometry: {
@@ -58,6 +58,22 @@ const rawFigures = {
     angularToothThicknessAtRadius: {
         description: "Angular tooth thickness at an arbitrary radius",
         path: "/images/theory/tooth_thickness_angle.svg",
+    },
+    transmissionRatioRelationships: {
+        description: "Transmission relationships in a two gear mesh",
+        path: "/images/theory/transmission_mesh.svg",
+    },
+    gearTrain: {
+        description: "Simple gear train",
+        path: "/images/theory/linear_gear_train.svg",
+    },
+    compoundGearTrain: {
+        description: "Compound gear train",
+        path: "/images/theory/compound_gear_train.svg"
+    },
+    reducerTrain: {
+        description: "Compound gear train reducer",
+        path: "/images/theory/compound_gear_train_reducer.svg",
     }
 }
 
