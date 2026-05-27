@@ -74,6 +74,14 @@ const rawFigures = {
     reducerTrain: {
         description: "Compound gear train reducer",
         path: "/images/theory/compound_gear_train_reducer.svg",
+    },
+    gearWithHelix: {
+        description: "Helix representation in a 2D gear",
+        path: "/images/theory/gear_with_helix.svg",
+    },
+    helixAngle: {
+        description: "Helix angle in a gear with a single tooth",
+        path: "/images/theory/helix_angle.svg"
     }
 }
 

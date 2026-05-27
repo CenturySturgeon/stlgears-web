@@ -19,7 +19,7 @@ const rawEquations = {
   },
   rootDiameter: {
     name: "Root Diameter",
-    formula: 'd_a = d - 2.5m',
+    formula: 'd_f = d - 2.5m',
     description: 'The diameter measured at the root of the gear teeth.',
     copyText: 'root_diameter = pitch_diameter - 2.5 * module'
   },
@@ -113,6 +113,30 @@ const rawEquations = {
     description: 'General equation to determining the torque|speed ratio between the input and output of a gear mesh.',
     copyText: 'i = (driving_gear_rotational_speed / driven_gear_rotational_speed), i = (driven_gear_torque / driving_gear_torque), i = (n'
   },
+  gearHelixXAxis: {
+    name: "Gear helix X axis parametric equation",
+    formula: "X = \\frac{d}{2} \\cdot \\cos(t)",
+    description: "Parametric equation that controls the coordinates of the gear's helix in the X axis.",
+    copyText: "X = r * math.cos(t)"
+  },
+  gearHelixYAxis: {
+    name: "Gear helix Y axis parametric equation",
+    formula: "Y = \\frac{d}{2} \\cdot \\sin(t)",
+    description: "Parametric equation that controls the coordinates of the gear's helix in the Y axis.",
+    copyText: "X = r * math.sin(t)"
+  },
+  gearHelixZAxis: {
+    name: "Gear helix Z axis parametric equation",
+    formula: "Z = \\frac{P_h}{2 \\pi} \\cdot t",
+    description: "Parametric equation that controls the coordinates of the gear's helix in the Z axis.",
+    copyText: "Z = ((math.pi * pitch_diameter * (math.cos(t)/math.sin(t))) / (2 * math.pi)) * t"
+  },
+  gearHelixPitch: {
+    name: "Gear helix's pitch",
+    formula: "P_h = \\pi \\cdot d \\cdot  \\frac{\\cos(\\beta)}{\\sin(\\beta)}",
+    description: "Helix pitch equation for a gear.",
+    copyText: "math.pi * pitch_diameter * (math.cos(t)/math.sin(t))"
+  }
   // internalGearDistanceBetweenCenters: {
   //   name: "Distance between centers for an external and ring gear pair.",
   //   formula: 'C = \\frac{d_{ring} - d_{external}}{2}',
