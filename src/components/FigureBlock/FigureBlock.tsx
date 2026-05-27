@@ -7,14 +7,13 @@ interface FigureBlockProps {
 }
 
 export default function FigureBlock({ index, description, path }: FigureBlockProps) {
-    const normalizedPath = path.replace('../../public', ''); // For React
     return (
         <Box my="xl">
             <Text c="dimmed" size="sm" mb="xs">
                 Figure {index}
             </Text>
             <Image
-                src={normalizedPath}
+                src={path}
                 alt={description}
                 radius="md"
                 fit="contain"
