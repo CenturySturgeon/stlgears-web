@@ -99,6 +99,9 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
                 <Menu.Item component={Link} href="/theory/equations">
                   Equations
                 </Menu.Item>
+                <Menu.Item component={Link} href="/theory/figures">
+                  Figures
+                </Menu.Item>
                 <Menu.Divider /> 
                 {theoryLinks.length > 0 ? (
                   theoryLinks.map((link) => (
@@ -212,6 +215,12 @@ export function Header({ theoryLinks = [] }: { theoryLinks?: TheoryLink[] }) {
             component={Link}
             href="/theory/equations"
             label="Equations"
+            onClick={toggle}
+          />
+          <NavLink
+            component={Link}
+            href="/theory/figures"
+            label="Figures"
             onClick={toggle}
           />
           <Divider my="xs"/>
