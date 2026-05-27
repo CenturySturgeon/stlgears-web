@@ -1,27 +1,63 @@
 const rawFigures = {
     leversPrinciple: {
         description: "System in balance due to levers principle",
-        path: "/images/theory/levers_principle.svg"
+        path: "/images/theory/levers_principle.svg",
     },
     leverArrays: {
         description: "Two lever arrays in a circular configuration",
-        path: "/images/theory/lever_array.svg"
+        path: "/images/theory/lever_array.svg",
     },
     leverArraysWithForces: {
         description: "Simplified version of Figure {{fig:leverArrays.index}} shown as two levers in contact",
-        path: "/images/theory/lever_array_wforces.svg"
+        path: "/images/theory/lever_array_wforces.svg",
     },
     tangentialDisks: {
         description: "Two tangent disks horizontally aligned",
-        path: "/images/theory/tangent_disks.svg"
+        path: "/images/theory/tangent_disks.svg",
     },
     gearWithRadii: {
         description: "Gear with core radii highlithed",
-        path: "/images/theory/gear_with_radii.svg"
+        path: "/images/theory/gear_with_radii.svg",
     },
     gearMesh: {
         description: "Simple two-gear mesh",
-        path: "/images/theory/gear_mesh.svg"
+        path: "/images/theory/gear_mesh.svg",
+    },
+    rackToothGeometry: {
+        description: "Rack tooth geometry",
+        path: "/images/theory/rack_geometry.svg",
+    },
+    toothInFunctionOfModule: {
+        description: "Toot dimmensions in function of the module",
+        path: "/images/theory/graphic_module.svg",
+    },
+    toothTotalHeight: {
+        description: "Tooth total height",
+        path: "/images/theory/module_h.svg",
+    },
+    pressureAngleEffectsOnToothGeometry: {
+        description: "Pressure angle effects on tooth geometry",
+        path: "/images/theory/pressure_angles.svg",
+    },
+    involuteOfCircle: {
+        description: "Involute of a circle",
+        path: "/images/theory/involute.svg",
+    },
+    rotatedInvoluteOfACircle: {
+        description: "Involute of a circle rotated 90 degrees",
+        path: "/images/theory/90deg_involute.svg",
+    },
+    involuteRollAngle: {
+        description: "Involute roll angle",
+        path: "/images/theory/involute_roll_angle.svg",
+    },
+    toothThicknessAtRadius: {
+        description: "Tooth thickness at an arbitrary radius",
+        path: "/images/theory/tooth_thickness.svg",
+    },
+    angularToothThicknessAtRadius: {
+        description: "Angular tooth thickness at an arbitrary radius",
+        path: "/images/theory/tooth_thickness_angle.svg",
     }
 }
 

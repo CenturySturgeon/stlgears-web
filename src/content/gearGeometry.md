@@ -16,7 +16,7 @@ Understanding racks is more important than most people realize when designing ge
 
 This last example works as a preface to the following statement where *"as a gear gets larger, its teeth will resemble more and more a trapeze"*:
 
-![Rack geometry](../../public/images/theory/rack_geometry.svg)
+![{{fig:rackToothGeometry.description}}](../../public/images/theory/rack_geometry.svg)
 
 The geometry of a standart rack follows:
 
@@ -50,11 +50,11 @@ Now that you understad rack geometry basics, you're ready to deep dive into gear
 
 The module affects the size of the gear teeth, which is represented by the distance between the pitch radius and the tip of the tooth (addendum radius):
 
-![Tooth dimensions expressed by module](../../public/images/theory/graphic_module.svg)
+![{{fig:toothInFunctionOfModule.description}}](../../public/images/theory/graphic_module.svg)
 
 The image above shows the total height of the tooth, commonly known as **h** expressed in terms of the module:
 
-![Tooth total height h](../../public/images/theory/module_h.svg)
+![{{fig:toothTotalHeight.description}}](../../public/images/theory/module_h.svg)
 
 {{eq:totalToothHeight}}
 
@@ -66,7 +66,7 @@ When selecting a module size, it's important to consider the effects it will hav
 
 The pressure angle affects the load capacity, the efficiency and the tooth profile (or how 'pointy' it is). It is defined as the angle between the line of action, which is the line connecting the points of contact between two meshing gears, and a line perpendicular to the plane of rotation of the gears.
 
-![Pressure angle effects on tooth geometry](../../public/images/theory/pressure_angles.svg)
+![{{fig:pressureAngleEffectsOnToothGeometry.description}}](../../public/images/theory/pressure_angles.svg)
 
 - **Note**: The image above represents the effects of the pressure angle on tooth form for a gear with the same module and amount of teeth but they aren't scaled properly.
 
@@ -82,7 +82,7 @@ Modern gears use an involute profile to shape its teeth as it rolls smoothly whe
 
 An involute is *a specific type of mathematical curve that is traced by the end of a taut string as it is unwrapped from a stationary shape or curve*. In modern gear manufacturing, the involute of a circle is commonly used. 
 
-![Involute of a circle](../../public/images/theory/involute.svg)
+![{{fig:involuteOfCircle.description}}](../../public/images/theory/involute.svg)
 
 In gear design, the involute portion of the teeh (yes, teeth are not all involute) starts at the base circle, and its cartesian equations are as follows:
 
@@ -96,13 +96,13 @@ In gear design, the involute portion of the teeh (yes, teeth are not all involut
 
 This expression allows to eassily rotate the involute, if you're insterested in plotting gears.
 
-![Involute of a circle rotated 90 degrees](../../public/images/theory/90deg_involute.svg)
+![{{fig:rotatedInvoluteOfACircle.description}}](../../public/images/theory/90deg_involute.svg)
 
 - **Note**: If the sigma value makes you uncomfortable, you can remove it and use a rotation matrix instead.
 
 While the length of the involute curve is typically not a critical factor in most CAD software, it can be useful to control it. In such cases, parameter 't' in the equations [{{eq:involuteXAxis.index}}], [{{eq:involuteYAxis.index}}], can be used to set the length of the curve (say, to make it stop at the addendum radius).
 
-![Involute roll angle](../../public/images/theory/involute_roll_angle.svg)
+![{{fig:involuteRollAngle.description}}](../../public/images/theory/involute_roll_angle.svg)
 
 The image above is a graphical representation of the roll angle **θ**. While it looks intimidating, its mathematical representation is rather simple:
 
@@ -133,12 +133,12 @@ $$
 
 While the geometry of teeth have been discussed in the involute and rack geometry sections, it is important to note that it varies between a rack and a real gear, especially in terms of tooth thickness.
 
-![Tooth thickness at an arbitrary radius](../../public/images/theory/tooth_thickness.svg)
+![{{fig:toothThicknessAtRadius.description}}](../../public/images/theory/tooth_thickness.svg)
 
 - **Note**: $$T_{ty}$$ represents an arc length, *not an angle*.
     - Unlike angles, which are measured in degrees or radians, arc lengths represent the distance along a curved path.
 
-The tooth thickness at an arbitrary radius, represented by the symbol , is illustrated in the image <TODO image no.>. Which can be calculated using the following expression:
+The tooth thickness at an arbitrary radius, represented by the symbol , is illustrated in Figure {{fig:toothThicknessAtRadius.index}}. Which can be calculated using the following expression:
 
 {{eq:toothThickness}}
 
@@ -176,7 +176,7 @@ Where:
 
 Although tooth thickness measured in arc length alone may not be very useful for gear design in CAD software, it can be used to calculate the corresponding tooth thickness angle.
 
-![Angular tooth thickness at an arbitrary radius](../../public/images/theory/tooth_thickness_angle.svg)
+!["{{fig:angularToothThicknessAtRadius.description}}"](../../public/images/theory/tooth_thickness_angle.svg)
 
 Where $$\sigma_y$$ is the tooth thickness angle for the arbitrary radius $$r_y$$.
 
