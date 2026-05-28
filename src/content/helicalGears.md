@@ -154,3 +154,19 @@ As shown in the picture above, a reduced projection of the cutter increases the 
 - **Note**: $$m_n$$ is the same as the previously referred to $$m$$.
 
 An important thing to mention is that even though the geometry of the teeth changes, the addendum and deddendum stay the same. It may be hard to grasp why, but think about it: the gear cutter is still the same. As long as the cutter stays the same the addendum and deddendum won't change.
+
+#### Radial system
+
+Helical gears designed with the radial system have the same basic dimensions as their spur gear counterparts, making them an easy replacement for spur gears in an already defined system. This means that the **transverse module is equal to the normal module**.
+
+Radial system helical gears are better suited for non-traditional manufacturing processes as it requires special machining tools to fabricate helical gears; with one cutting tool required per helix angle. This makes these kinds of gears not suitable for most machining processes (except for 3D printing, or 5-axis CNC milling) as the use of custom tooling is unattractive at best.
+
+![{{fig:helicalGearHelixPath.description}}](../../public/images/theory/helical_gear_twisting.svg)
+
+- **Note**: Whilst the helix in the image is in the addendum circle, the helix for the calculations (rotation, helix pitch) is defined at the pitch circle. 
+
+Helical gears belonging to this system may be viewed as spur gears twisted along their vertical axis as shown in figure {{fig:helicalGearHelixPath.index}}. It may seem hard to grasp the transition of a 2D image into a 3D property, so I made a gif to illustrate this:
+
+![{{fig:helicalGearSectionTwisting.description}}](../../public/images/theory/helical_turning.gif)
+
+The animation above illustrates the section view of a helical gear when viewed from above as you move up its height. You can achive the same by using a 3D slicer (like Cura) and use the preview to see the layers alongside the vertical axis. This is important because for radial helical gears, **the real involute is in the transverse plane**.

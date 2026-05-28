@@ -106,6 +106,14 @@ const rawFigures = {
     gearCutterRotatedResult: {
         description: "Inclined gear cutter profile impact on tooth geometry",
         path: "/images/theory/inclined_cutter_teeth_profile.svg",
+    },
+    helicalGearHelixPath: {
+        description: "Helical tooth path",
+        path: "/images/theory/helical_gear_twisting.svg",
+    },
+    helicalGearSectionTwisting: {
+        description: "",
+        path: "/images/theory/helical_turning.gif",
     }
 }
 
