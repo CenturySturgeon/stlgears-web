@@ -135,8 +135,38 @@ const rawEquations = {
     name: "Gear helix's pitch",
     formula: "P_h = \\pi \\cdot d \\cdot  \\frac{\\cos(\\beta)}{\\sin(\\beta)}",
     description: "Helix pitch equation for a gear.",
-    copyText: "math.pi * pitch_diameter * (math.cos(t)/math.sin(t))"
-  }
+    copyText: "helix_pitch = math.pi * pitch_diameter * (math.cos(t)/math.sin(t))"
+  },
+  transverseModule: {
+    name: "Transverse module",
+    formula: "m_t = \\frac{m_n}{\\cos(\\beta)}",
+    description: "The equivalent module for the transverse plane based on the one from the normal plane.",
+    copyText: "transverse_module = normal_module / math.cos(helix_angle)"
+  },
+  transversePitchDiameter: {
+    name: "Transverse pitch diameter",
+    formula: "d_t = m_t \\cdot z",
+    description: "The pitch diameter on the transverse plane.",
+    copyText: "transverse_pitch_diameter = transverse_module * number_of_teeth"
+  },
+  transverseBaseDiameter: {
+    name: "Transverse base diameter",
+    formula: "d_{bt} = d_t \\cdot \\cos(\\alpha_t)",
+    description: "The base diameter on the transverse plane.",
+    copyText: "transverse_base_diameter = transverse_pitch_diameter * math.cos(transverse_pressure_anlge)"
+  },
+  transverseAddendumDiameter: {
+    name: "Transverse addendum diameter",
+    formula: "d_{at} = d_t + 2m_n",
+    description: "The addendum diameter on the transverse plane.",
+    copyText: "transverse_addendum_diameter = transverse_pitch_diameter + 2 * module"
+  },
+  transverseRootDiameter: {
+    name: "Transverse root diameter",
+    formula: "d_{ft} = d_t - 2.5m_n",
+    description: "The root diameter on the transverse plane.",
+    copyText: "transverse_root_diameter = transverse_pitch_diameter - 2.5 * module"
+  },
   // internalGearDistanceBetweenCenters: {
   //   name: "Distance between centers for an external and ring gear pair.",
   //   formula: 'C = \\frac{d_{ring} - d_{external}}{2}',

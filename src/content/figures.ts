@@ -81,7 +81,31 @@ const rawFigures = {
     },
     helixAngle: {
         description: "Helix angle in a gear with a single tooth",
-        path: "/images/theory/helix_angle.svg"
+        path: "/images/theory/helix_angle.svg",
+    },
+    helicalMilling: {
+        description: "Helical gear milling setup",
+        path: "/images/theory/helical_milling.svg",
+    },
+    helicalModules: {
+        description: "Helical gear modules at different planes",
+        path: "/images/theory/helical_modules.svg",
+    },
+    gearMilling: {
+        description: "Gear cutter & milling",
+        path: "/images/theory/gear_milling.svg",
+    },
+    gearCutterProfile: {
+        description: "Gear cutter profile",
+        path: "/images/theory/cutter_profile.svg",
+    },
+    gearCutterRotated: {
+        description: "Projection of the rotated profile of a gear cutter",
+        path: "/images/theory/inclined_cutter_profile.svg",
+    },
+    gearCutterRotatedResult: {
+        description: "Inclined gear cutter profile impact on tooth geometry",
+        path: "/images/theory/inclined_cutter_teeth_profile.svg",
     }
 }
 
