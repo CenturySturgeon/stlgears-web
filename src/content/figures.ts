@@ -134,6 +134,15 @@ const rawFigures = {
     ringCenterDistance: {
         description: "Distance between the centers of an external gear and an internal gear",
         path: "/images/theory/internal_center_distance.svg",
+    },
+    profileShiftMilling: {
+        description: "Gear milling",
+        path: "/images/theory/profile_shift_milling.svg",
+        hide: ['g3243', 'path4023'],
+    },
+    numberOfTeethComparisson: {
+        description: "Tooth geometry comparisson as number of teeth increases",
+        path: "/images/theory/z_comparisson.svg"
     }
 }
 
@@ -143,8 +152,16 @@ const figuresWithIndex = Object.entries(rawFigures).map(([key, value], index) =>
     index: index + 1,
 }));
 
+export type Figure = {
+    key: string,
+    index: number,
+    description: string,
+    path: string,
+    hide?: string[],
+}
+
 // Descriptions can reference other figures, resolve them
-const processedFigures = figuresWithIndex.map((fig) => {
+const processedFigures: Figure[] = figuresWithIndex.map((fig) => {
     let processedDescription = fig.description;
     processedDescription = processedDescription.replace(
         /\{\{fig:([^}.]+)(?:\.([^}]+))?\}\}/g,
@@ -161,6 +178,6 @@ const processedFigures = figuresWithIndex.map((fig) => {
     return { ...fig, description: processedDescription };
 });
 
-export const FIGURES = Object.fromEntries(
+export const FIGURES: Record<string, Figure> = Object.fromEntries(
     processedFigures.map((fig) => [fig.key, fig])
 );
