@@ -130,6 +130,10 @@ const rawFigures = {
     screwGears: {
         description: "Screw gears",
         path: "/images/theory/screw_gears.svg",
+    },
+    ringCenterDistance: {
+        description: "Distance between the centers of an external gear and an internal gear",
+        path: "/images/theory/internal_center_distance.svg",
     }
 }
 

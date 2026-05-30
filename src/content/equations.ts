@@ -167,12 +167,12 @@ const rawEquations = {
     description: "The root diameter on the transverse plane.",
     copyText: "transverse_root_diameter = transverse_pitch_diameter - 2.5 * module"
   },
-  // internalGearDistanceBetweenCenters: {
-  //   name: "Distance between centers for an external and ring gear pair.",
-  //   formula: 'C = \\frac{d_{ring} - d_{external}}{2}',
-  //   description: 'The distance between the centers of an external and ring gear pair when their pitch circles are tangent.',
-  //   copyText: 'C = (pitch_diameter_internal_gear - pitch_diameter_external_gear) / 2'
-  // },
+  internalGearDistanceBetweenCenters: {
+    name: "Distance between centers for an external and ring gear pair.",
+    formula: 'C = \\frac{d_{ring} - d_{external}}{2}',
+    description: 'The distance between the centers of an external and ring gear pair when their pitch circles are tangent.',
+    copyText: 'C = (pitch_diameter_internal_gear - pitch_diameter_external_gear) / 2'
+  },
 } as const;
 
 export const EQUATIONS = Object.fromEntries(
