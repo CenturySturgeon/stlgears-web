@@ -87,6 +87,7 @@ export default async function AllTheoryPage() {
                                                 index={figure.index}
                                                 description={figure.description}
                                                 path={figure.path}
+                                                hide={figure.hide}
                                             />
                                         );
                                     }

@@ -21,6 +21,7 @@ export default function FiguresPage() {
                         index={fig.index}
                         description={fig.description}
                         path={fig.path}
+                        hide={fig.hide}
                     />
                 ))}
             </Box>
