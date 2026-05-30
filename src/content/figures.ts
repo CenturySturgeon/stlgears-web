@@ -114,6 +114,22 @@ const rawFigures = {
     helicalGearSectionTwisting: {
         description: "",
         path: "/images/theory/helical_turning.gif",
+    },
+    helicalForces: {
+        description: "Helical vs. Spur gear axial forces comparisson",
+        path: "/images/theory/helical_gear_forces.svg",
+    },
+    doubleHelicalGear: {
+        description: "Double helical gear",
+        path: "/images/theory/double_helical_gear.svg",
+    },
+    doubleHelicalForces: {
+        description: "Double helical gear axial forces",
+        path: "/images/theory/double_helical_gear_forces.svg",
+    },
+    screwGears: {
+        description: "Screw gears",
+        path: "/images/theory/screw_gears.svg",
     }
 }
 

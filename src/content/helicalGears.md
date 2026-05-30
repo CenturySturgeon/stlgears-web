@@ -170,3 +170,41 @@ Helical gears belonging to this system may be viewed as spur gears twisted along
 ![{{fig:helicalGearSectionTwisting.description}}](../../public/images/theory/helical_turning.gif)
 
 The animation above illustrates the section view of a helical gear when viewed from above as you move up its height. You can achive the same by using a 3D slicer (like Cura) and use the preview to see the layers alongside the vertical axis. This is important because for radial helical gears, **the real involute is in the transverse plane**.
+
+### Double helical gears
+
+Although helical gears pose sevaral advantages over spur gears, they do have inconveniences that must be taken into account when designing a mechanical system that utilizes them. The most relevant issue that arises is the **axial load** generated.
+
+The axial load refers to the opposing force exerted on the gear's axis when a force is applied to the gear teeth. This stress on the axis can be problematic as it necessitates the use of special bearings, commonly known as 'thrust bearings,' to handle this specific type of load. These specialized bearings tend to be more expensive compared to the standard bearings used in various mechanical systems.
+
+![{{fig:helicalForces.description}}](../../public/images/theory/helical_gear_forces.svg)
+
+However, there exists a simple solution to mitigate this axial load, namely the implementation of double helical gears:
+
+![{{fig:doubleHelicalGear.description}}](../../public/images/theory/double_helical_gear.svg)
+
+By mirroring the helical tooth, herringbone gears introduce an additional opposite axial force, effectively canceling out each other. This is depicted in the below diagram, where the two resulting axial forces 'R' are equal in magnitude but in opposite directions, same with the torques, where they cancel out each other:
+
+![{{fig:doubleHelicalForces.description}}](../../public/images/theory/double_helical_gear_forces.svg)
+
+This means that double helical gears don't face the same requirement for special bearings as helical gears do. Although this makes it look like the double helical gears are superior in every way to helical gears, they are more difficult and expensive to manufacture, making them less suitable for most applications.
+
+### Screw gears
+
+Screw gears, also known as crossed helical gears, are a type of gearing mechanism where two helical gears are positioned such that their axes are not parallel to each other. Unlike traditional parallel-axis helical gears, screw gears can be used in applications that require non-parallel axes. 
+
+![{{fig:screwGears.description}}](../../public/images/theory/screw_gears.svg)
+
+### Positioning
+
+Positioning helical gears is as simple as with their spur gear counterpart, there are just some extra things to consider when doing so:
+
+- Helical gears follow the same basic rules of spur gear meashing: they must share the same module and pressure angle so they can mesh with each other.
+
+- Helical gears with parallel axes must have the same helix angle to ensure smooth meshing..
+
+- To find the distance between centers can be determined by making their pitch circles tangent to each other, regardless of whether they are crossed helical gears or not.
+
+- For helical gears to mesh, they must be of the same helical system.
+
+- When designing crossed helical gears with a 90-degree angle between their axes the sum of their helix angles should be 90 degrees to ensure proper meshing.
