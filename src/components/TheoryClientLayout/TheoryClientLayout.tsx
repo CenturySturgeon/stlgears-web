@@ -17,7 +17,16 @@ export default function TheoryClientLayout({ children }: { children: React.React
             {/* Right Column: Sticky Table of Contents */}
             {/* Hidden on mobile, shown on medium screens and up */}
             <Grid.Col span={{ base: 12, md: 2 }} display={{ base: 'none', md: 'block' }}>
-                <Box pos="sticky" top={80} style={{ alignSelf: 'flex-start' }}>
+                <Box
+                    pos="sticky"
+                    top={80}
+                    style={{
+                        alignSelf: 'flex-start',
+                        maxHeight: 'calc(90vh - 100px)',
+                        overflowY: 'auto',
+                        paddingRight: '0.5rem' // Prevents content from touching the scrollbar
+                    }}
+                >
                     <TableOfContents
                         variant="light"
                         color="blue"

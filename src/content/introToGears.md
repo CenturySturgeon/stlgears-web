@@ -1,6 +1,6 @@
 ---
 title: 'Intro to gears'
-description: 'Learn the basic conecepts behind how gears work!'
+description: 'Learn the basic concepts behind how gears work!'
 order: 1
 ---
 
