@@ -149,6 +149,15 @@ const rawFigures = {
         path: "/images/theory/profile_shift_milling.svg",
         hide: ['path9560-4', 'rect3768', 'g586'],
     },
+    profileShiftMaterialDiameter: {
+        description: "Profile shifting coefficient",
+        path: "/images/theory/profile_shift_milling.svg",
+        hide: ['g3199', 'path4023'],
+    },
+    profileShiftComparrison: {
+        description: "Profile shifted impact on tooth geometry",
+        path: "/images/theory/profile_shift_comparisson.svg",
+    }
 }
 
 const figuresWithIndex = Object.entries(rawFigures).map(([key, value], index) => ({

@@ -35,3 +35,31 @@ As illustrated above, as the number of teeth in a gear goes up, their shape rese
 Profile shifting is a machining technique where the cutter's depth is adjusted outward or inward during the cutting process, resulting in subtle alterations to the tooth profile of the gear. This technique presents significant advantages, especially in applications where the distance between gear centers needs to be modified while preserving the desired base parameters $$m, z, \alpha, \beta$$. Furthermore, the resulting modifications to the tooth profile can prove beneficial, as they also impact the tooth thickness.
 
 ![{{fig:profileShiftCutterDistance.description}}](../../public/images/theory/profile_shift_milling.svg)
+
+The depth to which the cutter penetrates the material is denoted by $$h$$ and remains constant throughout the process. One might question the significance of moving the cutter if $$h$$ is to remain constant. However, the importance becomes clear when considering that while the cutter's penetration depth remains consistent, adjusting its position requires a corresponding alteration in the material's diameter:
+
+![{{fig:profileShiftMaterialDiameter.description}}](../../public/images/theory/profile_shift_milling.svg)
+
+Where
+
+$$
+-1 \leq X \leq 1
+$$
+
+Understanding profile shifting is often more intuitive through graphical representation than a theoretical explanation. Figure {{fig:profileShiftMaterialDiameter.index}} illustrates that shifting the cutter outward or inward requires adjusting the material's diameter to maintain the constant depth "h". This adjustment in material diameter is governed by the profile shifting coefficient "X", which ranges from -1 to 1.
+
+It's crucial to note that this modification of the material's outer diameter impacts all gear diameters, with the exception of the base diameter. It may sound counterintuitive that the base diameter remains unchanged despite modifications to other diameters due to the cutter's depth adjustment, but this apparent paradox becomes clearer when comparing teeth of gears with different profile shifting coefficients:
+
+![{{fig:profileShiftComparrison.description}}](../../public/images/theory/profile_shift_comparisson.svg)
+
+As depicted in figure {{fig:profileShiftComparrison.index}}, the tooth profiles vary significantly based on their profile shifting coefficient. However, it's important to recognize that their involute portions commence exactly at the same diameter: the base diameter. 
+
+Essentially, gears with positive profile shifting exhibit a larger involute portion, whereas the opposite holds true for negative profile shifting (truncation). Remarkably, this variation occurs while maintaining the same tooth height, even though the thickness of the tooth does vary. This variation on the gear's overall dimmensions implies that a different set of equations is required for gears with profile shift:
+
+{{eq:profileShiftPitchDiameter}}
+
+{{eq:profileShiftedAddendumDiameter}}
+
+{{eq:profileShiftedRootDiameter}}
+
+These equations are just the basics for the geometrical impact of profile shifting in gears. There are other things to consider when designing gear systems with profile shifting, like its impact on the root fillet radius for undercutting.

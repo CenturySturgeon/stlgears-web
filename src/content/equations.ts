@@ -173,6 +173,24 @@ const rawEquations = {
     description: 'The distance between the centers of an external and ring gear pair when their pitch circles are tangent.',
     copyText: 'C = (pitch_diameter_internal_gear - pitch_diameter_external_gear) / 2'
   },
+  profileShiftPitchDiameter: {
+    name: "Profile shifted pitch diameter",
+    formula: 'd_X = m \\cdot z + 2 \\cdot X \\ cdot m',
+    description: 'The diameter of the pitch circle, where mating gear teeth effectively make contact.',
+    copyText: 'profile_shifted_pitch_diameter = (module * number_of_teeth) + (2 * profile_shift_coefficient * module'
+  },
+  profileShiftedAddendumDiameter: {
+    name: "Profile shifted addendum Diameter",
+    formula: 'd_a = d_X + 2m',
+    description: 'The diameter measured at the tips of the gear teeth.',
+    copyText: 'addendum_diameter = profile_shifted_pitch_diameter + 2 * module'
+  },
+  profileShiftedRootDiameter: {
+    name: "Profile shifted root Diameter",
+    formula: 'd_f = d_X - 2.5m',
+    description: 'The diameter measured at the root of the gear teeth.',
+    copyText: 'root_diameter = profile_shifted_pitch_diameter - 2.5 * module'
+  },
 } as const;
 
 export const EQUATIONS = Object.fromEntries(
