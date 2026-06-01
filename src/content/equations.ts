@@ -191,6 +191,30 @@ const rawEquations = {
     description: 'The diameter measured at the root of the gear teeth.',
     copyText: 'root_diameter = profile_shifted_pitch_diameter - 2.5 * module'
   },
+  bevelGearConeDiagonalLength: {
+    name: "Bevel gear's cone diagonal length",
+    formula: 'C = \\sqrt{(r_f)^2 + ({r_{f2}})^2}',
+    description: "The length of the face shared by the two cones in contact for bevel gears.",
+    copyText: "C = math.sqrt(root_radius_pinion ** 2 + root_radius_wheel ** 2)"
+  },
+  bevelGearDiagonalLength: {
+    name: "Bevel gear's diagonal length",
+    formula: 'F = \\frac{C}{3}',
+    description: "The length of the tooth of the bevel gear.",
+    copyText: "bevel_gear_tooth_face_length = C / 3"
+  },
+  bevelPinionConeAngle: {
+    name: "Bevel pinion cone angle",
+    formula: "\\phi = \\tan^{-1}(\\frac{r_f}{r_{f2}})",
+    description: "The angle formed between the gear's axis and the point of intersection between the two root radii (wheel and pinion) at the tooth.",
+    copyText: "bevel_gear_pinion_cone_angle = math.arctan(root_radius_pinion / root_radius_wheel)"
+  },
+  bevelWheelConeAngle: {
+    name: "Bevel wheel cone angle",
+    formula: "\\phi = \\tan^{-1}(\\frac{r_{f2}}{r_f})",
+    description: "The angle formed between the gear's axis and the point of intersection between the two root radii (wheel and pinion) at the tooth.",
+    copyText: "bevel_gear_wheel_cone_angle = math.arctan(root_radius_wheel / root_radius_pinion)"
+  }
 } as const;
 
 export const EQUATIONS = Object.fromEntries(

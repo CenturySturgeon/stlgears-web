@@ -157,6 +157,34 @@ const rawFigures = {
     profileShiftComparrison: {
         description: "Profile shifted impact on tooth geometry",
         path: "/images/theory/profile_shift_comparisson.svg",
+    },
+    bevelGearCones: {
+        description: "Bevel gears represented as cones",
+        path: "/images/theory/bevel_gear_cones.svg",
+        hide: ['g5302', 'g13545'],
+    },
+    cylinderToothPath: {
+        description: "Path of tooth in raw cylinder",
+        path: "/images/theory/cylinder_teeth_path.svg",
+    },
+    coneToothPath: {
+        description: "Tooth's path in a cone",
+        path: "/images/theory/cone_geometry_effect.svg",
+    },
+    bevelGearsApex: {
+        description: "Isometric gear cones with highlighted apex",
+        path: "/images/theory/bevel_gear_cones.svg",
+        hide: ['g5302', 'g5128', 'g2456-6', 'g2456'],
+    },
+    bevelGearDimensions: {
+        description: "Bevel gear geometry",
+        path: "/images/theory/bevel_gear_dimensions.svg",
+        hide: ['g7580'],
+    },
+    bevelGearToothDimensions: {
+        description: "Bevel gear tooth geometry following conic path",
+        path: "/images/theory/bevel_gear_dimensions.svg",
+        hide: ['g4862'],
     }
 }
 
