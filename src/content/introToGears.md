@@ -4,8 +4,6 @@ description: 'Learn the basic concepts behind how gears work!'
 order: 1
 ---
 
-## What are gears ?
-
 Gears are mechanical devices that transmit power and motion between two or more rotating shafts. They are one of the most important inventions in mechanical system history and have been used for over centuries for a wide range of applications.
 
 ### How do gears actually work ?

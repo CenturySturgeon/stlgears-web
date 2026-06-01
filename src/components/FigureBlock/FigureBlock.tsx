@@ -21,12 +21,28 @@ export default function FigureBlock({ index, description, path, hide = [] }: Fig
             const svgDoc = objectElement.contentDocument;
             if (!svgDoc) return;
 
+            // 1. Hide requested elements
             hide.forEach(id => {
                 const element = svgDoc.getElementById(id);
                 if (element) {
                     (element as HTMLElement).style.display = 'none';
                 }
             });
+
+            // 2. Fix the inner SVG sizing and background natively
+            const svgRoot = svgDoc.documentElement;
+            if (svgRoot) {
+                // Remove hardcoded physical dimensions so viewBox controls scaling
+                svgRoot.removeAttribute('width');
+                svgRoot.removeAttribute('height');
+
+                // Force it to fill the object container
+                svgRoot.style.width = '100%';
+                svgRoot.style.height = '100%';
+
+                // Ensure the SVG itself has a transparent background
+                svgRoot.style.backgroundColor = 'transparent';
+            }
         };
 
         if (objectElement.contentDocument?.readyState === 'complete') {
@@ -40,9 +56,15 @@ export default function FigureBlock({ index, description, path, hide = [] }: Fig
     const containerStyles = {
         border: '1px solid var(--mantine-color-gray-3)',
         maxWidth: '100%',
-        maxHeight: '40vh',
         backgroundColor: 'white',
+        maxHeight: '40vh',
+        // Remember to emove backgroundColor: 'white' to allow transparency if you ever get that issue
         borderRadius: 'var(--mantine-radius-md)',
+        // Added flex properties to strictly contain the object child
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        overflow: 'hidden'
     };
 
     return (
@@ -52,7 +74,6 @@ export default function FigureBlock({ index, description, path, hide = [] }: Fig
             </Text>
 
             {hide.length === 0 ? (
-                // Use Image for static SVGs and images (no hiding needed)
                 <Image
                     src={path}
                     alt={description}
@@ -61,18 +82,17 @@ export default function FigureBlock({ index, description, path, hide = [] }: Fig
                     style={containerStyles}
                 />
             ) : (
-                // Use object for dynamic SVGs (hiding elements)
                 <Box style={containerStyles}>
                     <object
                         ref={objectRef}
                         data={path}
                         type="image/svg+xml"
                         style={{
-                            height: '100%',
+                            width: '100%',     // Added to prevent horizontal overflow
+                            maxHeight: '40vh', // Ensures it respects the parent's max height constraint
                             display: 'block',
-                            margin: '0 auto', // Centers the object horizontally
                             background: 'transparent',
-                            objectFit: 'contain', // Ensures aspect ratio is preserved
+                            objectFit: 'contain',
                         }}
                         aria-label={description}
                     />
