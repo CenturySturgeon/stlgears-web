@@ -29,3 +29,9 @@ Understanding this concept might be challenging, so the image below provides a v
 As illustrated above, as the number of teeth in a gear goes up, their shape resembles more and more the trapezoidal shape of the teeth in a rack. 
 
 - You could say that, in essence, a rack is a portion of a gear with an infinite amount of teeth.
+
+### Profile shifting
+
+Profile shifting is a machining technique where the cutter's depth is adjusted outward or inward during the cutting process, resulting in subtle alterations to the tooth profile of the gear. This technique presents significant advantages, especially in applications where the distance between gear centers needs to be modified while preserving the desired base parameters $$m, z, \alpha, \beta$$. Furthermore, the resulting modifications to the tooth profile can prove beneficial, as they also impact the tooth thickness.
+
+![{{fig:profileShiftCutterDistance.description}}](../../public/images/theory/profile_shift_milling.svg)

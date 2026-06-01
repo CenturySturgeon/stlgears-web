@@ -83,8 +83,8 @@ export default async function TheoryPage({
             a: ({ node, ...props }) => <Anchor c="logoBlue.6" underline="hover" {...props} />,
 
             img: ({ node, src, alt, ...props }) => {
-              // Find the figure by matching the absolute path
-              const figure = Object.values(FIGURES).find((fig) => fig.path === src);
+              // Find the figure by matching the absolute path and the description
+              const figure = Object.values(FIGURES).find((fig) => fig.path === src && fig.description==alt);
 
               if (figure) {
                 return (

@@ -143,7 +143,12 @@ const rawFigures = {
     numberOfTeethComparisson: {
         description: "Tooth geometry comparisson as number of teeth increases",
         path: "/images/theory/z_comparisson.svg"
-    }
+    },
+    profileShiftCutterDistance: {
+        description: "Profile shifting cutter depth",
+        path: "/images/theory/profile_shift_milling.svg",
+        hide: ['path9560-4', 'rect3768', 'g586'],
+    },
 }
 
 const figuresWithIndex = Object.entries(rawFigures).map(([key, value], index) => ({
