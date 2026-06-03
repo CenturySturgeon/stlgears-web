@@ -12,16 +12,21 @@ export function DropzoneButton() {
     <div className={classes.wrapper}>
       <Dropzone
         openRef={openRef}
-        onDrop={(files) => {
-          const file = files[0];
-          console.log(file);
-        }}
         className={classes.dropzone}
         radius="md"
-        accept={['model/stl', '.stl']}
+        accept={['model/stl']}
         maxFiles={1}
-        maxSize={30 * 1024 ** 2}
         aria-label="Drop STL file here"
+        onDrop={(files) => {
+          const file = files[0];
+
+          if (!file.name.toLowerCase().endsWith('.stl')) {
+            return;
+          }
+
+          console.log(file);
+          console.log("Open modal with gear params here!")
+        }}
       >
         <div style={{ pointerEvents: 'none' }}>
           <Group justify="center">
