@@ -5,6 +5,7 @@ import { GearCards } from "@/forms/configs/generators/stl/cards";
 import { Box, Container, SimpleGrid, Text, Title } from "@mantine/core";
 import GearCard from "@/components/GearCard/GearCard";
 import ButtonLink from "@/components/ButtonLink/ButtonLink";
+import { DropzoneButton } from '@/components/DropzoneButton/DropzoneButton';
 
 const small_margin = 40
 
@@ -37,6 +38,11 @@ export default function Generators() {
                     <GearCard key={index} {...card} />
                 ))}
             </SimpleGrid>
+
+            <Box my="md">
+                <DropzoneButton />
+            </Box>
+
         </Container>
     );
 }
