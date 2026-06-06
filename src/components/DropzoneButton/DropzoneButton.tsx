@@ -21,6 +21,7 @@ import {
 } from '@mantine/core';
 import { Dropzone } from '@mantine/dropzone';
 import { useDisclosure } from '@mantine/hooks';
+import { getGearParamsFromTag } from '@/utils/gearTag';
 
 import classes from './DropzoneButton.module.css';
 
@@ -30,7 +31,7 @@ export function DropzoneButton() {
 
   const [opened, { open, close }] = useDisclosure(false);
 
-  const [fileContent, setFileContent] = useState('');
+  const [gearTag, setGearTag] = useState('');
   const [fileName, setFileName] = useState('');
   const [error, setError] = useState<string | null>(null);
 
@@ -62,7 +63,7 @@ export function DropzoneButton() {
 
   const handleDrop = (files: File[]) => {
     setError(null);
-    setFileContent('');
+    setGearTag('');
 
     const file = files[0];
 
@@ -90,7 +91,7 @@ export function DropzoneButton() {
       const tag = content.substring(0, 80);
 
       setError(null);
-      setFileContent(tag);
+      setGearTag(tag);
 
       open();
     };
@@ -104,11 +105,12 @@ export function DropzoneButton() {
   };
 
   const generateCSV = () => {
-    const rows = fileContent
-      .split('')
-      .map((char, index) => `${index + 1},${char}`);
+    // const rows = fileContent
+    //   .split('')
+    //   .map((char, index) => `${index + 1},${char}`);
 
-    return ['Position,Character', ...rows].join('\n');
+    // return ['Position,Character', ...rows].join('\n');
+    return ','
   };
 
   const csvContent = generateCSV();
@@ -136,10 +138,13 @@ export function DropzoneButton() {
     URL.revokeObjectURL(url);
   };
 
-  const rows = fileContent.split('').map((char, index) => (
-    <Table.Tr key={index}>
-      <Table.Td>{index + 1}</Table.Td>
-      <Table.Td>{char}</Table.Td>
+  const records = Object.entries(getGearParamsFromTag(gearTag));
+
+  const rows = records.map(([key, value], index) => (
+    <Table.Tr key={key}>
+      {/* <Table.Td>{index + 1}</Table.Td> */}
+      <Table.Td>{key}</Table.Td>
+      <Table.Td>{value}</Table.Td>
     </Table.Tr>
   ));
 

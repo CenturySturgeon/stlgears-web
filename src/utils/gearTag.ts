@@ -82,6 +82,10 @@ export function getGearParamsFromTag(tag: string): Record<string, string> {
         tag.includes(value)
     )[0];
 
+    if (!tagGearType) {
+        return paramNamesToValues;
+    }
+
     paramNamesToValues["Gear type"] = TAG_GEAR_TYPES_TO_GEAR_NAME[tagGearType];
 
     if (tag.includes("GSOL N") || tag.includes("GFSI N")) {
